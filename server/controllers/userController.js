@@ -8,7 +8,7 @@ const handleSignup = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "User already exists!" });
     }
-    await User.create({ email, password, name, role, city});
+    await User.create({ email, password, name});
     const token = generateToken(email, "user");
     res.status(201).json({ message: "User created successfully!", token });
   } catch (err) {
