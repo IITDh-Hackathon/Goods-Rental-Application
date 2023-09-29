@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import { generateToken } from "../utils/jwt_token.js";
+import bycrypt from "bcrypt";
 
 const handleSignup = async (req, res) => {
   try {
@@ -19,8 +20,12 @@ const handleSignup = async (req, res) => {
 const handleLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email, password }); //asynchronous function
+    const user = await User.findOne({ email }); //asynchronous function
     if (!user) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+    const auth = await bycrypt.compare(password, user.password);
+    if (!auth) {
       return res.status(400).json({ message: "Invalid username or password!" });
     }
     const token = generateToken(email, "user");
