@@ -1,4 +1,4 @@
-import { User } from "../models/models.js";
+import User from "../models/user.js";
 import { generateToken } from "../utils/jwt_token.js";
 
 const handleSignup = async (req, res) => {

@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { handleSignup, handleLogin } from "../controllers/UserController.js";
+import { handleSignup, handleLogin } from "../controllers/userController.js";
 
 
 router.post("/signup", handleSignup);
