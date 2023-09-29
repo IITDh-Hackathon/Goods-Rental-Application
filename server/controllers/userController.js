@@ -1,5 +1,6 @@
-import { User } from "../models/models.js";
+import User from "../models/user.js";
 import { generateToken } from "../utils/jwt_token.js";
+import bycrypt from "bcrypt";
 
 const handleSignup = async (req, res) => {
   try {
@@ -8,7 +9,7 @@ const handleSignup = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "User already exists!" });
     }
-    await User.create({ email, password, name, role, city});
+    await User.create({ email, password, name});
     const token = generateToken(email, "user");
     res.status(201).json({ message: "User created successfully!", token });
   } catch (err) {
@@ -19,8 +20,12 @@ const handleSignup = async (req, res) => {
 const handleLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email, password }); //asynchronous function
+    const user = await User.findOne({ email }); //asynchronous function
     if (!user) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+    const auth = await bycrypt.compare(password, user.password);
+    if (!auth) {
       return res.status(400).json({ message: "Invalid username or password!" });
     }
     const token = generateToken(email, "user");
