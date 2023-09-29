@@ -3,7 +3,7 @@ import item from "./item";
 
 const cityListingSchema = new Schema({
     item:{
-        type: Schema.Types.ObjectId,
+        type: [Schema.Types.ObjectId],
         ref: "Item"
     },
     city: String, //zip code of the city
