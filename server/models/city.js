@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import item from "./item";
+import item from "./item.js";
 
 const citySchema = new Schema({
     name: String, //name of the city

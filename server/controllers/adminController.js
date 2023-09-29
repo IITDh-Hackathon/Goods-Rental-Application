@@ -1,4 +1,5 @@
 import Item  from '../models/item.js';
+import City from '../models/city.js';
 
 // const itemSchema = new Schema({
 //     name: String,
@@ -9,12 +10,14 @@ import Item  from '../models/item.js';
 //     category: String,
 // });
 
-// const cityListingSchema = new Schema({
-//     item:{
+// const citySchema = new Schema({
+//     name: String, //name of the city
+//     image: String,
+//     pincode: String,
+//     listings: [{
 //         type: Schema.Types.ObjectId,
-//         ref: "Item"
-//     },
-//     city: String, //zip code of the city
+//         ref: "item"
+//     }]
 // });
 
 
@@ -28,11 +31,24 @@ export const addItemHandler = async (req, res) => {
     }
 };
 
-export const addCityListingHandler = async (req, res) => {
-    const { item, city } = req.body;
+export const addCity = async (req, res) => {
+    const { name, image, pincode } = req.body;
     try {
-        const cityListing = await CityListing.create({ item, city });
-        res.status(201).json({ message: "City listing added successfully!", cityListing });
+        const city = await City.create({ name, image, pincode });
+        res.status(201).json({ message: "City added successfully!", city });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+export const addCityListing = async (req, res) => {
+    const { city,item } = req.body;
+    try {
+        const item = await Item.create({ name, description, price, quantity, image, category });
+        const city = await City.findById(cityId);
+        city.listings.push(item);
+        await city.save();
+        res.status(201).json({ message: "Item added successfully!", item });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

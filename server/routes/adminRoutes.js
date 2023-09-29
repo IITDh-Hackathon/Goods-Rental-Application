@@ -1,13 +1,16 @@
 import express from "express";
 const router = express.Router();
 
-import { addItemHandler,addCityListingHandler } from "../controllers/adminController.js";
+import { addItemHandler,addCity,addCityListing } from "../controllers/adminController.js";
 
 
-//api to handle adding items for admin
+//api to handle adding items
 router.post("addItem",addItemHandler);
 
-//api to handle add city listing for admin
-router.post("addCityListing",addCityListingHandler);
+//api to handle a new city add
+router.post("addCity",addCity);
+
+//api to handle a new city addlistings
+router.post("addCityListing",addCityListing);
 
 export default router;
