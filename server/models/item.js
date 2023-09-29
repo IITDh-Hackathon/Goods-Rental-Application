@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const itemSchema = new Schema({
-    name: String,
+    name: String, //name of the item to be rented
     description: String,
     price: Number,
     quantity: Number,
