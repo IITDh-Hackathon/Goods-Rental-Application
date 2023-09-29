@@ -1,113 +1,167 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../css/LoginCss.css'
+import ApiContext from '../context/api/ApiContext';
 
 const Login = () => {
+  const [admin, setAdmin] = useState(false);
+  const [creds, setCreds] = useState({ "email": "", "password": "" })
+  const [signupCreds, setsignupCreds] = useState({ "name": "", "email": "", "city": "", "password": "", "confirmPassword": "" })
+  const context = useContext(ApiContext)
+  const { login, signup } = context;
+  const [invalidcreds, setinvalidcreds] = useState(false);
+
+
+  const handleOnChange = (e,islogin) => {
+    if(islogin){
+    setCreds({ ...creds, [e.target.name]: e.target.value })
+    }
+    else{
+      setsignupCreds({ ...signupCreds, [e.target.name]: e.target.value })
+    }
+  }
+
+  const handleOnClick = () => {
+    if (admin) {
+      setAdmin(false);
+    }
+    else {
+      setAdmin(true);
+    }
+  }
+
+  const handleOnSubmit = async (e,islogin) =>{
+    e.preventDefault();
+    if (islogin){
+      console.log(creds);
+      const response= await login(admin,creds);
+      const [status,error]=response || [null,true];
+      //todo: handle error
+      if(error){
+        alert('Invalid Credentials')
+      }
+      else{
+        if(admin){
+          window.location.href = '/admin';
+        }
+        else{
+          window.location.href = '/user';
+        }
+      }
+    }
+    else{
+      console.log(signupCreds);
+      const response= await signup(signupCreds);
+      //todo: handle error
+      const [status,error]=response || [null,true];
+      if(error){
+        alert('sign up')
+      }
+      else{
+        if(admin){
+          window.location.href = '/admin';
+        }
+        else{
+          window.location.href = '/user';
+        }
+      }
+    }
+  }
+
 
   // this useeffect will check if user clicks on sign up button then it will add sign up mode class to container so that it will show sign up form
   useEffect(() => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
     const sign_up_btn = document.querySelector("#sign-up-btn");
     const container = document.querySelector(".container");
-    const adminButton = document.querySelector('.admin-button')
-    const usercontent = document.querySelector('.user-content')
-    const admincontent = document.querySelector('.hide-content')
 
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
-    });
-    adminButton.addEventListener('click', () => {
-      usercontent.classList.add('hide-content')
-      admincontent.classList.remove('hide-content')
-    })
-
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
-    });
+    if (sign_up_btn && sign_in_btn && container) {
+      sign_up_btn.addEventListener("click", () => {
+        container.classList.add("sign-up-mode");
+      });
+      sign_in_btn.addEventListener("click", () => {
+        container.classList.remove("sign-up-mode");
+      });
+    }
   }
   )
 
   return (
     <>
-      <div class="container">
-        <div class="forms-container">
-          <div class="signin-signup">
-            <form class="sign-in-form">
-              <h2 class="title">Login</h2>
-              <div class="input-field">
-                  <i class="fas fa-user"></i>
-                <input type="text" placeholder="Email" />
+      <div className="container">
+        <div className="forms-container">
+          <div className="signin-signup">
+            <form className="sign-in-form" onSubmit={(e)=> handleOnSubmit(e,true)} >
+              <h2 className="title">Login</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input type="text" name='email' value={creds.email} placeholder="Email" onChange={(e)=>handleOnChange(e,true)} />
               </div>
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input type="password" name='password' value={creds.password} onChange={(e)=>handleOnChange(e,true)} placeholder="Password" />
               </div>
-               <div className='admin-button' >
-                login as <span style={{color:'blue',cursor:'pointer'}} >
-                  admin
+              {invalidcreds? <div style={{color:'red'}}>Invalid Credentials</div>:null}
+              <div className='admin-button' >
+                login as <span style={{ color: 'blue', cursor: 'pointer' }} onClick={handleOnClick} >
+                  {admin ? 'Admin' : 'User'}
                 </span>
-               </div>
-              <input type="submit" value="Login" class="btn solid" />
+              </div>
+              <input type="submit" value="Login" className="btn solid" />
             </form>
-            <form class="sign-up-form">
-              <h2 class="title">Sign up</h2>
-              <div class="input-field">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Name" />
+            <form className="sign-up-form" onSubmit={(e)=> handleOnSubmit(e,false)}  >
+              <h2 className="title">Sign up</h2>
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input type="text" value={signupCreds.name} name='name' onChange={(e)=>handleOnChange(e,false)} placeholder="Name" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email" />
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input type="email" value={signupCreds.email} name='email' onChange={(e)=>handleOnChange(e,false)} placeholder="Email" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="city" placeholder="City" />
+              <div className="input-field">
+                <i className="fas fa-city"></i>
+                <input type="city" value={signupCreds.city} name='city' onChange={(e)=>handleOnChange(e,false)} placeholder="City" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input type="password" value={signupCreds.password} name='password' onChange={(e)=>handleOnChange(e,false)} placeholder="Password" />
               </div>
-              <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Confirm Password" />
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input type="password" value={signupCreds.confirmPassword} name='confirmPassword' onChange={(e)=>handleOnChange(e,false)} placeholder="Confirm Password" />
               </div>
-              <input type="submit" class="btn" value="Sign up" />
+              <input type="submit" className="btn" value="Sign up" />
             </form>
           </div>
         </div>
 
-        <div class="panels-container">
-          <div class="panel left-panel">
-            <div class="content user-content">
-              <h3>New here ?</h3>
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="content">
+              <h3>{admin ? 'Admin' : 'User'}</h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-                ex ratione. Aliquid!
+                {admin ? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. A necessitatibus similique mollitia obcaecati nesciunt non ipsam quis, voluptatum cupiditate porro optio dicta rem impedit ducimus labore ad numquam nam maxime' : 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione'}
               </p>
-              <button class="btn transparent" id="sign-up-btn">
-                Sign up
-              </button>
+              {
+                admin ? null : <button className="btn transparent" id="sign-up-btn">
+                  Sign up
+                </button>
+              }
             </div>
-            <div class="content hide-content" >
-              <h3>Admin</h3>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-                ex ratione. Aliquid!
-              </p>
-            </div>
-            <img src="img/log.svg" class="image" alt="" />
+            <img src="img/log.svg" className="image" alt="" />
           </div>
-          <div class="panel right-panel">
-            <div class="content user-content">
+          <div className="panel right-panel">
+            <div className="content user-content">
               <h3>One of us ?</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                 laboriosam ad deleniti.
               </p>
-              <button class="btn transparent" id="sign-in-btn">
+              <button className="btn transparent" id="sign-in-btn">
                 Login
               </button>
             </div>
-            <img src="img/register.svg" class="image" alt="" />
+            <img src="img/register.svg" className="image" alt="" />
           </div>
         </div>
       </div>
