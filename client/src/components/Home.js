@@ -5,7 +5,6 @@ import HomeCarousel from "./carousel.js";
 const Home = () => {
   return (
     <>
-    <div>Homejs</div>
     <HomeCarousel />
     <Goods category='Furniture' />
     </>
