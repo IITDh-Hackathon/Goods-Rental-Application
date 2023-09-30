@@ -5,13 +5,13 @@ const storage = multer.diskStorage({
     cb(null, '../server/public/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, Date.now());
   }
 });
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // Limit file size to 5MB
-}).array('images', 5); // Allow up to 5 files for the 'images' field
+  limits: { fileSize: 1024 * 1024 * 15 }, // Limit file size to 5MB
+}).array('images', 10); // Allow up to 5 files for the 'images' field
 
 export default upload;
