@@ -48,15 +48,25 @@ const ApiState = (props) => {
   };
 
   const addItem = async (item) => {
+    console.log(item);
+    const formData = new FormData();
+    formData.append("name", item.name);
+    formData.append("description", item.description);
+    formData.append("price", item.price);
+    formData.append("quantity", item.quantity);
+    formData.append("category", item.category);
+    item.images.forEach((file) => {
+      formData.append(`images`, file)
+    });
     return axios
-      .post(`${host}/api/admin/addItem`, item, {
+      .post(`${host}/api/admin/additem`, formData, {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then(function (response) {
+        console.log(response);
         return [response, false];
       })
       .catch(function (error) {
@@ -85,7 +95,7 @@ const ApiState = (props) => {
   }
 
   return (
-    <ApiContext.Provider value={{ login, signup, addItem, getStats }}>
+    <ApiContext.Provider value={{ login, signup,  addItem, getStats }}>
       {props.children}
     </ApiContext.Provider>
   );

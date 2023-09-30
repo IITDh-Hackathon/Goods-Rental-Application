@@ -5,7 +5,11 @@ const itemSchema = new Schema({
     description: String,
     price: Number,
     quantity: Number,
-    image: String,
+    images: {
+        //array of image urls
+        type: [String],
+        default: [],
+    },
     category: String,
 });
 

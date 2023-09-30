@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { addItemHandler,addCity,addCityListing,getCities } from "../controllers/adminController.js";
+import { addItemHandler,addCity,addCityListing,getCities,getStats } from "../controllers/adminController.js";
 import { authenticateUser} from "../middlewares/Authenticate.js";
 import {authorizeUser} from "../middlewares/Authorize.js";
 
@@ -16,5 +16,8 @@ router.post("/addCityListing", authenticateUser, authorizeUser("admin"), addCity
 
 //api to get all cities
 router.get("/getCities", authenticateUser, authorizeUser("admin"), getCities);
+
+//api to get stats
+router.get("/getStats",authenticateUser, authorizeUser("admin"),getStats);
 
 export default router;
