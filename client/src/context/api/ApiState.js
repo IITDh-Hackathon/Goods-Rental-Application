@@ -2,15 +2,19 @@ import ApiContext from './ApiContext';
 import Axios from 'axios'
 
 const ApiState = (props) => {
-    const host = 'http://localhost:5000';
+    const host = 'http://localhost:8000';
 
     const login = async (isadmin,creds) => {
-        await Axios.post(`${host}/api/auth/loginuser`, creds, {
+        let reqBody = {
+            "email": creds.email,
+            "password": creds.password,
+            "role": isadmin ? "admin" : "user"
+        }
+        return Axios.post(`${host}/api/auth/login`, reqBody, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },
-            body: JSON.stringify(isadmin)
+            }
         }).then(function (response) {
             localStorage.setItem("token", response.data.token)
             return [response.status,false];
