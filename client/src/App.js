@@ -24,6 +24,7 @@ function App() {
       </Routes>
     </BrowserRouter>
     </ApiState>
+    <ToastContainer />
     </>
   );
 }

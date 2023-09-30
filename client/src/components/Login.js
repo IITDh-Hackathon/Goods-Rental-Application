@@ -41,8 +41,7 @@ const Login = () => {
       //todo: handle error
       if(error){
         setinvalidcreds(true);
-        console.log(response.response.data.message);
-        toast.error(response.message);
+        toast.error(response.response.data.message);
       }
       else{
         if(admin){
@@ -55,20 +54,25 @@ const Login = () => {
       }
     }
     else{
-      console.log(signupCreds);
+      if(signupCreds.password!==signupCreds.confirmPassword){
+        toast.error('Password and Confirm Password should be same');
+        return;
+      }
       const res= await signup(signupCreds);
       //todo: handle error
       const [response,error]= res || [null,true];
       if(error){
-        toast.error(response.data.message);
+        setinvalidcreds(true);
+        toast.error(response.response.data.message);
       }
       else{
         if(admin){
-          window.location.href = '/admin';
+          navigate('/admin');
         }
         else{
-          window.location.href = '/user';
+          navigate('/user');
         }
+        toast.success('Signup Successfull');
       }
     }
   }
