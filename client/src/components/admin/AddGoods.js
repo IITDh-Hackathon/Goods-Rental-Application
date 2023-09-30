@@ -31,7 +31,11 @@ const AddGoods = () => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        console.log(item);
+        // console.log(item);
+        // console.log(images);
+        //add images array to item object
+        item.images = images;
+        // console.log(item);
         const res = await addItem(item);
         const [response, error] = res || [null, true];
         if (error) {

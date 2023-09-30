@@ -1,14 +1,25 @@
 import Item  from '../models/item.js';
 import City from '../models/city.js';
+import upload from '../config/multerConfig.js';
 
 export const addItemHandler = async (req, res) => {
-    const { name, description, price, quantity, image, category } = req.body;
-    try {
-        const item = await Item.create({ name, description, price, quantity, image, category });
+    const { name, description, price, quantity, images, category } = req.body;
+    console.log(images);
+    try{
+        const item = await Item.create({ name, description, price, quantity, category });
         res.status(201).json({ message: "Item added successfully!", item });
-    } catch (err) {
+    }catch(err){
         res.status(500).json({ message: err.message });
     }
+    // upload(req, res, async (err) => {
+    //     if (err) {
+    //         res.status(500).json({ message: err.message });
+    //     }
+    //     else {
+    //         const item = await Item.create({ name, description, price, quantity, images, category });
+    //         res.status(201).json({ message: "Item added successfully!", item });
+    //     }
+    // });
 };
 
 export const addCity = async (req, res) => {
