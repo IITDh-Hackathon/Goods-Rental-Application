@@ -1,11 +1,14 @@
 import React from 'react'
 import Stats from './Stats'
+import Functionalities from './Functionalities'
 
 const AdminHome = () => {
   return (
     <>
-    <div>AdminHome</div>
-    <Stats />
+      <div>
+        <Stats />
+        <Functionalities />
+      </div>
     </>
   )
 }

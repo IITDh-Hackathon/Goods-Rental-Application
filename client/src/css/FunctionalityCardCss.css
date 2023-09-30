@@ -1,0 +1,22 @@
+.FunctionalityCard{
+    width: 300px ;
+    height: 100px;
+    background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+    margin: 10px;
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -webkit-transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+.FunctionalityCard:hover {
+    transform: scale(1.1); 
+    cursor: pointer;
+  }
+.FunctionalityCardTitle{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+}

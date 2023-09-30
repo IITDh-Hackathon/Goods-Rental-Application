@@ -1,0 +1,9 @@
+.Functionality{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center ;
+    justify-content: space-around;
+}
+.title{
+    text-align: center;
+}

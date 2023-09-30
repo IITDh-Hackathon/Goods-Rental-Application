@@ -1,13 +1,18 @@
 .StatsCard{
     width: 200px ;
     height: 200px;
-    background-color: rgba(240, 240, 240, 0.9);;
+    background-color: rgba(240, 240, 240, 0.9);
     border-radius: 10px;
     margin: 15px 50px ;
     padding: 20px 25px 50px;
     text-align: center;
+    transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -webkit-transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
-
+.StatsCard:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
 .StatIcon{
     color: var(--main-color);
 }
