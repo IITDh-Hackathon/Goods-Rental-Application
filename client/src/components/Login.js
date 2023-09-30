@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import '../css/LoginCss.css'
 import ApiContext from '../context/api/ApiContext';
 
@@ -9,6 +11,7 @@ const Login = () => {
   const context = useContext(ApiContext)
   const { login, signup } = context;
   const [invalidcreds, setinvalidcreds] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleOnChange = (e,islogin) => {
@@ -33,28 +36,31 @@ const Login = () => {
     e.preventDefault();
     if (islogin){
       console.log(creds);
-      const response= await login(admin,creds);
-      const [status,error]=response || [null,true];
+      const res= await login(admin,creds);
+      const [response,error]= res|| [null,true];
       //todo: handle error
       if(error){
-        alert('Invalid Credentials')
+        setinvalidcreds(true);
+        console.log(response.response.data.message);
+        toast.error(response.message);
       }
       else{
         if(admin){
-          window.location.href = '/admin';
+          navigate('/admin');
         }
         else{
-          window.location.href = '/user';
+          navigate('/user');
         }
+        toast.success('Login Successfull');
       }
     }
     else{
       console.log(signupCreds);
-      const response= await signup(signupCreds);
+      const res= await signup(signupCreds);
       //todo: handle error
-      const [status,error]=response || [null,true];
+      const [response,error]= res || [null,true];
       if(error){
-        alert('sign up')
+        toast.error(response.data.message);
       }
       else{
         if(admin){
