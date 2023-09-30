@@ -1,10 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
+import * as React from "react";
 import { useState, useEffect } from "react";
 import "./../css/navBar.css";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(true);
   const [click, setClick] = useState(false);
   const [showMenu, setshowMenu] = useState(true);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -26,14 +35,50 @@ const Navbar = () => {
           className={showMenu ? "navbar-container-mobile" : "navbar-container"}
         >
           <div className="top-bar">
-            <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-              TRVL <i className="fab fa-typo3" />
-            </Link>
+            <div className="location_conatiner">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <p on onClick={handleOpen}>
+                Select City
+              </p>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box className="box">
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Select a City
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Duis mollis, est non commodo luctus, nisi erat porttitor
+                    ligula.
+                  </Typography>
+                </Box>
+              </Modal>
+            </div>
+
             <div className="menu-icon" onClick={handleClick}>
-              <i className={click ? "fas fa-times" : "fas fa-bars"} />
+              {loggedIn ? (
+                <div className="nav_logos">
+                  <Link to="/cart">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </Link>
+                  <Link to="/profile">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </Link>
+                  <i className={click ? "fas fa-times" : "fas fa-bars"} />
+                </div>
+              ) : (
+                <i className={click ? "fas fa-times" : "fas fa-bars"} />
+              )}
             </div>
           </div>
-          <div>
+          <div className="navbar-links">
             <ul className={click ? "navmenu-active" : "navmenu"}>
               <li>
                 <NavLink
@@ -68,17 +113,33 @@ const Navbar = () => {
                   Services
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/sign-up"
-                  className={({ isActive }) =>
-                    "signup" + (isActive ? "-active" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Sign Up
-                </NavLink>
-              </li>
+              {!loggedIn ? (
+                <li>
+                  <NavLink
+                    to="/sign-up"
+                    className={({ isActive }) =>
+                      "signup" + (isActive ? "-active" : "")
+                    }
+                    onClick={closeMobileMenu}
+                  >
+                    Sign Up
+                  </NavLink>
+                </li>
+              ) : (
+                <></>
+              )}
+              {loggedIn ? (
+                <div className="nav_logos">
+                  <Link to="/cart">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </Link>
+                  <Link to="/profile">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </Link>
+                </div>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
         </div>
