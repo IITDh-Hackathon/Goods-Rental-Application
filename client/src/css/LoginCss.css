@@ -1,9 +1,10 @@
-
 .container {
   position: relative;
-  width: 100%;
+  min-width: 100%;
   background-color: #fff;
-  min-height: 100vh;
+  height: calc(100vh - 94px);
+  max-height: calc(100vh - 94px);
+
   overflow: hidden;
 }
 
