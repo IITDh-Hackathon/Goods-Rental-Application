@@ -31,7 +31,7 @@ const handleLogin = async (req, res) => {
     if(user.role != role){
       return res.status(400).json({ message: `you are not a ${role}` });
     }
-    const token = generateToken(email, "user");
+    const token = generateToken(email, user.role);
     res.status(200).json({ message: "User logged in successfully!", token });
   } catch (err) {
     res.status(500).json({ message: err.message });

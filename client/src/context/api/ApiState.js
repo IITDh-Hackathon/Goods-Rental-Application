@@ -5,46 +5,68 @@ import axios from "axios";
 const ApiState = (props) => {
   const host = "http://localhost:8000";
 
-    const login = async (isadmin,creds) => {
-        let reqBody = {
-            "email": creds.email,
-            "password": creds.password,
-            "role": isadmin ? "admin" : "user"
-        }
-        return axios.post(`${host}/api/auth/login`, reqBody, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }).then(function (response) {
-            localStorage.setItem("token", response.data.token)
-            localStorage.setItem("role", isadmin ? "admin" : "user")
-            return [response,false];
-        })
-            .catch(function (error) {
-                console.log(error)
-                return [error,true];
-            });
-    }
+  const login = async (isadmin, creds) => {
+    let reqBody = {
+      email: creds.email,
+      password: creds.password,
+      role: isadmin ? "admin" : "user",
+    };
+    return axios
+      .post(`${host}/api/auth/login`, reqBody, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then(function (response) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("role", isadmin ? "admin" : "user");
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
-    const signup = async (creds) =>{
-        return axios.post(`${host}/api/auth/signup`, creds, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-        }).then(function (response) {
-            localStorage.setItem("token", response.data.token)
-            return [response,false];
-        })
-            .catch(function (error) {
-                console.log(error)
-                return [error,true];
-            });
-    }
+  const signup = async (creds) => {
+    return axios
+      .post(`${host}/api/auth/signup`, creds, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then(function (response) {
+        localStorage.setItem("token", response.data.token);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
+
+  const addItem = async (item) => {
+    return axios
+      .post(`${host}/api/admin/addItem`, item, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
   return (
-    <ApiContext.Provider value={{ login, signup }}>
+    <ApiContext.Provider value={{ login, signup,addItem }}>
       {props.children}
     </ApiContext.Provider>
   );

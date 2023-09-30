@@ -1,12 +1,15 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useContext } from 'react'
+import { toast } from 'react-toastify';
 import '../../css/AddGoodsCss.css'
+import ApiContext from '../../context/api/ApiContext'
 
 const AddGoods = () => {
     const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: '' })
     const [images, setImages] = useState([]);
     const [currentImage, setCurrentImage] = useState(null);
     const [invalidfields, setInvalidfields] = useState(false);
+    const { addItem } = useContext(ApiContext);
 
     const handleOnChange = (e) => {
         setitem({ ...item, [e.target.name]: e.target.value })
@@ -29,6 +32,14 @@ const AddGoods = () => {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         console.log(item);
+        const res = await addItem(item);
+        const [response, error] = res || [null, true];
+        if (error) {
+            toast.error(response.response.data.message);
+        }
+        else {
+            toast.success('Item Added Successfully');
+        }
         if (isNaN(item.price) || isNaN(item.quantity)) {
             setInvalidfields(true);
             return;

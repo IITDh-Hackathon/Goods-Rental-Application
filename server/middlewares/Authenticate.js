@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 
 export const authenticateUser = (req, res, next) => {
-    const token = req.headers.authorization;
+    let token = req.headers.authorization;
+    token = token.split(" ")[1].trim();
+    console.log(token);
     if (!token) {
         res.status(401).json({ message: "You are not authorized" });
     } else {
@@ -10,6 +12,7 @@ export const authenticateUser = (req, res, next) => {
             res.status(401).json({ message: "Invalid token" });
         } else {
             req.user = decodedToken;
+            console.log("ded",decodedToken);
             next();
         }
         });
