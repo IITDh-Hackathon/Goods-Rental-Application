@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 
 import connectDB from './config/connectDB.js';
 import userRoutes from './routes/userRoutes.js';
@@ -13,9 +14,11 @@ dotenv.config();
 const app = express();
 
 
+
 //middlewares
 app.use(cors());
 app.use(express.json());
+app.use('/static', express.static(path.join(path.resolve(), 'public')));
 
 connectDB();
 

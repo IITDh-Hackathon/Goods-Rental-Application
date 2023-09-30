@@ -6,8 +6,8 @@ const FunctionalityCard = (props) => {
     const {feature} = props;
     const navigate = useNavigate();
     const handleOnClick = () => {
-      if(feature==="Add City"){
-        navigate('/admin/addcity');
+      if(feature==="Add Item To City"){
+        navigate('/admin/addlisting');
       }
       else{
         navigate('/admin/addgoods');

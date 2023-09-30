@@ -3,6 +3,7 @@ import { useState,useContext } from 'react'
 import { toast } from 'react-toastify';
 import '../../css/AddGoodsCss.css'
 import ApiContext from '../../context/api/ApiContext'
+import { useNavigate } from 'react-router-dom';
 
 const AddGoods = () => {
     const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: '' })
@@ -10,6 +11,8 @@ const AddGoods = () => {
     const [currentImage, setCurrentImage] = useState(null);
     const [invalidfields, setInvalidfields] = useState(false);
     const { addItem } = useContext(ApiContext);
+    const navigate = useNavigate();
+
 
     const handleOnChange = (e) => {
         setitem({ ...item, [e.target.name]: e.target.value })
@@ -30,29 +33,29 @@ const AddGoods = () => {
     };
 
     const handleOnSubmit = async (e) => {
-        e.preventDefault();
-        console.log(item);
+        item.images = images;
         const res = await addItem(item);
         const [response, error] = res || [null, true];
+        if (isNaN(item.price) || isNaN(item.quantity)) {
+            setInvalidfields(true);
+            toast.error('Price and Quantity should be numbers');
+            return;
+        } else {
+            setInvalidfields(false);
+            console.log(images);
+        }
         if (error) {
             toast.error(response.response.data.message);
         }
         else {
             toast.success('Item Added Successfully');
         }
-        if (isNaN(item.price) || isNaN(item.quantity)) {
-            setInvalidfields(true);
-            return;
-        } else {
-            setInvalidfields(false);
-            console.log(images);
-        }
     }
     return (
         <div>
             <div>
                 <form className="add-goods-form" onSubmit={handleOnSubmit} >
-                    <h2 className="title">Add Goods</h2>
+                    <h2 className="title">Add A New Good</h2>
                     <div className="input-field">
                         <i className="fas fa-shopping-bag"></i>
                         <input type="text" name='name' value={item.name} placeholder="name" onChange={handleOnChange} required />
