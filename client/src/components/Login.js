@@ -94,11 +94,11 @@ const Login = () => {
               <h2 className="title">Login</h2>
               <div className="input-field">
                 <i className="fas fa-user"></i>
-                <input type="text" name='email' value={creds.email} placeholder="Email" onChange={(e)=>handleOnChange(e,true)} />
+                <input type="text" name='email' value={creds.email} placeholder="Email" onChange={(e)=>handleOnChange(e,true)} required/>
               </div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input type="password" name='password' value={creds.password} onChange={(e)=>handleOnChange(e,true)} placeholder="Password" />
+                <input type="password" name='password' value={creds.password} onChange={(e)=>handleOnChange(e,true)} placeholder="Password" required/>
               </div>
               {invalidcreds? <div style={{color:'red'}}>Invalid Credentials</div>:null}
               <div className='admin-button' >
