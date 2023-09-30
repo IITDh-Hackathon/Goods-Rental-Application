@@ -12,10 +12,18 @@
   color: #272727;
 }
 
+nav {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 760px) {
   .navbar-container-mobile {
-    background-color: transparent;
-    /* linear-gradient(to left, #FF1493, #00BFFF); */
+    z-index: 1000;
+    background-color: rgba(240, 240, 240, 0.9);
     position: absolute;
     width: 100%;
   }
@@ -93,7 +101,7 @@
     padding-top: 28px;
     height: max-content;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     width: 100%;
   }
   ul {

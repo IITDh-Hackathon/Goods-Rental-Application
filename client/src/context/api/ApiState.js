@@ -1,11 +1,12 @@
 import ApiContext from './ApiContext';
-import Axios from 'axios'
+// import axios from 'axios'
+import axios from 'axios';
 
 const ApiState = (props) => {
     const host = 'http://localhost:5000';
 
     const login = async (isadmin,creds) => {
-        await Axios.post(`${host}/api/auth/loginuser`, creds, {
+        await axios.post(`${host}/api/auth/loginuser`, creds, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -22,7 +23,7 @@ const ApiState = (props) => {
     }
 
     const signup = async (creds) =>{
-        await Axios.post(`${host}/api/auth/createuser`, creds, {
+        await axios.post(`${host}/api/auth/createuser`, creds, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
