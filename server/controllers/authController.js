@@ -19,7 +19,7 @@ const handleSignup = async (req, res) => {
 
 const handleLogin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     const user = await User.findOne({ email }); //asynchronous function
     if (!user) {
       return res.status(400).json({ message: "Invalid username or password!" });
@@ -27,6 +27,9 @@ const handleLogin = async (req, res) => {
     const auth = await bycrypt.compare(password, user.password);
     if (!auth) {
       return res.status(400).json({ message: "Invalid username or password!" });
+    }
+    if(user.role != role){
+      return res.status(400).json({ message: `you are not a ${role}` });
     }
     const token = generateToken(email, "user");
     res.status(200).json({ message: "User logged in successfully!", token });

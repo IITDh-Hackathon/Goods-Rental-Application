@@ -28,7 +28,7 @@ const ApiState = (props) => {
     }
 
     const signup = async (creds) =>{
-        await axios.post(`${host}/api/auth/createuser`, creds, {
+        return axios.post(`${host}/api/auth/signup`, creds, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -39,7 +39,7 @@ const ApiState = (props) => {
         })
             .catch(function (error) {
                 console.log(error)
-                return [error.response.status,true];
+                return [error,true];
             });
     }
 
