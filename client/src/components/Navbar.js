@@ -36,7 +36,7 @@ const Navbar = () => {
         >
           <div className="top-bar">
             <div className="location_conatiner">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <i className="fa fa-map-marker" aria-hidden="true"></i>
               <p on onClick={handleOpen}>
                 Select City
               </p>
@@ -66,10 +66,10 @@ const Navbar = () => {
               {loggedIn ? (
                 <div className="nav_logos">
                   <Link to="/cart">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
                   <Link to="/profile">
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <i className="fa fa-user" aria-hidden="true"></i>
                   </Link>
                   <i className={click ? "fas fa-times" : "fas fa-bars"} />
                 </div>
@@ -131,10 +131,10 @@ const Navbar = () => {
               {loggedIn ? (
                 <div className="nav_logos">
                   <Link to="/cart">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
                   <Link to="/profile">
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <i className="fa fa-user" aria-hidden="true"></i>
                   </Link>
                 </div>
               ) : (
