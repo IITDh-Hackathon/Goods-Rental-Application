@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Login from './components/Login';
 import ApiState from './context/api/ApiState';
+import AdminHome from './components/admin/AdminHome';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminHome/>} />
       </Routes>
     </BrowserRouter>
     </ApiState>
