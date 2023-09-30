@@ -1,8 +1,9 @@
-import ApiContext from './ApiContext';
-import Axios from 'axios'
+import ApiContext from "./ApiContext";
+// import axios from 'axios'
+import axios from "axios";
 
 const ApiState = (props) => {
-    const host = 'http://localhost:8000';
+  const host = "http://localhost:8000";
 
     const login = async (isadmin,creds) => {
         let reqBody = {
@@ -10,7 +11,7 @@ const ApiState = (props) => {
             "password": creds.password,
             "role": isadmin ? "admin" : "user"
         }
-        return Axios.post(`${host}/api/auth/login`, reqBody, {
+        return axios.post(`${host}/api/auth/login`, reqBody, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -27,7 +28,7 @@ const ApiState = (props) => {
     }
 
     const signup = async (creds) =>{
-        await Axios.post(`${host}/api/auth/createuser`, creds, {
+        await axios.post(`${host}/api/auth/createuser`, creds, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -42,11 +43,11 @@ const ApiState = (props) => {
             });
     }
 
-    return (
-        <ApiContext.Provider value={{ login, signup }}>
-            {props.children}
-        </ApiContext.Provider>
-    )
-}
+  return (
+    <ApiContext.Provider value={{ login, signup }}>
+      {props.children}
+    </ApiContext.Provider>
+  );
+};
 
 export default ApiState;
