@@ -1,5 +1,7 @@
-import city from "../models/city";
-import item from "../models/item";
+import city from "../models/city.js";
+import City from "../models/city.js";
+import Item from "../models/item.js";
+import { pick } from "../utils/pick.js";
 
 // const citySchema = new Schema({
 //     name: String, //name of the city
@@ -18,7 +20,7 @@ import item from "../models/item";
 
 export const getAllCities = async (req, res) => {
   try {
-    let cities = await city.find();
+    let cities = await City.find();
     //remove listings from cities
     cities.forEach((city) => {
       city.listings = undefined;
@@ -29,19 +31,26 @@ export const getAllCities = async (req, res) => {
   }
 };
 
-export const getAllItems = async (req, res) => {
-  try {
-    let items = await item.find();
-    res.status(200).json(items);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+export const getItems = async (req, res) => {
+  let items;
+  if(req.query.city){
+    items = await City.findOne({name: req.query.city});
+    if(items){
+      items = items.listings;
+    }
   }
+  const filter = pick(req.query, ['name', 'category', 'price', 'quantity'])
+  // filter id with items array
+  filter._id = { $in: items };
+  console.log(filter);
+  const options = pick(req.query, ['sortBy', 'limit', 'skip', 'populate', 'page'])
+  res.send( await Item.paginate(filter, options ));
 };
 
 export const getCityListings = async (req, res) => {
   try {
     let pincode = req.params.pincode;
-    let cityListings = await city.findOne({ pincode }).populate("listings");
+    let cityListings = await City.findOne({ pincode }).populate("listings");
     res.status(200).json(cityListings);
   } catch (err) {
     res.status(500).json({ message: err.message });

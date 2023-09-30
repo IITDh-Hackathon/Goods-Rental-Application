@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import item from "./item.js";
+import { toJSON } from "./plugins/toJson.plugin.js";
+import { paginate } from "./plugins/paginate.plugin.js";
 
 const citySchema = new Schema({
     name: String, //name of the city
@@ -15,5 +16,8 @@ const citySchema = new Schema({
         ref: "item"
     }]
 });
+
+citySchema.plugin(toJSON);
+citySchema.plugin(paginate);
 
 export default mongoose.model("City", citySchema);
