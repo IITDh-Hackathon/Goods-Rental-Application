@@ -65,8 +65,27 @@ const ApiState = (props) => {
       });
   };
 
+  const getStats = async () => {
+    console.log('hi');
+    return axios
+    .get(`${host}/api/admin/getStats`, localStorage.getItem("role") ,{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
+
   return (
-    <ApiContext.Provider value={{ login, signup,addItem }}>
+    <ApiContext.Provider value={{ login, signup, addItem, getStats }}>
       {props.children}
     </ApiContext.Provider>
   );
