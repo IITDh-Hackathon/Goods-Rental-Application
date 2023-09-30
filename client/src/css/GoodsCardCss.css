@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   margin: 10px;
-  min-width: 250px;
+  min-width: 280px;
   max-width: 310px;
   width: 100%;
   background: var(--main-color) ;
