@@ -55,8 +55,8 @@ const ApiState = (props) => {
     formData.append("price", item.price);
     formData.append("quantity", item.quantity);
     formData.append("category", item.category);
-    item.images.forEach((file, index) => {
-      formData.append(`images[${index}]`, file);
+    item.images.forEach((file) => {
+      formData.append(`images`, file)
     });
     return axios
       .post(`${host}/api/admin/additem`, formData, {
