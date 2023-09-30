@@ -9,6 +9,12 @@ input {
   text-align: center;
 }
 
+/* create a variable for global color */
+:root {
+  --main-color: #007bff;
+  --secondary-color: #ff5733;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

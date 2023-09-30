@@ -1,0 +1,94 @@
+
+.GoodsCard {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 250px;
+  max-width: 310px;
+  width: 100%;
+  background: var(--main-color) ;
+  color: #333;
+  text-align: left;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.GoodsCard * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+.GoodsCard img {
+  max-width: 100%;
+  vertical-align: top;
+}
+.GoodsBody  {
+  position: relative;
+  background-color: #ffffff;
+  padding: 20px 25px 50px;
+}
+.GoodsCard h3 {
+  position: absolute;
+  bottom: 100%;
+  text-transform: uppercase;
+  padding: 0px 25px;
+  line-height: 44px;
+  margin: 0;
+  left: 0;
+  font-weight: 400;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+}
+.GoodsCard p {
+  font-size: 0.8em;
+  font-weight: 500;
+  text-align: left;
+  margin: 0;
+  line-height: 1.6em;
+}
+.category {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #ffffff;
+  background-color: var(--secondary-color);
+  padding: 0 10px;
+  line-height: 40px;
+  font-weight: 800;
+}
+ .category:before {
+  position: absolute;
+  right: 100%;
+  border-style: solid;
+  border-width: 0 12px 40px 0;
+  border-color: transparent var(--secondary-color) transparent;
+  content: '';
+  top: 0;
+}
+.GoodsCard span {
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--secondary-color);
+  line-height: 40px;
+  padding: 0 10px;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+.GoodsCard span:before {
+  position: absolute;
+  right: 100%;
+  border-style: solid;
+  border-width: 0 0 40px 12px;
+  border-color: transparent transparent var(--secondary-color);
+  content: '';
+  top: 0;
+}
+
+.GoodsCard:hover img,
+.GoodsCard.hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
