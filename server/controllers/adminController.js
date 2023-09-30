@@ -12,7 +12,10 @@ export const addItemHandler = async (req, res) => {
         }
         else {
             const { name, description, price, quantity, category } = req.body;
-            const images = req.files.map((file) => file.path);
+            const images = req.files.map((file) => {
+                //add only last part of the path to the array
+                return file.path.split('\\').slice(-1)[0];
+            });
             console.log(images);
             try {
                 const item = await Item.create({ name, description, price, quantity, category, images });
