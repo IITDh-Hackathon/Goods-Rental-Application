@@ -2,21 +2,57 @@ import { Link, NavLink } from "react-router-dom";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import "./../css/navBar.css";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import axios from "axios";
+import CityLogos from "./cityLogos";
 
-const Navbar = () => {
+const Navbar = ({ city, setCity }) => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [click, setClick] = useState(false);
   const [showMenu, setshowMenu] = useState(true);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const [cityList, setCityList] = useState([
+    "New York",
+    "Los Angeles",
+    "Chicago",
+    "Houston",
+    "Phoenix",
+    "Philadelphia",
+    "San Antonio",
+    "San Diego",
+    "Dallas",
+    "San Jose",
+    "Austin",
+    "Jacksonville",
+    "San Francisco",
+    "Columbus",
+    "Charlotte",
+    "Indianapolis",
+    "Seattle",
+    "Denver",
+    "Washington, D.C.",
+    "Boston",
+    "Nashville",
+    "Baltimore",
+    "Oklahoma City",
+    "Louisville",
+  ]);
+  const [showCity, setShowCity] = useState(false);
+
+  const getCityList = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/city");
+      setCityList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const show = () => {
     if (window.innerWidth <= 760) {
@@ -28,6 +64,19 @@ const Navbar = () => {
   window.addEventListener("resize", show);
   useEffect(show);
 
+  const cities = {
+    Mumbai: "in.bmscdn.com/m6/images/common-modules/regions/mumbai.png",
+    Delhi: "in.bmscdn.com/m6/images/common-modules/regions/ncr.png",
+    Bengaluru: "in.bmscdn.com/m6/images/common-modules/regions/bang.png",
+    Hyderabad: "in.bmscdn.com/m6/images/common-modules/regions/hyd.png",
+    Ahmedabad: "in.bmscdn.com/m6/images/common-modules/regions/ahd.png",
+    Chandigarh: "in.bmscdn.com/m6/images/common-modules/regions/chd.png",
+    Chennai: "in.bmscdn.com/m6/images/common-modules/regions/chen.png",
+    Pune: "in.bmscdn.com/m6/images/common-modules/regions/pune.png",
+    Kolkata: "in.bmscdn.com/m6/images/common-modules/regions/kolk.png",
+    Kochi: "in.bmscdn.com/m6/images/common-modules/regions/koch.png",
+  };
+
   return (
     <>
       <nav>
@@ -38,7 +87,7 @@ const Navbar = () => {
             <div className="location_conatiner">
               <i className="fa fa-map-marker" aria-hidden="true"></i>
               <p on onClick={handleOpen}>
-                Select City
+                {!city ? "Select a City" : city}
               </p>
               <Modal
                 open={open}
@@ -47,17 +96,53 @@ const Navbar = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box className="box">
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    Select a City
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor
-                    ligula.
-                  </Typography>
+                  <p>Popular Cities</p>
+                  <div className="city_logos">
+                    <ul className="logos_ul">
+                      {Object.keys(cities).map((city) => (
+                        <CityLogos
+                          name={city}
+                          url={`https://${cities[city]}`}
+                          setCity={setCity}
+                          handleClose={handleClose}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                  {!showCity ? (
+                    <p
+                      className="view_all"
+                      style={{ color: "#d11c1c" }}
+                      onClick={() => setShowCity(true)}
+                    >
+                      View all cities
+                    </p>
+                  ) : (
+                    <>
+                      <p
+                        className="view_all"
+                        style={{ color: "#d11c1c" }}
+                        onClick={() => setShowCity(false)}
+                      >
+                        View less cities
+                      </p>
+                      <div className="city_list">
+                        <ul className="city_list_ul">
+                          {cityList.map((city, index) => (
+                            <li
+                              key={index}
+                              onClick={() => {
+                                setCity(city);
+                                handleClose();
+                              }}
+                            >
+                              {city}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  )}
                 </Box>
               </Modal>
             </div>
