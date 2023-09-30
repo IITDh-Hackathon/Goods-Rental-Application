@@ -7,8 +7,8 @@ const Functionalities = () => {
     <div>
       <h1 className='title'>Functionalites</h1>
       <div className="Functionality">
-        <FunctionalityCard feature="Add City" />
-        <FunctionalityCard feature="Add Goods" />
+        <FunctionalityCard feature="Add Item To City" />
+        <FunctionalityCard feature="Add New Goods" />
       </div>
     </div>
   )

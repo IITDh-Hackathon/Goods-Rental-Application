@@ -5,6 +5,7 @@ form {
     padding: 0rem 5rem;
     transition: all 0.2s 0.7s;
     overflow: hidden;
+    margin: 30px;
   }
   
   .title {

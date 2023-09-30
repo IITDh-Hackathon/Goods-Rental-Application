@@ -52,7 +52,7 @@ const AddGoods = () => {
         <div>
             <div>
                 <form className="add-goods-form" onSubmit={handleOnSubmit} >
-                    <h2 className="title">Add Goods</h2>
+                    <h2 className="title">Add A New Good</h2>
                     <div className="input-field">
                         <i className="fas fa-shopping-bag"></i>
                         <input type="text" name='name' value={item.name} placeholder="name" onChange={handleOnChange} required />

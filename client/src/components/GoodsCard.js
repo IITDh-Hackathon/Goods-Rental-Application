@@ -8,7 +8,7 @@ const GoodsCard = (props) => {
     // quantity: Number,
     // image: String,
     // category: String,
-    const { name, description, price, quantity, image, category } = props
+    const { name, description, price, quantity, image, category,message } = props
     // "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg"
     return (
         <>
@@ -16,10 +16,15 @@ const GoodsCard = (props) => {
                 <img src={image} alt='' />
                 <div className="category">{category}</div>
                 <div className='GoodsBody'>
-                    <h3>{name}</h3>
                     <p>
+                        <h2 className='goods-name'>
+                            {name}
+                        </h2>
+                        <h3 className='goods-price'>
+                            {price}
+                        </h3>
                         {description}
-                    </p><span href="/a">{price}</span>
+                    </p><span className='message' >{message}</span>
                 </div>
             </div>
         </>
