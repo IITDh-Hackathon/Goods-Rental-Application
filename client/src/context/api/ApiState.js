@@ -17,11 +17,12 @@ const ApiState = (props) => {
             }
         }).then(function (response) {
             localStorage.setItem("token", response.data.token)
-            return [response.status,false];
+            localStorage.setItem("role", isadmin ? "admin" : "user")
+            return [response,false];
         })
             .catch(function (error) {
                 console.log(error)
-                return [error.response.status,true];
+                return [error,true];
             });
     }
 
@@ -33,7 +34,7 @@ const ApiState = (props) => {
             },
         }).then(function (response) {
             localStorage.setItem("token", response.data.token)
-            return [response.status,false];
+            return [response,false];
         })
             .catch(function (error) {
                 console.log(error)
