@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import ApiState from "./context/api/ApiState";
 import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
+import AddListingToCity from "./components/admin/AddListingToCity";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/admin" element={<AdminHome />} />
               <Route path="/admin/addgoods" element={<AddGoods />} />
+              <Route path="/admin/addlisting" element={<AddListingToCity />} />
             </Routes>
           </div>
         </BrowserRouter>

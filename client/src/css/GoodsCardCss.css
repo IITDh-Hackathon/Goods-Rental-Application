@@ -27,17 +27,21 @@
   background-color: #ffffff;
   padding: 20px 25px 50px;
 }
-.GoodsCard h3 {
-  position: absolute;
-  bottom: 100%;
-  text-transform: uppercase;
-  padding: 0px 25px;
-  line-height: 44px;
-  margin: 0;
-  left: 0;
-  font-weight: 400;
-  background-color: var(--secondary-color);
-  color: #ffffff;
+.goods-price{
+  font-size: 1.5em;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.goods-name{
+  font-size: 2em;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 5px;
+  color: var(--secondary-color);
+}
+.message{
+  cursor: pointer;
 }
 .GoodsCard p {
   font-size: 0.8em;
