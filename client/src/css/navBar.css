@@ -134,7 +134,7 @@ a {
 
   .navlinks:hover,
   .navlinks-active:hover {
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid rgb(128, 128, 128);
     transition: 0.4s ease-out;
   }
 
