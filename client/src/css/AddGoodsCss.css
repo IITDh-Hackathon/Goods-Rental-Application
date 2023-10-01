@@ -78,7 +78,7 @@ form {
     color: white;
     border: none;
     padding: 5px 10px;
-    border-radius: 50%;
+    border-radius: 5px;
     cursor: pointer;
     position: absolute;
     top: 5px;
