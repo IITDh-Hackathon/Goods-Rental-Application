@@ -8,13 +8,16 @@ import Pagination from '@mui/material/Pagination';
 const AddListingToCity = () => {
   const { city, setCity, getItems } = useContext(ApiContext);
   const [listed, setListed] = useState([]);
+  const [listedPage, setListedPage] = useState(1);
   const [notListed, setNotListed] = useState([]);
+  const [notListedPage, setNotListedPage] = useState(1);
   const message = "addItem";
 
   useEffect( () => {
     getItems(
       {
         city:city,
+        page:listedPage,
       }
     ).then((res) => {
       setListed(res[0]);
@@ -23,12 +26,21 @@ const AddListingToCity = () => {
     getItems(
       {
         notCity:city,
+        page:notListedPage,
       }
     ).then((res) => {
       setNotListed(res[0]);
     }
     );
-  }, [city, getItems]);
+  }, [city, getItems, listedPage, notListedPage]);
+
+  const handleChangeListedPage = (event, newPage) => {
+    setListedPage(newPage);
+  }
+
+  const handleChangeNotListedPage = (event, newPage) => {
+    setNotListedPage(newPage);
+  }
 
   return (
     <div>
@@ -40,7 +52,7 @@ const AddListingToCity = () => {
               ))
               }
             </div>
-            <Pagination className='paninate' count={notListed.data ? notListed.data.totalPages:10} color="warning" />
+            <Pagination className='paninate' count={notListed.data ? notListed.data.totalPages:10} page={notListedPage} onChange={handleChangeNotListedPage} />
         </div>
         <div className="added">
             <h2 className='added-title'>Items That Are Added </h2>
@@ -50,6 +62,7 @@ const AddListingToCity = () => {
               ))
               }
             </div>
+            <Pagination className='paninate' count={listed.data ? listed.data.totalPages:10} page={listedPage} onChange={handleChangeListedPage} />
         </div>
     </div>
   )
