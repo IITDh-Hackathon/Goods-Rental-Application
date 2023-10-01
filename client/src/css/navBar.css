@@ -13,6 +13,7 @@
 }
 .city-select{
   cursor: pointer;
+  margin-bottom: 0px;
 }
 
 nav {
