@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="footer-distributed">
         <div className="footer-left">
           <h3>
-            Company<span>logo</span>
+            Borrow<span>Box</span>
           </h3>
           <p className="footer-links">
             <a href="#" className="link-1">
@@ -22,14 +22,14 @@ export default function Footer() {
             <a href="#">Faq</a>
             <a href="#">Contact</a>
           </p>
-          <p className="footer-company-name">Company Name © 2015</p>
+          <p className="footer-company-name">Borrow Box © 2023</p>
         </div>
 
         <div className="footer-center">
           <div>
             <i className="fa fa-map-marker"></i>
             <p>
-              <span>444 S. Cedros Ave</span> Solana Beach, California
+              <span>IIT Dharwad</span> Karnataka, India
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
             <i className="fa fa-envelope"></i>
 
             <p>
-              <a href="mailto: support@company.com">support@company.com</a>
+              <a href="mailto: support@company.com">support@borrowbox.com</a>
             </p>
           </div>
         </div>

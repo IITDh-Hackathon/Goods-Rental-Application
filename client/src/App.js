@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
 
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
@@ -14,7 +13,6 @@ import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
-import Footer from "./components/footer";
 
 
 function App() {
@@ -35,7 +33,6 @@ function App() {
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
             </Routes>
           </div>
-          <Footer />
         </BrowserRouter>
       </ApiState>
       <ToastContainer />
