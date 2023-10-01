@@ -11,6 +11,9 @@
   font-weight: 600;
   color: #272727;
 }
+.city-select{
+  cursor: pointer;
+}
 
 nav {
   position: relative;
