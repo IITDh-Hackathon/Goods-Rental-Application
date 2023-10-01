@@ -15,7 +15,7 @@ export const addItemHandler = async (req, res) => {
             const { name, description, price, quantity, category } = req.body;
             const images = req.files.map((file) => {
                 //add only last part of the path to the array
-                return file.path.split('\\').slice(-1)[0];
+                return file.path.split('/').slice(-1)[0];
             });
             console.log(images);
             try {
