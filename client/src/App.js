@@ -12,6 +12,7 @@ import ApiState from "./context/api/ApiState";
 import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
+import Products from "./components/Products";
 // import IndividualCard from "./components/IndividualCard";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/products" element={<Products />} />
               <Route path="/admin" element={<AdminHome />} />
               <Route path="/admin/addgoods" element={<AddGoods />} />
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
