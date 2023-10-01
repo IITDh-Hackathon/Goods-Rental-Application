@@ -1,13 +1,11 @@
 import React from 'react'
 import '../css/GoodsCardCss.css'
+import { useState,useContext } from 'react'
+import { toast } from 'react-toastify';
+import ApiContext from '../../context/api/ApiContext'
 
 const GoodsCard = (props) => {
-    // name: String, //name of the item to be rented
-    // description: String,
-    // price: Number,
-    // quantity: Number,
-    // image: String,
-    // category: String,
+    const { addItem } = useContext(ApiContext);
     const imageStore = 'http://localhost:8000/static/'
     let { name, description, price, quantity, images, category,message, id, city } = props
     let image;
