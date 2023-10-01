@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination';
 
 
 const Products = (props) => {
+    const { category } = props;
     const [selectedCategory, setSelectedCategory] = useState(category);
     const context = React.useContext(ApiContext);
     const [items, setItems] = useState([]);
