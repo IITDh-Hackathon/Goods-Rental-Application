@@ -183,11 +183,15 @@ const Navbar = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem disabled={true}>
-                      {" "}
-                      Hello {profile ? profile.email : "user"}!
-                    </MenuItem>
-                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    <MenuItem disabled={true}> Hello {profile?profile.email:"user"}!</MenuItem>
+                    <MenuItem onClick={
+                      () => {
+                        logout();
+                        handleMenuClose();
+                        toast("Logged out successfully");
+                        navigate("/");
+                      }
+                    }>Logout</MenuItem>
                   </Menu>
                 </div>
               ) : (

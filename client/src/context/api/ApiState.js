@@ -12,8 +12,8 @@ const ApiState = (props) => {
   
   const [loginStatus, setLoginStatus] = useState(true);
   const [cartitems, setCartitems] = useState([]);
-  const [totalprice, setTotalprice] = useState(0)
-	const [totalquantity, setTotalquantity] = useState(0)
+  const [totalprice, setTotalprice] = useState(0);
+	const [totalquantity, setTotalquantity] = useState(0);
   
 
   useEffect(() => {
@@ -219,16 +219,7 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      var temp = 0;
       console.log(response);
-      cartitems = response.data;
-			for (let i=0; i<cartitems.length; i++) {
-        console.log(cartitems[i]['item']['price']);
-				temp += (cartitems[i]['item']['price'] * cartitems[i]['quantity']);
-			}
-      console.log(temp);;
-      setCartitems(response.data);
-			setTotalprice(temp);
       return [response, false];
     })
     .catch(function (error) {
