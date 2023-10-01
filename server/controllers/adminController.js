@@ -17,7 +17,7 @@ export const addItemHandler = async (req, res) => {
             const { name, description, price, quantity, category } = req.body;
             const images = req.files.map((file) => {
                 let fileName = file.path.split(path.sep).pop();
-                return `http://localhost:8000/static/${fileName}`;
+                return fileName;
             });
             console.log(images);
             try {
@@ -76,9 +76,11 @@ export const getStats = async (req, res) => {
         let productCount = 0;
         let cityCount = cities.length;
         let userCount = users.length;
-        items.forEach((item) => {
-            productCount += item.quantity;
-        });
+        if(!items){
+            items.forEach((item) => {
+                productCount += item.quantity;
+            });
+        }
         res.status(200).json({ productCount, cityCount, userCount });
     } catch (err) {
         res.status(500).json({ message: err.message });
