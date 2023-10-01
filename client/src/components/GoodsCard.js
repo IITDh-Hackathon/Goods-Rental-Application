@@ -31,7 +31,7 @@ const GoodsCard = (props) => {
         }else if(message==="Add to cart"){
             console.log(id);
             console.log(city);
-            const res = addCityListing(city,id);
+            const res = await addCityListing(city,id);
             const [response, error] = res || [null, true];
             if (error) {
                 toast.error(response.message);
