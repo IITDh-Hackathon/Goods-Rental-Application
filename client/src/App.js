@@ -13,7 +13,7 @@ import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
-import IndividualCard from "./components/individualCard"
+
 
 function App() {
   return (
@@ -23,7 +23,6 @@ function App() {
           <Navbar />
           <div className="content">
             <Routes>
-              <Route path="/IndividualCard" element={<IndividualCard />} />
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
