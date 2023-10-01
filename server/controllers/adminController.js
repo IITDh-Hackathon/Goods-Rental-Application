@@ -17,7 +17,7 @@ export const addItemHandler = async (req, res) => {
             const { name, description, price, quantity, category } = req.body;
             const images = req.files.map((file) => {
                 let fileName = file.path.split(path.sep).pop();
-                return `http://localhost:8000/static/${fileName}`;
+                return fileName;
             });
             console.log(images);
             try {
