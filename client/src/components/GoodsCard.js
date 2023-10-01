@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
-    const { addCityListing,addToCart } = useContext(ApiContext);
+    const { addCityListing,addToCart,city } = useContext(ApiContext);
     const imageStore = process.env.REACT_APP_SERVER_URL+"/static/";
-    let { name, description, price, quantity, images, category,message, id, city } = props
+    let { name, description, price, quantity, images, category,message, id } = props
     let image;
     if(!images){
         image = "https://cdn1.iconfinder.com/data/icons/image-manipulations/100/13-512.png";

@@ -21,6 +21,7 @@ const ApiState = (props) => {
   }, []);
 
   const addToCart = async (id, city) => {
+    console.log(id, city,"from api state");
     return axios
       .post(
         `${host}/api/user/addtocart`,
