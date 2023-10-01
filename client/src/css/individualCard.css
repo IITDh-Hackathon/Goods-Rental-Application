@@ -1,0 +1,110 @@
+:root {
+  --primary-color: #485031;
+}
+
+.cardBox {
+  font-family: "Montserrat";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px;
+  max-width: 900px;
+  border: 1px solid var(--primary-color);
+  background-color: #faf9f6;
+}
+
+.img_carousel {
+  width: 60%;
+}
+
+.img_carousel img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.carousel {
+  height: 450px;
+}
+
+.cardInfo {
+  width: 40%;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .cardBox {
+    flex-direction: column;
+    max-width: 550px;
+    margin: 20px;
+  }
+
+  .img_carousel,
+  .cardInfo {
+    width: 100%;
+  }
+}
+
+.cardInfo h2 {
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+.cardInfo p {
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.cardInfo button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cardInfo button:hover {
+  background-color: #33401c;
+}
+
+.cardInfo div {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  flex: 1;
+}
+
+.cardInfo button.quantity-button,
+.cardInfo button.duration-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cardInfo button.quantity-button:hover,
+.cardInfo button.duration-button:hover {
+  background-color: var(--primary-color);
+}
+
+.cardInfo span {
+  font-size: 1rem;
+  /* border: 1px solid black; */
+  font-family: "times new roman";
+  padding: 10px;
+}
+
+.add_to_cart {
+  position: relative;
+  margin: 15px 0;
+  left: 85px;
+}

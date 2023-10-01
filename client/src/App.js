@@ -14,17 +14,17 @@ import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
-// import IndividualCard from "./components/IndividualCard";
+import Footer from "./components/footer";
+
 
 function App() {
   return (
     <>
       <ApiState>
         <BrowserRouter>
-          <Navbar  />
+          <Navbar />
           <div className="content">
             <Routes>
-              {/* <Route path="/individualcard" element={<IndividualCard />} /> */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
@@ -35,6 +35,7 @@ function App() {
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
             </Routes>
           </div>
+          <Footer />
         </BrowserRouter>
       </ApiState>
       <ToastContainer />

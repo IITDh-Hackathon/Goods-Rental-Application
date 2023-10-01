@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../css/LoginCss.css'
 import ApiContext from '../context/api/ApiContext';
 
@@ -9,9 +9,11 @@ const Login = () => {
   const [creds, setCreds] = useState({ "email": "", "password": "" })
   const [signupCreds, setsignupCreds] = useState({ "name": "", "email": "", "city": "", "password": "", "confirmPassword": "" })
   const context = useContext(ApiContext)
-  const { login, signup } = context;
+  const { login, signup, profile, loginStatus } = context;
   const [invalidcreds, setinvalidcreds] = useState(false);
   const navigate = useNavigate();
+
+
 
 
   const handleOnChange = (e,islogin) => {
@@ -94,6 +96,10 @@ const Login = () => {
     }
   }
   )
+
+  if(profile && profile.role === "admin"){
+    return <Navigate to="/admin" />
+  }
 
   return (
     <>

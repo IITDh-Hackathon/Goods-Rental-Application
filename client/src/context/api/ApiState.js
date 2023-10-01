@@ -1,12 +1,45 @@
 import ApiContext from "./ApiContext";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const ApiState = (props) => {
-  const host = "http://localhost:8000";
+  console.log(process.env.REACT_APP_SERVER_URL);
+  const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8000";
 
-  const [profile, setProfile] = useState();
-  const [city, setCity] = useState();
+  const [profile, setProfile] = useState(null);
+  const [city, setCity] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getProfile();
+    }else{
+      setLoginStatus(false);
+    }
+  },[]);
+
+  const getProfile = async () => { 
+    return axios
+      .get(`${host}/api/user/profile`, {
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+      .then(function (response) {
+        setProfile(response.data);
+        toast.dismiss();
+        toast(`you are logged in as ${response.data.email}`);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
+
 
   const login = async (isadmin, creds) => {
     let reqBody = {
@@ -24,6 +57,8 @@ const ApiState = (props) => {
       .then(function (response) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", isadmin ? "admin" : "user");
+        getProfile();
+        setLoginStatus(true);
         return [response, false];
       })
       .catch(function (error) {
@@ -48,6 +83,13 @@ const ApiState = (props) => {
         console.log(error);
         return [error, true];
       });
+  };
+
+  const logout = async () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setLoginStatus(false);
+    setProfile(null);
   };
 
   const addItem = async (item) => {
@@ -116,8 +158,27 @@ const ApiState = (props) => {
     });
   }
 
+  const addCityListing = async (city, id) => {
+    return axios
+    .post(`${host}/api/admin/addCityListing`,{city:city, id:id},{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
+
   return (
-    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems }}>
+    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems, getProfile, profile, loginStatus, logout, addCityListing }}>
       {props.children}
     </ApiContext.Provider>
   );

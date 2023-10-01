@@ -1,14 +1,12 @@
 import React from 'react'
 import '../css/GoodsCardCss.css'
+import { useState,useContext } from 'react'
+import { toast } from 'react-toastify';
+import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
-    // name: String, //name of the item to be rented
-    // description: String,
-    // price: Number,
-    // quantity: Number,
-    // image: String,
-    // category: String,
-    const imageStore = 'http://localhost:8000/static/'
+    const { addCityListing } = useContext(ApiContext);
+    const imageStore = process.env.REACT_APP_SERVER_URL+"/static/";
     let { name, description, price, quantity, images, category,message, id, city } = props
     let image;
     if(!images){
@@ -22,6 +20,14 @@ const GoodsCard = (props) => {
         if(message==="addItem"){
             console.log(id);
             console.log(city);
+            const res = addCityListing(city,id);
+            const [response, error] = res || [null, true];
+            if (error) {
+                toast.error(response.message);
+            }
+            else {
+                toast.success('Item Added to City Listing Successfully');
+            }
         }
     }
     
