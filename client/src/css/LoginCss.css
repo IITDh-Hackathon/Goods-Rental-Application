@@ -2,9 +2,8 @@
   position: relative;
   min-width: 100%;
   background-color: #fff;
-  height: calc(100vh - 94px);
-  max-height: calc(100vh - 94px);
-
+  height: calc(100vh - 67px);
+  max-height: calc(100vh - 67px);
   overflow: hidden;
 }
 

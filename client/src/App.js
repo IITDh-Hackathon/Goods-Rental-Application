@@ -13,9 +13,22 @@ import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
-
+import Checkout from "./components/checkout/delivery";
+import ConfirmationPage from "./components/checkout/confirmation";
 
 function App() {
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    firstName: "",
+    lastName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    county: "",
+    pincode: "",
+    shippingMethod: "Free",
+  });
+
   return (
     <>
       <ApiState>
@@ -23,6 +36,19 @@ function App() {
           <Navbar />
           <div className="content">
             <Routes>
+              <Route
+                path="/checkout"
+                element={
+                  <Checkout
+                    deliveryInfo={deliveryInfo}
+                    setDeliveryInfo={setDeliveryInfo}
+                  />
+                }
+              />
+              <Route
+                path="/confirmation"
+                element={<ConfirmationPage deliveryInfo={deliveryInfo} />}
+              />
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
