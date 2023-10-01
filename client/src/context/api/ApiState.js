@@ -11,6 +11,9 @@ const ApiState = (props) => {
   const [city, setCity] = useState(null);
   const [loginStatus, setLoginStatus] = useState(true);
   const [cartitems, setCartitems] = useState([]);
+  const [totalprice, setTotalprice] = useState(0)
+	const [totalquantity, setTotalquantity] = useState(0)
+  
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -215,7 +218,16 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
+      var temp = 0;
       console.log(response);
+      cartitems = response.data;
+			for (let i=0; i<cartitems.length; i++) {
+        console.log(cartitems[i]['item']['price']);
+				temp += (cartitems[i]['item']['price'] * cartitems[i]['quantity']);
+			}
+      console.log(temp);;
+      setCartitems(response.data);
+			setTotalprice(temp);
       return [response, false];
     })
     .catch(function (error) {
@@ -223,6 +235,20 @@ const ApiState = (props) => {
       return [error, true];
     });
   }
+
+  const handlePriceChange = (increase,price) => {
+		if (increase) {
+			setTotalquantity(totalquantity + 1);
+			setTotalprice(totalprice + price);
+		} else {
+			if (totalquantity > 1) {
+				setTotalquantity(totalquantity - 1);
+				setTotalprice(totalprice - price);
+			}
+		}
+	}
+
+
 
   return (
     <ApiContext.Provider
@@ -241,6 +267,9 @@ const ApiState = (props) => {
         logout,
         addCityListing,
         getCartItems,
+        cartitems,
+        handlePriceChange,
+        totalprice
       }}
     >
       {props.children}

@@ -156,7 +156,7 @@ const Login = () => {
             <div className="content">
               <h3>{admin ? 'Admin' : 'User'}</h3>
               <p>
-                {admin ? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. A necessitatibus similique mollitia obcaecati nesciunt non ipsam quis, voluptatum cupiditate porro optio dicta rem impedit ducimus labore ad numquam nam maxime' : 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione'}
+                {admin ? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. A necessitatibus similique mollitia obcaecati nesciunt non ipsam quis, voluptatum cupiditate porro optio dicta rem impedit ducimus labore ad numquam nam maxime' : 'Welcome to BorrowBox! We are thrilled to have you here. Get ready to access a world of convenience and choice as you embark on your rental journey with us. Explore our extensive collection of goods and start renting today'}
               </p>
               {
                 admin ? null : <button className="btn transparent" id="sign-up-btn">

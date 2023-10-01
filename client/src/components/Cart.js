@@ -6,34 +6,21 @@ import '../css/CartCss.css'
 import { toast } from 'react-toastify';
 
 const Cart = () => {
-	const [totalprice, setTotalprice] = useState(0)
-	const [totalquantity, setTotalquantity] = useState(0)
-	const { getCartItems } = useContext(ApiContext);
+	// const [totalprice, setTotalprice] = useState(0)
+	// const [totalquantity, setTotalquantity] = useState(0)
+	const { getCartItems, cartitems, handlePriceChange, totalprice } = useContext(ApiContext);
 
-	const handlePriceChange = (increase,price) => {
-		if (increase) {
-			setTotalquantity(totalquantity + 1);
-			setTotalprice(totalprice + price);
-		} else {
-			if (totalquantity > 1) {
-				setTotalquantity(totalquantity - 1);
-				setTotalprice(totalprice - price);
-			}
-		}
-	}
 
 	useEffect(() => {
+		console.log('hi');
 		getCartItems().then((res) => {
 			const [response, error] = res || [null, true];
+			// make a for loop to calculate total price and quantity
 			if (error) {
 			  toast.error(response.response.data.message);
 			}
-			else {
-				setTotalprice(response.data.totalPrice);
-				setTotalquantity(response.data.totalQuantity);
-			}
 		})
-	},[getCartItems])
+	},[])
 	
 
 	return (
