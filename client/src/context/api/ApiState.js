@@ -116,8 +116,27 @@ const ApiState = (props) => {
     });
   }
 
+  const addCityListing = async (city, id) => {
+    return axios
+    .post(`${host}/api/admin/addCityListing`,{city:city, id:id},{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
+
   return (
-    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems }}>
+    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems,addCityListing }}>
       {props.children}
     </ApiContext.Provider>
   );
