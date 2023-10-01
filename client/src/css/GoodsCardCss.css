@@ -19,6 +19,8 @@
   transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
 .GoodsCard img {
+  height: 45%;
+  width: 100%;
   max-width: 100%;
   vertical-align: top;
 }
