@@ -5,7 +5,8 @@ const storage = multer.diskStorage({
     cb(null, '../server/public/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now());
+    let extension = file.originalname.split('.').pop();
+    cb(null, String(Date.now()) + '.' + extension);
   }
 });
 

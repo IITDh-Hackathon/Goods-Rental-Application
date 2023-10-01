@@ -8,11 +8,16 @@ const GoodsCard = (props) => {
     // quantity: Number,
     // image: String,
     // category: String,
-    
-    let { name, description, price, quantity, image, category,message } = props
-    if(!image){
-           image = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg";
+    const imageStore = 'http://localhost:8000/static/'
+    let { name, description, price, quantity, images, category,message } = props
+    let image;
+    if(!images){
+        image = "https://cdn1.iconfinder.com/data/icons/image-manipulations/100/13-512.png";
     }
+    else{
+        image = imageStore + images[0];
+    }
+    
     return (
         <>
             <div className="GoodsCard">
