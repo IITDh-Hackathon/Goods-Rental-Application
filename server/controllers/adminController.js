@@ -3,6 +3,8 @@ import City from '../models/city.js';
 import upload from '../config/multerConfig.js';
 import user from '../models/user.js';
 import city from '../models/city.js';
+import path from 'path';
+
 
 export const addItemHandler = async (req, res) => {
     
@@ -14,8 +16,8 @@ export const addItemHandler = async (req, res) => {
         else {
             const { name, description, price, quantity, category } = req.body;
             const images = req.files.map((file) => {
-                //add only last part of the path to the array
-                return file.path.split('/').slice(-1)[0];
+                let fileName = file.path.split(path.sep).pop();
+                return `http://localhost:8000/static/${fileName}`;
             });
             console.log(images);
             try {
