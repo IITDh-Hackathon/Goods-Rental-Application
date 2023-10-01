@@ -11,7 +11,8 @@ const cartSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    city: String
 });
 
 export default mongoose.model("Cart", cartSchema);

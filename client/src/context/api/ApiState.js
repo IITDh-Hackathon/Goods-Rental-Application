@@ -15,20 +15,43 @@ const ApiState = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getProfile();
-    }else{
+    } else {
       setLoginStatus(false);
     }
-  },[]);
+  }, []);
 
-  const getProfile = async () => { 
+  const addToCart = async (id, city) => {
+    return axios
+      .post(
+        `${host}/api/user/addtocart`,
+        { item: id, city: city },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
+
+  const getProfile = async () => {
     return axios
       .get(`${host}/api/user/profile`, {
         headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      }
-    })
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then(function (response) {
         setProfile(response.data);
         toast.dismiss();
@@ -40,7 +63,6 @@ const ApiState = (props) => {
         return [error, true];
       });
   };
-
 
   const login = async (isadmin, creds) => {
     let reqBody = {
@@ -102,7 +124,7 @@ const ApiState = (props) => {
     formData.append("quantity", item.quantity);
     formData.append("category", item.category);
     item.images.forEach((file) => {
-      formData.append(`images`, file)
+      formData.append(`images`, file);
     });
     return axios
       .post(`${host}/api/admin/additem`, formData, {
@@ -123,82 +145,103 @@ const ApiState = (props) => {
 
   const getStats = async () => {
     return axios
-    .get(`${host}/api/admin/getStats`,{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(function (response) {
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .get(`${host}/api/admin/getStats`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
   const getItems = async (params) => {
     return axios
-    .get(`${host}/api/user/items`,{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      params:params,
-    })
-    .then(function (response) {
-      console.log(response.data.results);
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .get(`${host}/api/user/items`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        params: params,
+      })
+      .then(function (response) {
+        console.log(response.data.results);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
   const addCityListing = async (city, id) => {
     return axios
-    .post(`${host}/api/admin/addCityListing`,{city:city, id:id},{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(function (response) {
-      console.log(response);
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .post(
+        `${host}/api/admin/addCityListing`,
+        { city: city, id: id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
-  const getCartItems = async () =>{
+  const getCartItems = async () => {
     return axios
-    .post(`${host}/api/user/getcartitems`,{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(function (response) {
-      console.log(response);
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .post(`${host}/api/user/getcartitems`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
   return (
-    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems, getProfile, profile, loginStatus, logout, addCityListing, getCartItems }}>
+    <ApiContext.Provider
+      value={{
+        addToCart,
+        login,
+        signup,
+        addItem,
+        getStats,
+        city,
+        setCity,
+        getItems,
+        getProfile,
+        profile,
+        loginStatus,
+        logout,
+        addCityListing,
+        getCartItems,
+      }}
+    >
       {props.children}
     </ApiContext.Provider>
   );
