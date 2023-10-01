@@ -18,7 +18,7 @@ const Categories = () => {
       "https://www.ikea.com/images/96/8e/968e22928aa8e4698a45d8b502117b89.jpg?f=xs",
     ],
     [
-      "Funriture",
+      "Furniture",
       "https://www.ikea.com/ext/ingkadam/m/4d08014585d33c9/original/PH191589.jpg?f=xs"
     ],
     [

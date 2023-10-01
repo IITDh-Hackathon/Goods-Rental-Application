@@ -44,7 +44,7 @@ const GoodsCard = (props) => {
                         <h3 className='goods-price'>
                         ₹ {price}
                         </h3>
-                        {description}
+                        {description.length > 25 ? description.substring(0, 25) + "..." : description}
                     </p><span className='message' onClick={()=>{
                         if(message==="addItem"){
                             handleOnSubmit(city,id);

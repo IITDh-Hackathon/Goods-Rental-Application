@@ -3,6 +3,7 @@ import HomeCarousel from "./carousel.js";
 import Categories from "./Categories";
 import { Navigate } from "react-router-dom";
 import ApiContext from "../context/api/ApiContext.js";
+import Footer from "./footer.js";
 const Home = () => {
   const context = React.useContext(ApiContext);
   const { profile, loginStatus } = context;
@@ -13,6 +14,7 @@ const Home = () => {
     <>
     <HomeCarousel />
     <Categories />
+    <Footer />
     </>
   )
 }

@@ -50,7 +50,7 @@ const Login = () => {
           navigate('/admin');
         }
         else{
-          navigate('/user');
+          navigate('/');
         }
         toast.success('Login Successfull');
       }
@@ -72,7 +72,7 @@ const Login = () => {
           navigate('/admin');
         }
         else{
-          navigate('/user');
+          navigate('/');
         }
         toast.success('Signup Successfull');
       }
@@ -107,7 +107,7 @@ const Login = () => {
         <div className="forms-container">
           <div className="signin-signup">
             <form className="sign-in-form" onSubmit={(e)=> handleOnSubmit(e,true)} >
-              <h2 className="title">Login</h2>
+              <h2 className="title"> {admin ? 'Admin' : 'User'} Login</h2>
               <div className="input-field">
                 <i className="fas fa-user"></i>
                 <input type="text" name='email' value={creds.email} placeholder="Email" onChange={(e)=>handleOnChange(e,true)} required/>
@@ -119,7 +119,7 @@ const Login = () => {
               {invalidcreds? <div style={{color:'red'}}>Invalid Credentials</div>:null}
               <div className='admin-button' >
                 login as <span style={{ color: 'blue', cursor: 'pointer' }} onClick={handleOnClick} >
-                  {admin ? 'Admin' : 'User'}
+                  {admin ? 'User' : 'Admin'}
                 </span>
               </div>
               <input type="submit" value="Login" className="btn solid" />

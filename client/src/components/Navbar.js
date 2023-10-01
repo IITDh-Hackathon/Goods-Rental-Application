@@ -114,40 +114,6 @@ const Navbar = () => {
                       ))}
                     </ul>
                   </div>
-                  {!showCity ? (
-                    <p
-                      className="view_all"
-                      style={{ color: "#d11c1c" }}
-                      onClick={() => setShowCity(true)}
-                    >
-                      View all cities
-                    </p>
-                  ) : (
-                    <>
-                      <p
-                        className="view_all"
-                        style={{ color: "#d11c1c" }}
-                        onClick={() => setShowCity(false)}
-                      >
-                        View less cities
-                      </p>
-                      <div className="city_list">
-                        <ul className="city_list_ul">
-                          {cityList.map((city, index) => (
-                            <li
-                              key={index}
-                              onClick={() => {
-                                setCity(city);
-                                handleClose();
-                              }}
-                            >
-                              {city}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )}
                 </Box>
               </Modal>
             </div>
