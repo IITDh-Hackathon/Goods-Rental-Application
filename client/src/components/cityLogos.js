@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import * as React from "react";
 import "./../css/navBar.css";
-import { Button } from "bootstrap";
+
 
 const CityLogos = ({ name, url, setCity, handleClose }) => {
   const hadleClick = () => {
