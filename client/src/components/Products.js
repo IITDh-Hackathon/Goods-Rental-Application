@@ -90,7 +90,7 @@ const Products = (props) => {
                 </div>
                 <div className="products">
                     {items.data && items.data.results && items.data.results.map((item) => (
-                        <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} key={item.id} id={item.id} />
+                        <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} key={item.id} id={item.id} message="Add to cart" />
                     ))
                     }
 
