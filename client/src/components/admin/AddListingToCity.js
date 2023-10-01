@@ -51,7 +51,7 @@ const AddListingToCity = () => {
             <h2 className='not-added-title' >Items That Are Not Added {city} </h2>
             <div className='wrapper'>
               {notListed.data && notListed.data.results && notListed.data.results.map((item) => (
-                <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} message={message} key={item.id}/>
+                <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} message={message} key={item.id} city={city} id={item.id}/>
               ))
               }
             </div>
@@ -61,7 +61,7 @@ const AddListingToCity = () => {
             <h2 className='added-title'>Items That Are Added </h2>
             <div className='wrapper'>
               {listed.data && listed.data.results && listed.data.results.map((item) => (
-                <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} key={item.id}/>
+                <GoodsCard name={item.name} description={item.description} price={item.price} quantity={item.quantity} category={item.category} images={item.images} key={item.id} city={city} id={item.id}/>
               ))
               }
             </div>
