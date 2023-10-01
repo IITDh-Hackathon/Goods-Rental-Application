@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/GoodsCardCss.css'
 import { useState,useContext } from 'react'
 import { toast } from 'react-toastify';
-import ApiContext from '../../context/api/ApiContext'
+import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
     const { addItem } = useContext(ApiContext);
