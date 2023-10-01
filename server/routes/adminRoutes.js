@@ -6,18 +6,18 @@ import { authenticateUser} from "../middlewares/Authenticate.js";
 import {authorizeUser} from "../middlewares/Authorize.js";
 
 //api to handle adding items
-router.post("/addItem", authenticateUser, authorizeUser("admin"), addItemHandler);
+router.post("/addItem", authenticateUser, authorizeUser(["admin"]), addItemHandler);
 
 //api to handle a new city add
-router.post("/addCity", authenticateUser, authorizeUser("admin"), addCity);
+router.post("/addCity", authenticateUser, authorizeUser(["admin"]), addCity);
 
 //api to handle a new city addlistings
-router.post("/addCityListing", authenticateUser, authorizeUser("admin"), addCityListing);
+router.post("/addCityListing", authenticateUser, authorizeUser(["admin"]), addCityListing);
 
 //api to get all cities
-router.get("/getCities", authenticateUser, authorizeUser("admin"), getCities);
+router.get("/getCities", authenticateUser, authorizeUser(["admin"]), getCities);
 
 //api to get stats
-router.get("/getStats",authenticateUser, authorizeUser("admin"),getStats);
+router.get("/getStats",authenticateUser, authorizeUser(["admin"]),getStats);
 
 export default router;

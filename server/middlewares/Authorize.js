@@ -1,10 +1,10 @@
-export const authorizeUser = (role) => {
+export const authorizeUser = (roles) => {
     return (req, res, next) => {
-        console.log(role,req.user.role);
-        if (req.user.role == role) {
+        let user = req.user;
+        if (user && roles.includes(user.role)) {
             next();
         } else {
-            res.status(403).json({ message: "You are not authorized" });
+            res.status(401).json({ message: 'Unauthorized' });
         }
     }
 }
