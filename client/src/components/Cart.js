@@ -1,11 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import ApiContext from '../context/api/ApiContext'
 import CartCard from './CartCard'
 import '../css/CartCss.css'
+import { toast } from 'react-toastify';
 
 const Cart = () => {
 	const [totalprice, setTotalprice] = useState(0)
 	const [totalquantity, setTotalquantity] = useState(0)
+	const { getCartItems } = useContext(ApiContext);
 
 	const handlePriceChange = (increase,price) => {
 		if (increase) {
@@ -18,6 +21,20 @@ const Cart = () => {
 			}
 		}
 	}
+
+	useEffect(() => {
+		getCartItems().then((res) => {
+			const [response, error] = res || [null, true];
+			if (error) {
+			  toast.error(response.response.data.message);
+			}
+			else {
+				setTotalprice(response.data.totalPrice);
+				setTotalquantity(response.data.totalQuantity);
+			}
+		})
+	},[getCartItems])
+	
 
 	return (
 		<div className="cart-wrapper">

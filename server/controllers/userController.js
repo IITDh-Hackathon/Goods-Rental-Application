@@ -71,37 +71,36 @@ export const getAllCategories = async (req, res) => {
   }
 };
 
-// const cartSchema = new Schema({
-//   item:{
-//       type: Schema.Types.ObjectId,
-//       ref: "Item"
-//   },
-//   quantity: Number,
-//   numberOfMonths: Number,
-//   user: {
-//       type: Schema.Types.ObjectId,
-//       ref: "User"
-//   }
-// });
-
-
 //all apis for cart handling
 export const addToCart = async (req, res) => {
   try {
-    const {item, quantity,months} = req.body;
+    const {item, city} = req.body;
     const email = req.user.email;
     const user = await User.findOne({email});
-    const cart = await Cart.create({user:user._id, item, quantity, numberOfMonths: months});
+    const cart = await Cart.create({user:user._id, item, quantity:1, numberOfMonths: 1,city});
     res.status(201).json({ message: "Item added to cart successfully!" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-export const getAllCartItems = async (req, res) => {
+export const getAllCartItems = async (req, res) =>{
   try{
-
-  }catch(err){
+    const email = req.user.email;
+    const user = await User.findOne({email});
+    const cartItems= await Cart.find({user:user._id});
+    const allItems=await Item.find({});
+    const items = [];
+    cartItems.forEach((cartItem)=>{
+      let obj = {};
+      obj.quantity = cartItem.quantity;
+      obj.months = cartItem.numberOfMonths;
+      //find item
+      let item = allItems.find((item)=>item._id.toString()===cartItem.item.toString());
+      obj.item = item;
+    });
+    res.status(200).json(items);
+  }catch (err) {
     res.status(500).json({ message: err.message });
   }
 }

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
-    const { addCityListing } = useContext(ApiContext);
+    const { addCityListing,addToCart } = useContext(ApiContext);
     const imageStore = process.env.REACT_APP_SERVER_URL+"/static/";
     let { name, description, price, quantity, images, category,message, id, city } = props
     let image;
@@ -16,17 +16,28 @@ const GoodsCard = (props) => {
         image = imageStore + images[0];
     }
 
-    const handleOnSubmit=(city,id)=>{
+    const handleOnSubmit=async (city,id)=>{
         if(message==="addItem"){
             console.log(id);
             console.log(city);
-            const res = addCityListing(city,id);
+            const res = await addCityListing(city,id);
             const [response, error] = res || [null, true];
             if (error) {
                 toast.error(response.message);
             }
             else {
                 toast.success('Item Added to City Listing Successfully');
+            }
+        }else if(message==="Add to cart"){
+            console.log(id);
+            console.log(city);
+            const res = await addToCart(id,city);
+            const [response, error] = res || [null, true];
+            if (error) {
+                toast.error(response.message);
+            }
+            else {
+                toast.success('Item Added to Cart Successfully');
             }
         }
     }
@@ -47,6 +58,8 @@ const GoodsCard = (props) => {
                         {description.length > 25 ? description.substring(0, 25) + "..." : description}
                     </p><span className='message' onClick={()=>{
                         if(message==="addItem"){
+                            handleOnSubmit(city,id);
+                        }else if(message==="Add to cart"){
                             handleOnSubmit(city,id);
                         }
                     }} >{message}</span>
