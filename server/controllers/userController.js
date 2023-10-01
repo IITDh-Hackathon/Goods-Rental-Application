@@ -1,6 +1,7 @@
-import city from "../models/city.js";
 import City from "../models/city.js";
 import Item from "../models/item.js";
+import Cart from "../models/cart.js";
+import User from "../models/user.js";
 import { pick } from "../utils/pick.js";
 
 export const getAllCities = async (req, res) => {
@@ -69,3 +70,38 @@ export const getAllCategories = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// const cartSchema = new Schema({
+//   item:{
+//       type: Schema.Types.ObjectId,
+//       ref: "Item"
+//   },
+//   quantity: Number,
+//   numberOfMonths: Number,
+//   user: {
+//       type: Schema.Types.ObjectId,
+//       ref: "User"
+//   }
+// });
+
+
+//all apis for cart handling
+export const addToCart = async (req, res) => {
+  try {
+    const {item, quantity,months} = req.body;
+    const email = req.user.email;
+    const user = await User.findOne({email});
+    const cart = await Cart.create({user:user._id, item, quantity, numberOfMonths: months});
+    res.status(201).json({ message: "Item added to cart successfully!" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const getAllCartItems = async (req, res) => {
+  try{
+
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+}
