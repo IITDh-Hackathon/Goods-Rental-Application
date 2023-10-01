@@ -1,29 +1,25 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import "../css/ProductsCss.css";
-import GoodsCard from "./GoodsCard";
-import ApiContext from "../context/api/ApiContext";
-import Pagination from "@mui/material/Pagination";
-import Modal from "@mui/material/Modal";
-import IndividualCard from "./individualCard";
+import React, { useEffect } from 'react'
+import { useState } from 'react';
+import '../css/ProductsCss.css'
+import GoodsCard from './GoodsCard';
+import ApiContext from '../context/api/ApiContext';
+import Pagination from '@mui/material/Pagination';
+import { useParams } from 'react-router-dom';
 
 const Products = (props) => {
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const { category } = props;
-  const [selectedCategory, setSelectedCategory] = useState(category);
-  const context = React.useContext(ApiContext);
-  const [items, setItems] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const { city } = context;
-  console.log(city);
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 4,
-    category: selectedCategory,
-    city: city,
-  });
-  const { getItems } = context;
+    const { category } = useParams();
+    const [selectedCategory, setSelectedCategory] = useState(category);
+    const context = React.useContext(ApiContext);
+    const [items, setItems] = useState([]);
+    const {city} = context;
+    console.log(city);
+    const [params, setParams] = useState({
+        page: 1,
+        limit: 4,
+        category: selectedCategory,
+        city: city,
+    })
+    const { getItems } = context;
 
   useEffect(() => {
     setParams({
@@ -123,11 +119,7 @@ const Products = (props) => {
                   key={item.id}
                   id={item.id}
                   message="Add to cart"
-                  onClick={handleOpen}
                 />
-                <Modal open={open} onClose={handleClose}>
-                  <IndividualCard />
-                </Modal>
               </>
             ))}
         </div>
