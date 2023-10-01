@@ -264,3 +264,28 @@ a {
   box-sizing: border-box;
   text-align: center;
 }
+
+.wallet{
+  cursor: pointer;
+  font-size: 24px;
+  color: #46504d;
+}
+
+.wallet-title{
+  text-align: center;
+  padding: 10px 0px 0px 0px;
+}
+
+.wallet-body{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.addcash-btn{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.wallet-cash{
+  text-align: center;
+}
