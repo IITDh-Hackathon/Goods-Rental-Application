@@ -254,7 +254,6 @@ const ApiState = (props) => {
   return (
     <ApiContext.Provider
       value={{
-        loading,
         addToCart,
         login,
         signup,
