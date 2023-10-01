@@ -22,7 +22,7 @@ const userSchema = new Schema({
         //either "user" or "admin"
         enum: ["user", "admin"],
         default: "user"
-    }
+    },
 });
 
 userSchema.plugin(toJSON);
