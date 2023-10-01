@@ -9,8 +9,10 @@ const ApiState = (props) => {
 
   const [profile, setProfile] = useState(null);
   const [city, setCity] = useState(null);
+  
   const [loginStatus, setLoginStatus] = useState(true);
   const [cartitems, setCartitems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -207,26 +209,27 @@ const ApiState = (props) => {
 
   const getCartItems = async () => {
     return axios
-    .get(`${host}/api/user/getcartItems`,{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(function (response) {
-      console.log(response);
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .get(`${host}/api/user/getcartItems`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
   return (
     <ApiContext.Provider
       value={{
+        loading,
         addToCart,
         login,
         signup,
