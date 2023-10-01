@@ -41,18 +41,17 @@ export const addCity = async (req, res) => {
 };
 
 export const addCityListing = async (req, res) => {
-    const { city_name,item_id } = req.body;
+    const cityName = req.body.city;
+    const itemId = req.body.id;
     try{
         //add item._id to city.listings
         const city = City.findOne({name:city_name});
         if(!city){
-            return res.status(404).json({ message: "City not found!"});
+            //create city
+            await City.create({name:city_name, listings:[item_id]});
+            return res.status(201).json({ message: "City listing added successfully!"});
         }
-        const item = Item.findOne({_id:item_id});
-        if(!item){
-            return res.status(404).json({ message: "Item not found!"});
-        }
-        await City.updateOne({name:city_name},{$push:{listings:item_id}});
+        await City.updateOne({name:city_name}, {$push: {listings: item_id}});
         return res.status(201).json({ message: "City listing added successfully!"});
     }catch(err){
         return res.status(500).json({ message: err.message });
