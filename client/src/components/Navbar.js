@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import * as React from "react";
 import { useState, useEffect } from "react";
 import "./../css/navBar.css";
@@ -10,6 +10,7 @@ import ApiContext from "../context/api/ApiContext";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from "@mui/material/MenuItem";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -20,6 +21,7 @@ const Navbar = () => {
   const handleClose = () => setOpen(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const navigate = useNavigate();
 
   const { city, setCity, loginStatus, profile, logout } = React.useContext(ApiContext);
 
@@ -182,7 +184,14 @@ const Navbar = () => {
         }}
       >
         <MenuItem disabled={true}> Hello {profile?profile.email:"user"}!</MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={
+          () => {
+            logout();
+            handleMenuClose();
+            toast("Logged out successfully");
+            navigate("/");
+          }
+        }>Logout</MenuItem>
       </Menu>
                 </div>
               ) : (

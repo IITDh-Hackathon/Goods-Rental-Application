@@ -4,11 +4,11 @@ import '../css/ProductsCss.css'
 import GoodsCard from './GoodsCard';
 import ApiContext from '../context/api/ApiContext';
 import Pagination from '@mui/material/Pagination';
-
+import { useParams } from 'react-router-dom';
 
 
 const Products = (props) => {
-    const { category } = props;
+    const { category } = useParams();
     const [selectedCategory, setSelectedCategory] = useState(category);
     const context = React.useContext(ApiContext);
     const [items, setItems] = useState([]);

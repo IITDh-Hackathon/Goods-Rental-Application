@@ -7,7 +7,7 @@ const CategoryCard = (props) => {
     const navigate = useNavigate()
 
     const handleOnClick = (category) => {
-        navigate(`/products`)
+        navigate(`/products/${category}`)
     }
     return (
         <div className="CategoryCard" onClick={()=>handleOnClick(category)}>
