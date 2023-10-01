@@ -110,3 +110,56 @@ export const getAllCartItems = async (req, res) =>{
     res.status(500).json({ message: err.message });
   }
 }
+
+export const deleteCartItem = async (req, res) =>{
+  try{
+    const {id} = req.body;
+    await Cart.findByIdAndDelete(id);
+    res.status(200).json({ message: "Item deleted from cart successfully!" });
+  }catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateCartItemQuantity = async (req, res) =>{
+  try{
+    const {id, quantity} = req.body;
+    const cart = await Cart.findById(id);
+    cart.quantity = quantity;
+    await cart.save();
+    res.status(200).json({ message: "Item quantity updated successfully!" });
+  }catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateCartItemMonths = async (req, res) =>{
+  try{
+    const {id, months} = req.body;
+    const cart = await Cart.findById(id);
+    cart.numberOfMonths = months;
+    await cart.save();
+    res.status(200).json({ message: "Item months updated successfully!" });
+  }catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
+//all apis for wallet handling
+export const addMoneyToWallet = async (req, res) => {
+  try {
+    const { amount } = req.body;
+    const email = req.user.email;
+    const user = await User.findOne({email});
+    user.walletCash += amount;
+    await user.save();
+    res.status(201).json({ message: "Money added to wallet successfully!" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
