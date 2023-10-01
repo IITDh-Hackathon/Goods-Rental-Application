@@ -13,6 +13,7 @@ import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
+import Cart from "./components/Cart";
 // import IndividualCard from "./components/IndividualCard";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/admin" element={<AdminHome />} />
               <Route path="/admin/addgoods" element={<AddGoods />} />
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
