@@ -59,6 +59,10 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    getCityList();
+  }, [city]);
+
   const show = () => {
     if (window.innerWidth <= 760) {
       setshowMenu(true);
