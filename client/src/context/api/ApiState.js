@@ -206,22 +206,22 @@ const ApiState = (props) => {
 
   const getCartItems = async () => {
     return axios
-      .post(`${host}/api/user/getcartitems`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then(function (response) {
-        console.log(response);
-        return [response, false];
-      })
-      .catch(function (error) {
-        console.log(error);
-        return [error, true];
-      });
-  };
+    .get(`${host}/api/user/getcartItems`,{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
 
   return (
     <ApiContext.Provider
