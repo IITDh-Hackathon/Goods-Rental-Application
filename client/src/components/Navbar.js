@@ -11,12 +11,17 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
+import TextField from '@mui/material/TextField';
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [click, setClick] = useState(false);
   const [showMenu, setshowMenu] = useState(true);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [walletOpen, setWalletOpen] = useState(false);
+  const [currentCash, setCurrentCash] = useState(0);
+  const [addCash, setaddCash] = useState(0);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleClick = () => setClick(!click);
@@ -34,6 +39,29 @@ const Navbar = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+  const handleWalletClick = () => {
+    // Fetch the user's current cash value from your API or wherever it's stored
+    // For now, I'm just setting it to a static value of 1000 as an example
+    const userCash = 1000;
+
+    setCurrentCash(userCash);
+    setWalletOpen(true);
+  };
+  const handleCloseWallet = () => {
+    setWalletOpen(false);
+  };
+  const handleCashChange = (e) =>{
+    setaddCash(e.target.value);
+  }
+  const handleAddCash = () =>{
+    if(isNaN(addCash)){
+      toast.error("Please enter a valid number");
+      return;
+    }
+    setCurrentCash(currentCash+parseInt(addCash));
+    setaddCash(0);
+    toast.success("Cash added successfully");
+  }
 
   const [cityList, setCityList] = useState([
     "New York",
@@ -119,6 +147,35 @@ const Navbar = () => {
                   </div>
                 </Box>
               </Modal>
+              <Modal
+                open={walletOpen}
+                onClose={handleCloseWallet}
+                aria-labelledby="wallet-modal-title"
+                aria-describedby="wallet-modal-description"
+              >
+                <Box className="box">
+                  <h2 className="wallet-title" >Wallet</h2>
+                  <hr/>
+                  <div className="wallet-body">
+                    <div className="wallet-cash" >
+                      <h3>
+                      Current cash
+                      </h3>
+                      <div>
+                        {currentCash}
+                      </div>
+                    </div>
+                    <div>
+                    <TextField id="outlined-basic" label="Enter Cash" variant="outlined" name='addCash' value={addCash} onChange={(e)=>handleCashChange(e)} />
+                    <div className="addcash-btn">
+                      <Button variant="contained" color="success" onClick={handleAddCash} >
+                        Add Cash
+                      </Button>
+                    </div>
+                      </div>
+                  </div>
+                  </Box>
+              </Modal>
             </div>
 
             <div className="menu-icon" onClick={handleClick}>
@@ -164,7 +221,7 @@ const Navbar = () => {
                   <Link to="/cart">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
-
+                  <i className="fa fa-wallet wallet" aria-hidden="true" onClick={handleWalletClick}></i>
                   <Button
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
@@ -172,7 +229,7 @@ const Navbar = () => {
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleMenuClick}
                   >
-                    <i className="fa fa-user" aria-hidden="true"></i>
+                    <i className="fa fa-user" aria-hidden="true" style={{ fontSize: '24px' }}></i>
                   </Button>
                   <Menu
                     id="basic-menu"
