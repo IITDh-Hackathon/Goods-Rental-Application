@@ -23,6 +23,10 @@ const userSchema = new Schema({
         enum: ["user", "admin"],
         default: "user"
     },
+    walletCash: {
+        type: Number,
+        default: 0
+    },
 });
 
 userSchema.plugin(toJSON);
