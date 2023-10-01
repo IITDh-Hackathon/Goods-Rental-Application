@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
-    const { addCityListing } = useContext(ApiContext);
+    const { addCityListing,addToCart } = useContext(ApiContext);
     const imageStore = process.env.REACT_APP_SERVER_URL+"/static/";
     let { name, description, price, quantity, images, category,message, id, city } = props
     let image;
@@ -31,13 +31,13 @@ const GoodsCard = (props) => {
         }else if(message==="Add to cart"){
             console.log(id);
             console.log(city);
-            const res = await addCityListing(city,id);
+            const res = await addToCart(id,city);
             const [response, error] = res || [null, true];
             if (error) {
                 toast.error(response.message);
             }
             else {
-                toast.success('Item Added to City Listing Successfully');
+                toast.success('Item Added to Cart Successfully');
             }
         }
     }
