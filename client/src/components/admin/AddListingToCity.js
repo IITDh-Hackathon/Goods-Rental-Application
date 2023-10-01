@@ -44,6 +44,9 @@ const AddListingToCity = () => {
 
   return (
     <div>
+      { city ?
+        (
+          <>
         <div className="not-added" >
             <h2 className='not-added-title' >Items That Are Not Added {city} </h2>
             <div className='wrapper'>
@@ -64,7 +67,10 @@ const AddListingToCity = () => {
             </div>
             <Pagination className='paninate' count={listed.data ? listed.data.totalPages:10} page={listedPage} onChange={handleChangeListedPage} />
         </div>
+        </>
+      ): "Please Select A City"}
     </div>
+
   )
 }
 
