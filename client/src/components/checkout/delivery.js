@@ -11,26 +11,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useNavigate } from "react-router-dom";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-const steps = ["Delivery Address", "Payment Details", "Confirmation "];
+const steps = ["Delivery Address", "Confirmation "];
 
-const Checkout = () => {
+const Checkout = ({ deliveryInfo, setDeliveryInfo }) => {
+  const navigate = useNavigate();
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      addressLine1: "",
-      addressLine2: "",
-      city: "",
-      state: "",
-      county: "",
-      pincode: "",
-      shippingMethod: "Free",
-    },
+    initialValues: deliveryInfo,
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
       lastName: Yup.string().required("Required"),
@@ -43,8 +34,9 @@ const Checkout = () => {
         .matches(/^[0-9]{6}$/, "Invalid PIN code (should be 6 digits)"),
     }),
     onSubmit: (values) => {
-      // Handle form submission here
+      setDeliveryInfo(values);
       console.log("Form submitted with values:", values);
+      navigate("/confirmation");
     },
   });
 
@@ -82,7 +74,7 @@ const Checkout = () => {
           <Typography variant="h5" gutterBottom style={{ float: "left" }}>
             Shipping Address
           </Typography>
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
@@ -226,11 +218,12 @@ const Checkout = () => {
 
           <Button
             variant="contained"
+            type="submit"
             color="primary"
             style={{ marginTop: "20px", float: "right" }}
             endIcon={<ArrowForwardIcon />}
-            component={Link} // Use the Link component
-            to="/payments" // Specify the target route
+            // component={Link} // Use the Link component
+            // to="/payments" // Specify the target route
           >
             Continue
           </Button>
