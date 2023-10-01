@@ -5,7 +5,7 @@ import GoodsCard from './GoodsCard';
 
 const Products = (props) => {
     const { category } = props;
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(category);
     const [Sort, setSort] = useState(true)
 
     // Function to handle category selection
