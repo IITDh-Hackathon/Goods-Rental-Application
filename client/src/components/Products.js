@@ -6,6 +6,7 @@ import GoodsCard from './GoodsCard';
 const Products = (props) => {
     const { category } = props;
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [Sort, setSort] = useState(true)
 
     // Function to handle category selection
     const handleCategoryClick = (clickedCategory) => {
@@ -18,9 +19,17 @@ const Products = (props) => {
             <div className="products-body">
                 <div className="products-filter">
                     <div className="filter-body">
-                    <div className="filter-title">Filter</div>
+                        <div className="filters-sort">
+                            <div className="filter-title">
+                                Sort
+                            </div>
+                            <div className="filter-category-body">
+                                <div className={`filter-category-item ${Sort ? 'selected-category' : ''}`} onClick={() => setSort(true)}>Ascending</div>
+                                <div className={`filter-category-item ${!Sort ? 'selected-category' : ''}`} onClick={() => setSort(false)}>Descending</div>
+                            </div>
+                        </div>
                         <div className="filter-category">
-                            <div className="filter-category-title">Category</div>
+                            <div className="filter-title">Category</div>
                             <div className="filter-category-body">
                                 {['Baskets', 'Furniture', 'Clothing', 'Books', 'Sports', 'Others'].map((item) => (
                                     <div
