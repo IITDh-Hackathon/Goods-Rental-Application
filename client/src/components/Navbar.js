@@ -95,7 +95,7 @@ const Navbar = () => {
           <div className="top-bar">
             <div className="location_conatiner">
               <i className="fa fa-map-marker" aria-hidden="true"></i>
-              <p on onClick={handleOpen}>
+              <p on onClick={handleOpen} className="selectACity">
                 {!city ? "Select a City" : city}
               </p>
               <Modal

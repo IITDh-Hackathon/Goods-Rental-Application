@@ -31,7 +31,7 @@ const Categories = () => {
     <>
       <div className="Categories">
         <div>
-          <h1>Categories</h1>
+          <h2 style={{padding:"0px 10px"}}>Categories</h2>
         </div>
         <div className="wrapper">
           {Categories.map((category) => (
