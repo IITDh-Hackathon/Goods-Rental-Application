@@ -180,7 +180,7 @@ const ApiState = (props) => {
 
   const getCartItems = async () =>{
     return axios
-    .post(`${host}/api/user/getcartitems`,{
+    .get(`${host}/api/user/getcartItems`,{
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
