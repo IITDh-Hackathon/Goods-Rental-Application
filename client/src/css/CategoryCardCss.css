@@ -1,0 +1,41 @@
+
+.CategoryCard {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    min-width: 280px;
+    max-width: 310px;
+    width: 100%;
+    background: var(--main-color) ;
+    color: #333;
+    text-align: left;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px ;
+  }
+  .CategoryCard * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  }
+  .CategoryCard img {
+    max-width: 100%;
+    vertical-align: top;
+  }
+  .category-name {
+    position: absolute;
+    top: 50%;
+    right: 36%;
+    color: black;
+    background-color: white;
+    padding: 0 10px;
+    line-height: 40px;
+    font-weight: 800;
+    border-radius: 10px;
+  }
+
+  .CategoryCard:hover img,
+  .CategoryCard.hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
