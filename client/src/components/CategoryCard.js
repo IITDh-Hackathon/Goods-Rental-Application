@@ -1,10 +1,13 @@
 import React from 'react'
 import '../css/CategoryCardCss.css'
+import { useNavigate } from 'react-router-dom'
 
 const CategoryCard = (props) => {
     const { category, image } = props
+    const navigate = useNavigate()
+
     const handleOnClick = (category) => {
-        console.log(category);
+        navigate(`/products`)
     }
     return (
         <div className="CategoryCard" onClick={()=>handleOnClick(category)}>

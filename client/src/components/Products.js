@@ -75,7 +75,7 @@ const Products = (props) => {
                         <div className="filter-category">
                             <div className="filter-title">Category</div>
                             <div className="filter-category-body">
-                                {['Baskets', 'Furniture', 'Clothing', 'Books', 'Sports', 'Others'].map((item) => (
+                                {['Baskets', 'Furniture', 'Cleaning Accessories', 'Books', 'Sports', 'Others'].map((item) => (
                                     <div
                                         key={item}
                                         className={`filter-category-item ${params.category === item ? 'selected-category' : ''}`}
