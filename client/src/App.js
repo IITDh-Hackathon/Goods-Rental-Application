@@ -12,17 +12,17 @@ import ApiState from "./context/api/ApiState";
 import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
+// import IndividualCard from "./components/IndividualCard";
 
 function App() {
-  const [city, setCity] = useState("");
   return (
     <>
       <ApiState>
         <BrowserRouter>
-          <Navbar city={city} setCity={setCity} />
+          <Navbar  />
           <div className="content">
             <Routes>
-              <Route path="/individualcard" element={<IndividualCard />} />
+              {/* <Route path="/individualcard" element={<IndividualCard />} /> */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />

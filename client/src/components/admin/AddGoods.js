@@ -33,6 +33,7 @@ const AddGoods = () => {
     };
 
     const handleOnSubmit = async (e) => {
+        e.preventDefault();
         item.images = images;
         const res = await addItem(item);
         const [response, error] = res || [null, true];
@@ -45,7 +46,7 @@ const AddGoods = () => {
             console.log(images);
         }
         if (error) {
-            toast.error(response.response.data.message);
+            toast.error(response.message);
         }
         else {
             toast.success('Item Added Successfully');

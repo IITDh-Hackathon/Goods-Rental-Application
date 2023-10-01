@@ -41,7 +41,9 @@ export const getItems = async (req, res) => {
   }
   const filter = pick(req.query, ['name', 'category', 'price', 'quantity'])
   // filter id with items array
-  filter._id = { $in: items };
+  if(items){
+    filter._id = { $in: items };
+  }
   console.log(filter);
   const options = pick(req.query, ['sortBy', 'limit', 'skip', 'populate', 'page'])
   res.send( await Item.paginate(filter, options ));

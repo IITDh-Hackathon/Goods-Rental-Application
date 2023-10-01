@@ -1,12 +1,22 @@
 import React from 'react'
 import GoodsCard from '../GoodsCard'
 import '../../css/AddListingToCityCss.css'
+import { useContext, useState, useEffect } from 'react'
+import ApiContext from '../../context/api/ApiContext'
 
 const AddListingToCity = () => {
+  const { city, setCity, getItems } = useContext(ApiContext);
+  const [listed, setListed] = useState([]);
+  const [notListed, setNotListed] = useState([]);
+
+  useEffect( () => {
+    
+  }, [city, getItems])
+
   return (
     <div>
         <div className="not-added" >
-            <h2 className='not-added-title' >Items That Are Not Added </h2>
+            <h2 className='not-added-title' >Items That Are Not Added {city} </h2>
             <div className='wrapper'>
             <GoodsCard name='Title' description='lorem sdlfjslkdjflskdf fsld flskdfslkfjlsdjflsdfk;sdfls;kdjfl;' price='300.0' quantity='40' category='furniture' image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg" message='Add Item' />
             <GoodsCard name='Title' description='lorem sdlfjslkdjflskdf fsld flskdfslkfjlsdjflsdfk;sdfls;kdjfl;' price='300.0' quantity='40' category='furniture' image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg" message='Add Item' />

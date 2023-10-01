@@ -6,8 +6,9 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import CityLogos from "./cityLogos";
+import ApiContext from "../context/api/ApiContext";
 
-const Navbar = ({ city, setCity }) => {
+const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [click, setClick] = useState(false);
   const [showMenu, setshowMenu] = useState(true);
@@ -16,6 +17,10 @@ const Navbar = ({ city, setCity }) => {
   const handleClose = () => setOpen(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const { city, setCity } = React.useContext(ApiContext);
+
+
 
   const [cityList, setCityList] = useState([
     "New York",

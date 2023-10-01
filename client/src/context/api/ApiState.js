@@ -1,9 +1,13 @@
 import ApiContext from "./ApiContext";
 // import axios from 'axios'
 import axios from "axios";
+import { useState } from "react";
 
 const ApiState = (props) => {
   const host = "http://localhost:8000";
+
+  const [profile, setProfile] = useState();
+  const [city, setCity] = useState();
 
   const login = async (isadmin, creds) => {
     let reqBody = {
@@ -76,9 +80,8 @@ const ApiState = (props) => {
   };
 
   const getStats = async () => {
-    console.log('hi');
     return axios
-    .get(`${host}/api/admin/getStats`, localStorage.getItem("role") ,{
+    .get(`${host}/api/admin/getStats`,{
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -94,8 +97,27 @@ const ApiState = (props) => {
     });
   }
 
+  const getItems = async (params) => {
+    return axios
+    .get(`${host}/api/user/items`,{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      params:params,
+    })
+    .then(function (response) {
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
+
   return (
-    <ApiContext.Provider value={{ login, signup,  addItem, getStats }}>
+    <ApiContext.Provider value={{ login, signup,  addItem, getStats, city, setCity, getItems }}>
       {props.children}
     </ApiContext.Provider>
   );

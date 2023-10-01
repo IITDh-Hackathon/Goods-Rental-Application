@@ -7,7 +7,7 @@ import ApiContext from '../../context/api/ApiContext';
 
 const Stats = () => {
   // run an api call to get the stats from the database
-  const [stats, setStats] = useState({users: 0,goods: 0,cities: 0 })
+  const [stats, setStats] = useState({userCount: 0, productCount: 0,cityCount: 0 })
   const {getStats} = useContext(ApiContext)
   useEffect(() => {
     getStats().then((res) => {
@@ -19,13 +19,13 @@ const Stats = () => {
         setStats(response.data);
       }
     })
-  },)
+  },[getStats])
 
   return (
     <div className='Stats'>
-      <StatCard icon='users' title='Users' number='2500' />
-      <StatCard icon='suitcase' title='Goods' number='10000' />
-      <StatCard icon='city' title='Cities' number='300' />
+      <StatCard icon='users' title='Users' number={stats.userCount} />
+      <StatCard icon='suitcase' title='Goods' number={stats.productCount} />
+      <StatCard icon='city' title='Cities' number={stats.cityCount} />
     </div>
   )
 }
