@@ -39,10 +39,19 @@ export const getItems = async (req, res) => {
       items = items.listings;
     }
   }
+  if(req.query.notCity){
+    items = await City.findOne({name: req.query.notCity});
+    if(items){
+      items = items.listings;
+    }
+  }
   const filter = pick(req.query, ['name', 'category', 'price', 'quantity'])
   // filter id with items array
-  if(items){
+  if(req.query.city){
     filter._id = { $in: items };
+  }
+  if(req.query.notCity){
+    filter._id = { $nin: items };
   }
   console.log(filter);
   const options = pick(req.query, ['sortBy', 'limit', 'skip', 'populate', 'page'])

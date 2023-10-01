@@ -8,8 +8,11 @@ const GoodsCard = (props) => {
     // quantity: Number,
     // image: String,
     // category: String,
-    const { name, description, price, quantity, image, category,message } = props
-    // "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg"
+    
+    let { name, description, price, quantity, image, category,message } = props
+    if(!image){
+           image = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample71.jpg";
+    }
     return (
         <>
             <div className="GoodsCard">
@@ -21,7 +24,7 @@ const GoodsCard = (props) => {
                             {name}
                         </h2>
                         <h3 className='goods-price'>
-                            {price}
+                        ₹ {price}
                         </h3>
                         {description}
                     </p><span className='message' >{message}</span>

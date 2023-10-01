@@ -108,6 +108,7 @@ const ApiState = (props) => {
       params:params,
     })
     .then(function (response) {
+      console.log(response.data.results);
       return [response, false];
     })
     .catch(function (error) {
