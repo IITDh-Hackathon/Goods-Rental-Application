@@ -81,9 +81,8 @@ export const getAllCategories = async (req, res) => {
 //all apis for cart handling
 export const addToCart = async (req, res) => {
   try {
-    const { item, city } = req.body;
-    const quantity = (req.body.quantity)?req.body.quantity:1;
-    const numberOfMonths = (req.body.months)?req.body.months:1;
+    const { item, city,quantity } = req.body;
+    const numberOfMonths = req.body.months;
     console.log(item, city);
     const email = req.user.email;
     const user = await User.findOne({ email });
@@ -99,7 +98,6 @@ export const addToCart = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
 
 export const getAllCartItems = async (req, res) => {
   try {
@@ -133,6 +131,15 @@ export const deleteCartItem = async (req, res) => {
     res.status(200).json({ message: "Item deleted from cart successfully!" });
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const deleteCart = async (req, res) => {
+  try{
+    const user = await User.findOne({email:req.user.email});
+    await Cart.deleteMany({user:user._id});
+  }catch(err){
     res.status(500).json({ message: err.message });
   }
 };

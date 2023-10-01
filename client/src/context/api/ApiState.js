@@ -9,12 +9,11 @@ const ApiState = (props) => {
 
   const [profile, setProfile] = useState(null);
   const [city, setCity] = useState(null);
-  
+
   const [loginStatus, setLoginStatus] = useState(true);
   const [cartitems, setCartitems] = useState([]);
   const [totalprice, setTotalprice] = useState(0);
-	const [totalquantity, setTotalquantity] = useState(0);
-  
+  const [totalquantity, setTotalquantity] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -24,12 +23,12 @@ const ApiState = (props) => {
     }
   }, []);
 
-  const addToCart = async (id, city) => {
-    console.log(id, city,"from api state");
+  const addToCart = async (id, city, quantity = 1, months = 1) => {
+    console.log(id, city, "from api state");
     return axios
       .post(
         `${host}/api/user/addtocart`,
-        { item: id, city: city },
+        { item: id, city: city, quantity, months },
         {
           headers: {
             "Content-Type": "application/json",
@@ -211,34 +210,34 @@ const ApiState = (props) => {
 
   const getCartItems = async () => {
     return axios
-    .get(`${host}/api/user/getcartItems`,{
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(function (response) {
-      console.log(response);
-      return [response, false];
-    })
-    .catch(function (error) {
-      console.log(error);
-      return [error, true];
-    });
-  }
+      .get(`${host}/api/user/getcartItems`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
 
-  const handlePriceChange = (increase,price) => {
-		if (increase) {
-			setTotalquantity(totalquantity + 1);
-			setTotalprice(totalprice + price);
-		} else {
-			if (totalquantity > 1) {
-				setTotalquantity(totalquantity - 1);
-				setTotalprice(totalprice - price);
-			}
-		}
-	}
+  const handlePriceChange = (increase, price) => {
+    if (increase) {
+      setTotalquantity(totalquantity + 1);
+      setTotalprice(totalprice + price);
+    } else {
+      if (totalquantity > 1) {
+        setTotalquantity(totalquantity - 1);
+        setTotalprice(totalprice - price);
+      }
+    }
+  };
 
   return (
     <ApiContext.Provider
@@ -259,7 +258,7 @@ const ApiState = (props) => {
         getCartItems,
         cartitems,
         handlePriceChange,
-        totalprice
+        totalprice,
       }}
     >
       {props.children}
