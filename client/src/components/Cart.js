@@ -19,6 +19,11 @@ const Cart = () => {
 		}
 	}
 
+	// useEffect(async () => {
+	// 	await getCartItems()
+	// }, [third])
+	
+
 	return (
 		<div className="cart-wrapper">
 			<h1>Shopping Cart</h1>

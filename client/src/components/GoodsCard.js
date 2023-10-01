@@ -28,6 +28,17 @@ const GoodsCard = (props) => {
             else {
                 toast.success('Item Added to City Listing Successfully');
             }
+        }else if(message==="Add to cart"){
+            console.log(id);
+            console.log(city);
+            const res = addCityListing(city,id);
+            const [response, error] = res || [null, true];
+            if (error) {
+                toast.error(response.message);
+            }
+            else {
+                toast.success('Item Added to City Listing Successfully');
+            }
         }
     }
     
@@ -47,6 +58,8 @@ const GoodsCard = (props) => {
                         {description.length > 25 ? description.substring(0, 25) + "..." : description}
                     </p><span className='message' onClick={()=>{
                         if(message==="addItem"){
+                            handleOnSubmit(city,id);
+                        }else if(message==="Add to cart"){
                             handleOnSubmit(city,id);
                         }
                     }} >{message}</span>
