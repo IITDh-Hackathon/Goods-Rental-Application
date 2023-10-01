@@ -76,9 +76,11 @@ export const getStats = async (req, res) => {
         let productCount = 0;
         let cityCount = cities.length;
         let userCount = users.length;
-        items.forEach((item) => {
-            productCount += item.quantity;
-        });
+        if(!items){
+            items.forEach((item) => {
+                productCount += item.quantity;
+            });
+        }
         res.status(200).json({ productCount, cityCount, userCount });
     } catch (err) {
         res.status(500).json({ message: err.message });
