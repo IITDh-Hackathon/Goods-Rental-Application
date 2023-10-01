@@ -20,6 +20,7 @@ const GoodsCard = (props) => {
         if(message==="addItem"){
             console.log(id);
             console.log(city);
+            if(city===null) return toast.error("Please Select City");
             const res = await addCityListing(city,id);
             const [response, error] = res || [null, true];
             if (error) {
@@ -31,6 +32,7 @@ const GoodsCard = (props) => {
         }else if(message==="Add to cart"){
             console.log(id);
             console.log(city);
+            if(city===null) return toast.error("Please Select City");
             const res = await addToCart(id,city);
             const [response, error] = res || [null, true];
             if (error) {

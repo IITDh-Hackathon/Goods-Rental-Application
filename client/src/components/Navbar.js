@@ -7,8 +7,8 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import CityLogos from "./cityLogos";
 import ApiContext from "../context/api/ApiContext";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 const Navbar = () => {
@@ -21,7 +21,8 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const { city, setCity, loginStatus, profile, logout } = React.useContext(ApiContext);
+  const { city, setCity, loginStatus, profile, logout } =
+    React.useContext(ApiContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
@@ -91,7 +92,7 @@ const Navbar = () => {
           <div className="top-bar">
             <div className="location_conatiner">
               <i className="fa fa-map-marker" aria-hidden="true"></i>
-              <p className="city-select" on onClick={handleOpen} >
+              <p className="city-select" on onClick={handleOpen}>
                 {!city ? "Select a City" : city}
               </p>
               <Modal
@@ -101,7 +102,7 @@ const Navbar = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box className="box">
-                  <p>Popular Cities</p>
+                  <p>Select a City</p>
                   <div className="city_logos">
                     <ul className="logos_ul">
                       {Object.keys(cities).map((city) => (
@@ -162,28 +163,30 @@ const Navbar = () => {
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
 
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleMenuClick}
-      >
-                  <i className="fa fa-user" aria-hidden="true"></i>
-        
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={openMenu}
-        onClose={handleMenuClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem disabled={true}> Hello {profile?profile.email:"user"}!</MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
-      </Menu>
+                  <Button
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleMenuClick}
+                  >
+                    <i className="fa fa-user" aria-hidden="true"></i>
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={openMenu}
+                    onClose={handleMenuClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem disabled={true}>
+                      {" "}
+                      Hello {profile ? profile.email : "user"}!
+                    </MenuItem>
+                    <MenuItem onClick={logout}>Logout</MenuItem>
+                  </Menu>
                 </div>
               ) : (
                 <>

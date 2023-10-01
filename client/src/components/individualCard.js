@@ -5,7 +5,7 @@ import "./../css/individualCard.css";
 import ExampleCarouselImage1 from "./../images/carousel1.jpeg";
 import ExampleCarouselImage2 from "./../images/carousel2.jpeg";
 
-const IndividualCard = () => {
+const IndividualCard = ({ title, description, unitPrice }) => {
   const [index, setIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
@@ -35,9 +35,9 @@ const IndividualCard = () => {
         </Carousel>
       </div>
       <div className="cardInfo">
-        <h2>SMARRA</h2>
-        <p>Box with lid Natural, 11 ¾x11 ¾x9 " (30x30x23 cm)</p>
-        <p>$19.99</p>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <p>{unitPrice}</p>
 
         <div>
           <span>Quantity: </span>

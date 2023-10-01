@@ -9,6 +9,7 @@ const ApiState = (props) => {
 
   const [profile, setProfile] = useState(null);
   const [city, setCity] = useState(null);
+  
   const [loginStatus, setLoginStatus] = useState(true);
   const [cartitems, setCartitems] = useState([]);
   const [totalprice, setTotalprice] = useState(0)
@@ -253,6 +254,7 @@ const ApiState = (props) => {
   return (
     <ApiContext.Provider
       value={{
+        loading,
         addToCart,
         login,
         signup,
