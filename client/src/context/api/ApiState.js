@@ -23,6 +23,31 @@ const ApiState = (props) => {
     }
   }, []);
 
+  const addCash = async (amount) => {
+    return axios
+      .post(
+        `${host}/api/user/addMoneyToWallet`,
+        { amount: amount },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        getProfile();
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
+
+
   const addToCart = async (id, city, quantity = 1, months = 1) => {
     console.log(id, city, "from api state");
     return axios
@@ -242,6 +267,7 @@ const ApiState = (props) => {
   return (
     <ApiContext.Provider
       value={{
+        addCash,
         addToCart,
         login,
         signup,
