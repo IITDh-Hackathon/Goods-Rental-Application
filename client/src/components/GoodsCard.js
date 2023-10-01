@@ -16,11 +16,11 @@ const GoodsCard = (props) => {
         image = imageStore + images[0];
     }
 
-    const handleOnSubmit=(city,id)=>{
+    const handleOnSubmit=async (city,id)=>{
         if(message==="addItem"){
             console.log(id);
             console.log(city);
-            const res = addCityListing(city,id);
+            const res = await addCityListing(city,id);
             const [response, error] = res || [null, true];
             if (error) {
                 toast.error(response.message);
