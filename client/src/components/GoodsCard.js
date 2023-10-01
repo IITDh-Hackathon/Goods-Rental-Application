@@ -39,7 +39,11 @@ const GoodsCard = (props) => {
                         ₹ {price}
                         </h3>
                         {description}
-                    </p><span className='message' onClick={()=>handleOnSubmit(city,id)} >{message}</span>
+                    </p><span className='message' onClick={()=>{
+                        if(message==="addItem"){
+                            handleOnSubmit(city,id);
+                        }
+                    }} >{message}</span>
                 </div>
             </div>
         </>
