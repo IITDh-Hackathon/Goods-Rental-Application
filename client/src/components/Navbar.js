@@ -7,6 +7,9 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import CityLogos from "./cityLogos";
 import ApiContext from "../context/api/ApiContext";
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from "@mui/material/MenuItem";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -18,9 +21,16 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const { city, setCity } = React.useContext(ApiContext);
+  const { city, setCity, loginStatus, profile, logout } = React.useContext(ApiContext);
 
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openMenu = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const [cityList, setCityList] = useState([
     "New York",
@@ -157,14 +167,12 @@ const Navbar = () => {
             </div>
 
             <div className="menu-icon" onClick={handleClick}>
-              {loggedIn ? (
+              {loginStatus ? (
                 <div className="nav_logos">
                   <Link to="/cart">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
-                  <Link to="/profile">
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                  </Link>
+                  <i className="fa fa-user" aria-hidden="true"></i>
                   <i className={click ? "fas fa-times" : "fas fa-bars"} />
                 </div>
               ) : (
@@ -196,43 +204,49 @@ const Navbar = () => {
                   Products
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/services"
-                  className={({ isActive }) =>
-                    "navlinks" + (isActive ? "-active" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Services
-                </NavLink>
-              </li>
-              {!loggedIn ? (
-                <li>
-                  <NavLink
-                    to="/sign-up"
-                    className={({ isActive }) =>
-                      "signup" + (isActive ? "-active" : "")
-                    }
-                    onClick={closeMobileMenu}
-                  >
-                    Sign Up
-                  </NavLink>
-                </li>
-              ) : (
-                <></>
-              )}
-              {loggedIn ? (
+              {loginStatus ? (
                 <div className="nav_logos">
                   <Link to="/cart">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
-                  <Link to="/profile">
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                  </Link>
+
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleMenuClick}
+      >
+                  <i className="fa fa-user" aria-hidden="true"></i>
+        
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleMenuClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem disabled={true}> Hello {profile?profile.email:"user"}!</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
+      </Menu>
                 </div>
               ) : (
-                <></>
+                <>
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) =>
+                        "navlinks" + (isActive ? "-active" : "")
+                      }
+                      onClick={closeMobileMenu}
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                </>
               )}
             </ul>
           </div>
