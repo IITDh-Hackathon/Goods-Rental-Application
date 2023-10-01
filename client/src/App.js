@@ -13,6 +13,7 @@ import AdminHome from "./components/admin/AdminHome";
 import AddGoods from "./components/admin/AddGoods";
 import AddListingToCity from "./components/admin/AddListingToCity";
 import Products from "./components/Products";
+import Footer from "./components/footer";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
             </Routes>
           </div>
+          <Footer />
         </BrowserRouter>
       </ApiState>
       <ToastContainer />

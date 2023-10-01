@@ -11,7 +11,7 @@ const Categories = () => {
     ],
     [
       "Automobile",
-      "http://localhost:8000/static/auto.jpg"
+      "https://borrowbox.onrender.com/static/auto.jpg"
     ],
     [
       "Cleaning Accessories",
