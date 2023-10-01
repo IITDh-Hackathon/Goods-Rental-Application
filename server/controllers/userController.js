@@ -3,21 +3,6 @@ import City from "../models/city.js";
 import Item from "../models/item.js";
 import { pick } from "../utils/pick.js";
 
-// const citySchema = new Schema({
-//     name: String, //name of the city
-//     image: String,
-//     pincode: {
-//         type: String,
-//         unique: true,
-//         required: true,
-//         indexedDB: true
-//     },
-//     listings: [{
-//         type: Schema.Types.ObjectId,
-//         ref: "item"
-//     }]
-// });
-
 export const getAllCities = async (req, res) => {
   try {
     let cities = await City.find();
@@ -63,6 +48,15 @@ export const getCityListings = async (req, res) => {
     let pincode = req.params.pincode;
     let cityListings = await City.findOne({ pincode }).populate("listings");
     res.status(200).json(cityListings);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const getAllCategories = async (req, res) => {
+  try {
+    let categories = await Item.find().distinct("category");
+    res.status(200).json(categories);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
