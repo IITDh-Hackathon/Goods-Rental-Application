@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Box from "@mui/material/Box";
 import "./../css/individualCard.css";
-import ExampleCarouselImage1 from "./../images/carousel1.jpeg";
-import ExampleCarouselImage2 from "./../images/carousel2.jpeg";
 
-const IndividualCard = ({ title, description, unitPrice }) => {
+const IndividualCard = ({ title, description, unitPrice, images }) => {
   const [index, setIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
@@ -21,23 +19,23 @@ const IndividualCard = ({ title, description, unitPrice }) => {
   const handleDurationChange = (change) => {
     setDuration(Math.max(1, duration + change));
   };
+  const imageStore = process.env.REACT_APP_SERVER_URL + "/static/";
 
   return (
     <Box className="cardBox">
       <div className="img_carousel">
         <Carousel activeIndex={index} onSelect={handleSelect}>
-          <Carousel.Item>
-            <img src={ExampleCarouselImage1} alt="First slide" />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img src={ExampleCarouselImage2} alt="Second slide" />
-          </Carousel.Item>
+          {images.map((image) => (
+            <Carousel.Item>
+              <img src={imageStore + image} alt="First slide" />
+            </Carousel.Item>
+          ))}
         </Carousel>
       </div>
       <div className="cardInfo">
         <h2>{title}</h2>
         <p>{description}</p>
-        <p>{unitPrice}</p>
+        <p>₹ {unitPrice}</p>
 
         <div>
           <span>Quantity: </span>
