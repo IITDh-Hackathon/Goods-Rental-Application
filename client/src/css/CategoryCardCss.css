@@ -24,14 +24,16 @@
   }
   .category-name {
     position: absolute;
-    top: 50%;
-    right: 36%;
+    top: 75%;
+    left: 28%;
     color: black;
     background-color: white;
-    padding: 0 10px;
+    padding: 5px 20px;
     line-height: 40px;
     font-weight: 800;
     border-radius: 10px;
+    width: 120px;
+    text-align: center;
   }
 
   .CategoryCard:hover img,
