@@ -43,16 +43,18 @@ export const addCity = async (req, res) => {
 export const addCityListing = async (req, res) => {
     const cityName = req.body.city;
     const itemId = req.body.id;
+    console.log("cityname",cityName, itemId);
     try{
         //add item._id to city.listings
-        const city = City.findOne({name:cityName});
+        const city = await City.findOne({name:cityName});
         if(!city){
             //create city
+            console.log("city not found");
             await City.create({name:cityName, listings: [itemId]});
-            return res.status(201).json({ message: "City listing added successfully!"});
+            
         }
         await City.updateOne({name:cityName}, {$push: {listings: itemId}});
-        return res.status(201).json({ message: "City listing added successfully!"});
+        return res.status(201).json({ message: "City listing added successfully!", city});
     }catch(err){
         return res.status(500).json({ message: err.message });
     }

@@ -98,10 +98,23 @@ export const addToCart = async (req, res) => {
   }
 };
 
-export const getAllCartItems = async (req, res) => {
+export const getAllCartItems = async (req, res) =>{
   try{
-
-  }catch(err){
+    const email = req.user.email;
+    const user = await User.findOne({email});
+    const cartItems= await Cart.find({user:user._id});
+    const allItems=await Item.find({});
+    const items = [];
+    cartItems.forEach((cartItem)=>{
+      let obj = {};
+      obj.quantity = cartItem.quantity;
+      obj.months = cartItem.numberOfMonths;
+      //find item
+      let item = allItems.find((item)=>item._id.toString()===cartItem.item.toString());
+      obj.item = item;
+    });
+    res.status(200).json(items);
+  }catch (err) {
     res.status(500).json({ message: err.message });
   }
 }
