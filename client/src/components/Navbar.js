@@ -59,20 +59,6 @@ const Navbar = () => {
     "Louisville",
   ]);
   const [showCity, setShowCity] = useState(false);
-
-  const getCityList = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/api/city");
-      setCityList(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCityList();
-  }, [city]);
-
   const show = () => {
     if (window.innerWidth <= 760) {
       setshowMenu(true);

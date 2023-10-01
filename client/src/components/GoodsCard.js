@@ -6,7 +6,7 @@ import ApiContext from './../context/api/ApiContext'
 
 const GoodsCard = (props) => {
     const { addCityListing } = useContext(ApiContext);
-    const imageStore = 'http://localhost:8000/static/'
+    const imageStore = process.env.REACT_APP_SERVER_URL+"/static/";
     let { name, description, price, quantity, images, category,message, id, city } = props
     let image;
     if(!images){

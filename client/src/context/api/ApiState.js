@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ApiState = (props) => {
-  const host = "http://localhost:8000";
+  console.log(process.env.REACT_APP_SERVER_URL);
+  const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8000";
 
   const [profile, setProfile] = useState(null);
   const [city, setCity] = useState(null);
