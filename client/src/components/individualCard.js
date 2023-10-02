@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import Carousel from "react-bootstrap/Carousel";
 import Box from "@mui/material/Box";
@@ -9,7 +9,7 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
   const [index, setIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
-  const { addToCart, city } = useContext(ApiContext);
+  const { addToCart, city, profile } = useContext(ApiContext);
 
   const handleAddtoCart = async () => {
     console.log(id);
@@ -53,41 +53,48 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
         <p>{description}</p>
         <p>₹ {unitPrice}</p>
 
-        <div>
-          <span>Quantity: </span>
-          <button
-            className="arithmetic"
-            onClick={() => handleQuantityChange(-1)}
-          >
-            -
-          </button>
-          <span>{quantity}</span>
-          <button
-            className="arithmetic"
-            onClick={() => handleQuantityChange(1)}
-          >
-            +
-          </button>
-        </div>
-        <div>
-          <span>Duration: </span>
-          <button
-            className="arithmetic"
-            onClick={() => handleDurationChange(-1)}
-          >
-            -
-          </button>
-          <span> {duration} </span>
-          <button
-            className="arithmetic"
-            onClick={() => handleDurationChange(1)}
-          >
-            +
-          </button>
-        </div>
-        <button className="add_to_cart" onClick={handleAddtoCart}>
-          Add to Cart
-        </button>
+        {profile && profile.role && profile.role === "admin" ? (
+          <></>
+        ) : (
+          <>
+            <div>
+              <span>Quantity: </span>
+              <button
+                className="arithmetic"
+                onClick={() => handleQuantityChange(-1)}
+              >
+                -
+              </button>
+              <span>{quantity}</span>
+              <button
+                className="arithmetic"
+                onClick={() => handleQuantityChange(1)}
+              >
+                +
+              </button>
+            </div>
+            <div>
+              <span>Duration: </span>
+              <button
+                className="arithmetic"
+                onClick={() => handleDurationChange(-1)}
+              >
+                -
+              </button>
+              <span> {duration} </span>
+              <button
+                className="arithmetic"
+                onClick={() => handleDurationChange(1)}
+              >
+                +
+              </button>
+            </div>
+
+            <button className="add_to_cart" onClick={handleAddtoCart}>
+              Add to Cart
+            </button>
+          </>
+        )}
       </div>
     </Box>
   );

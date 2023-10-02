@@ -10,11 +10,9 @@ const Cart = () => {
 	// const [totalquantity, setTotalquantity] = useState(0)
 	const {cartitems, getCartItems, totalprice } = useContext(ApiContext);
 
-	useEffect(() => {
-		getCartItems();
-	}
-	,[])
-	
+  useEffect(() => {
+    getCartItems();
+  }, []);
 
 	return (
 		<div className="cart-wrapper">
@@ -35,10 +33,12 @@ const Cart = () => {
 					<hr />
 					<p><span>Total</span> <span>₹{totalprice + totalprice * 0.05 + 15}</span></p><a href="#"><i className="fa fa-shopping-cart"></i>Checkout</a>
 
-				</div>
-			</div>
-		</div>
-	)
-}
-
-export default Cart
+					<a href="/checkout">
+            <i className="fa fa-shopping-cart"></i>Checkout
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Cart;
