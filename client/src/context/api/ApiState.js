@@ -72,6 +72,7 @@ const ApiState = (props) => {
       )
       .then(function (response) {
         console.log(response);
+        getProfile();
         return [response, false];
       })
       .catch(function (error) {
@@ -107,7 +108,7 @@ const ApiState = (props) => {
   };
 
   const getProfile = async (show=true) => {
-    return axios
+    const response = await axios
       .get(`${host}/api/user/profile`, {
         headers: {
           "Content-Type": "application/json",
@@ -115,18 +116,9 @@ const ApiState = (props) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then(function (response) {
-        setProfile(response.data);
-        if (show){
-          toast.dismiss();
-          toast(`you are logged in as ${response.data.email}`);
-        }
-        return [response, false];
-      })
-      .catch(function (error) {
-        console.log(error);
-        return [error, true];
-      });
+      console.log('object');
+      console.log(response.data);
+    return response.data;
   };
 
   const login = async (isadmin, creds) => {

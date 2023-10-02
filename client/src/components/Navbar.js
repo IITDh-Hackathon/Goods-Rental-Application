@@ -25,7 +25,7 @@ const Navbar = () => {
   const [addCash, setaddCash] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const [showNav, setShowNav] = useState(['/','/about', '/login', '/products', '/cart','/admin','/admin/addlisting','/admin/addgoods'].includes(location.pathname));
+  const [showNav, setShowNav] = useState(['/', '/about', '/login', '/products', '/cart', '/admin', '/admin/addlisting', '/admin/addgoods'].includes(location.pathname));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,26 +52,26 @@ const Navbar = () => {
   const handleCashChange = (e) => {
     setaddCash(e.target.value);
   }
-  const handleAddCash = () =>{
-    if(isNaN(addCash) || addCash<0 ){
+  const handleAddCash = async () => {
+    if (isNaN(addCash) || addCash < 0) {
       toast.error("Please enter a valid number");
       return;
     }
-    if(currentCash+parseInt(addCash)>10000){
+    if (currentCash + parseInt(addCash) > 10000) {
       toast.error("You can't have more than 10000");
       return;
     }
 
-    setCurrentCash(currentCash+parseInt(addCash));
-    addcash(parseInt(addCash));
-    getProfile(false);
-    setaddCash(0);
+    setCurrentCash(currentCash + parseInt(addCash));
+    await addcash(parseInt(addCash))
+    getProfile(false)
+    setaddCash(0)
+
     toast.success("Cash added successfully");
   };
 
   useEffect(() => {
-    getProfile();
-    setCurrentCash(profile?profile.walletCash:0);
+    getProfile(true)
   }, []);
 
   const [showCity, setShowCity] = useState(false);
@@ -100,201 +100,201 @@ const Navbar = () => {
 
   return (
     <>
-    {showNav && (
-      <nav>
-        <div
-          className={showMenu ? "navbar-container-mobile" : "navbar-container"}
-        >
-          <div className="top-bar">
-            <div className="location_conatiner">
-              <i className="fa fa-map-marker" aria-hidden="true"></i>
-              <p className="city-select" on onClick={handleOpen}>
-                {!city ? "Select a City" : city}
-              </p>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box className="box">
-                  <p>Select a City</p>
-                  <div className="city_logos">
-                    <ul className="logos_ul">
-                      {Object.keys(cities).map((city) => (
-                        <CityLogos
-                          name={city}
-                          url={`https://${cities[city]}`}
-                          setCity={setCity}
-                          handleClose={handleClose}
-                        />
-                      ))}
-                    </ul>
-                  </div>
-                </Box>
-              </Modal>
-              <Modal
-                open={walletOpen}
-                onClose={handleCloseWallet}
-                aria-labelledby="wallet-modal-title"
-                aria-describedby="wallet-modal-description"
-              >
-                <Box className="box">
-                  <h2 className="wallet-title">Wallet</h2>
-                  <hr />
-                  <div className="wallet-body">
-                    <div className="wallet-cash">
-                      <h3>Current cash</h3>
-                      <div>{currentCash}</div>
+      {showNav && (
+        <nav>
+          <div
+            className={showMenu ? "navbar-container-mobile" : "navbar-container"}
+          >
+            <div className="top-bar">
+              <div className="location_conatiner">
+                <i className="fa fa-map-marker" aria-hidden="true"></i>
+                <p className="city-select" on onClick={handleOpen}>
+                  {!city ? "Select a City" : city}
+                </p>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box className="box">
+                    <p>Select a City</p>
+                    <div className="city_logos">
+                      <ul className="logos_ul">
+                        {Object.keys(cities).map((city) => (
+                          <CityLogos
+                            name={city}
+                            url={`https://${cities[city]}`}
+                            setCity={setCity}
+                            handleClose={handleClose}
+                          />
+                        ))}
+                      </ul>
                     </div>
-                    <div>
-                      <TextField
-                        id="outlined-basic"
-                        label="Enter Cash"
-                        variant="outlined"
-                        name="addCash"
-                        value={addCash}
-                        onChange={(e) => handleCashChange(e)}
-                      />
-                      <div className="addcash-btn">
-                        <Button
-                          variant="contained"
-                          color="success"
-                          onClick={handleAddCash}
-                        >
-                          Add Cash
-                        </Button>
+                  </Box>
+                </Modal>
+                <Modal
+                  open={walletOpen}
+                  onClose={handleCloseWallet}
+                  aria-labelledby="wallet-modal-title"
+                  aria-describedby="wallet-modal-description"
+                >
+                  <Box className="box">
+                    <h2 className="wallet-title">Wallet</h2>
+                    <hr />
+                    <div className="wallet-body">
+                      <div className="wallet-cash">
+                        <h3>Current cash</h3>
+                        <div>{profile?profile.walletCash:0}</div>
+                      </div>
+                      <div>
+                        <TextField
+                          id="outlined-basic"
+                          label="Enter Cash"
+                          variant="outlined"
+                          name="addCash"
+                          value={addCash}
+                          onChange={(e) => handleCashChange(e)}
+                        />
+                        <div className="addcash-btn">
+                          <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleAddCash}
+                          >
+                            Add Cash
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Box>
-              </Modal>
-            </div>
+                  </Box>
+                </Modal>
+              </div>
 
-            <div className="menu-icon" onClick={handleClick}>
-              {loginStatus ? (
-                <div className="nav_logos">
-                  <Link to="/cart">
-                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </Link>
-                  <i className="fa fa-user" aria-hidden="true"></i>
+              <div className="menu-icon" onClick={handleClick}>
+                {loginStatus ? (
+                  <div className="nav_logos">
+                    <Link to="/cart">
+                      <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </Link>
+                    <i className="fa fa-user" aria-hidden="true"></i>
+                    <i className={click ? "fas fa-times" : "fas fa-bars"} />
+                  </div>
+                ) : (
                   <i className={click ? "fas fa-times" : "fas fa-bars"} />
-                </div>
-              ) : (
-                <i className={click ? "fas fa-times" : "fas fa-bars"} />
-              )}
+                )}
+              </div>
             </div>
-          </div>
-          <div className="navbar-links">
-            <ul className={click ? "navmenu-active" : "navmenu"}>
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    "navlinks" + (isActive ? "-active" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Home
-                </NavLink>
-              </li>
-              {profile && profile.role && profile.role === "admin" ? (
-                <></>
-              ) : (
+            <div className="navbar-links">
+              <ul className={click ? "navmenu-active" : "navmenu"}>
                 <li>
                   <NavLink
-                    to="/products"
+                    to="/"
                     className={({ isActive }) =>
                       "navlinks" + (isActive ? "-active" : "")
                     }
                     onClick={closeMobileMenu}
                   >
-                    Products
+                    Home
                   </NavLink>
                 </li>
-              )}
-
-              {loginStatus ? (
-                <div className="nav_logos">
-                  {profile && profile.role && profile.role === "admin" ? (
-                    <></>
-                  ) : (
-                    <>
-                      <Link to="/cart">
-                      <Badge badgeContent={cartitems.length} color="error">
-                        <i
-                          className="fa fa-shopping-cart"
-                          aria-hidden="true"
-                        ></i>
-                        </Badge>
-                      </Link>
-
-                      <i
-                        className="fa fa-wallet wallet"
-                        aria-hidden="true"
-                        onClick={handleWalletClick}
-                      ></i>
-                    </>
-                  )}
-
-                  <a
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleMenuClick}
-                  >
-                    <i
-                      className="fa fa-user"
-                      aria-hidden="true"
-                      style={{ fontSize: "24px" }}
-                    ></i>
-                  </a>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={openMenu}
-                    onClose={handleMenuClose}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                  >
-                    <MenuItem disabled={true}>
-                      {" "}
-                      Hello {profile ? profile.email : "user"}!
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        logout();
-                        handleMenuClose();
-                        toast("Logged out successfully");
-                        navigate("/");
-                      }}
-                    >
-                      Logout
-                    </MenuItem>
-                  </Menu>
-                </div>
-              ) : (
-                <>
+                {profile && profile.role && profile.role === "admin" ? (
+                  <></>
+                ) : (
                   <li>
                     <NavLink
-                      to="/login"
+                      to="/products"
                       className={({ isActive }) =>
                         "navlinks" + (isActive ? "-active" : "")
                       }
                       onClick={closeMobileMenu}
                     >
-                      Login
+                      Products
                     </NavLink>
                   </li>
-                </>
-              )}
-            </ul>
+                )}
+
+                {loginStatus ? (
+                  <div className="nav_logos">
+                    {profile && profile.role && profile.role === "admin" ? (
+                      <></>
+                    ) : (
+                      <>
+                        <Link to="/cart">
+                          <Badge badgeContent={cartitems.length} color="error">
+                            <i
+                              className="fa fa-shopping-cart"
+                              aria-hidden="true"
+                            ></i>
+                          </Badge>
+                        </Link>
+
+                        <i
+                          className="fa fa-wallet wallet"
+                          aria-hidden="true"
+                          onClick={handleWalletClick}
+                        ></i>
+                      </>
+                    )}
+
+                    <a
+                      id="basic-button"
+                      aria-controls={open ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleMenuClick}
+                    >
+                      <i
+                        className="fa fa-user"
+                        aria-hidden="true"
+                        style={{ fontSize: "24px" }}
+                      ></i>
+                    </a>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      onClose={handleMenuClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      <MenuItem disabled={true}>
+                        {" "}
+                        Hello {profile ? profile.email : "user"}!
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          logout();
+                          handleMenuClose();
+                          toast("Logged out successfully");
+                          navigate("/");
+                        }}
+                      >
+                        Logout
+                      </MenuItem>
+                    </Menu>
+                  </div>
+                ) : (
+                  <>
+                    <li>
+                      <NavLink
+                        to="/login"
+                        className={({ isActive }) =>
+                          "navlinks" + (isActive ? "-active" : "")
+                        }
+                        onClick={closeMobileMenu}
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    )}
+        </nav>
+      )}
     </>
   );
 };

@@ -4,13 +4,21 @@ import ApiContext from "../context/api/ApiContext";
 import CartCard from "./CartCard";
 import "../css/CartCss.css";
 import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
 	// const [totalprice, setTotalprice] = useState(0)
 	// const [totalquantity, setTotalquantity] = useState(0)
-	const {cartitems, getCartItems} = useContext(ApiContext);
-
+	const navigate = useNavigate();
+	const {cartitems, getCartItems, profile} = useContext(ApiContext);
+	const handleCheckout = async () => {
+		console.log(profile);
+		if(profile.walletCash - totalprice < 0){
+			toast.error("Insufficient Balance")
+			return;
+		}
+		navigate("/checkout")
+	}
   useEffect(() => {
     getCartItems();
   }, []);
@@ -43,7 +51,7 @@ const Cart = () => {
 					<p><span>Shipping</span> <span>₹15</span></p>
 					<hr />
 					<p><span>Total</span> <span>₹{totalprice + totalprice * 0.05 + 15}</span></p>
-					<NavLink to={"/checkout"}> <i className="fa fa-shopping-cart"></i> Checkout </NavLink>
+					<div onClick={handleCheckout}> <i className="fa fa-shopping-cart"></i> Checkout </div>
         		</div>
 				</>
 				):(
