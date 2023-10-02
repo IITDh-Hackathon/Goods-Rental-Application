@@ -75,7 +75,7 @@ const AddListingToCity = () => {
               ))
               }
             </div>
-            <Pagination className='paninate' count={notListed.data ? notListed.data.totalPages:10} page={notListedPage} onChange={handleChangeNotListedPage} />
+            <Pagination className='paginate' count={notListed.data ? notListed.data.totalPages:10} page={notListedPage} onChange={handleChangeNotListedPage} />
         </div>
         <div className="added">
             <h2 className='added-title'>Items That Are Added </h2>
@@ -85,7 +85,7 @@ const AddListingToCity = () => {
               ))
               }
             </div>
-            <Pagination className='paninate' count={listed.data ? listed.data.totalPages:10} page={listedPage} onChange={handleChangeListedPage} />
+            <Pagination className='paginate' count={listed.data ? listed.data.totalPages:10} page={listedPage} onChange={handleChangeListedPage} />
         </div>
         </>
       ): <Modal

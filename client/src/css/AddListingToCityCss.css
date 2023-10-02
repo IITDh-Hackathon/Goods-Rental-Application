@@ -11,5 +11,7 @@
 .paginate{
     margin-top: 20px;
     margin-bottom: 30px;
-    width: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
