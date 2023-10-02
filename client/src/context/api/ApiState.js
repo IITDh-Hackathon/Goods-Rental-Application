@@ -286,7 +286,7 @@ const ApiState = (props) => {
     )
   };
 
-  const updateCartItemMonths = async (id,months) => {
+  const updateCartItemMonths = async (id,months, setOpen) => {
     return axios.post(`${host}/api/user/updateCartItemMonths`,{id,months},{
       headers: {
         "Content-Type": "application/json",
@@ -295,16 +295,19 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
+      setOpen(false);
       getCartItems();
       return [response, false];
     })
     .catch(function (error) {
+      setOpen(false);
       return [error, true];
+
     }
     )
   };
 
-  const updateCartItemQuantity = async (id,quantity) => {
+  const updateCartItemQuantity = async (id,quantity, setLoad) => {
     return axios.post(`${host}/api/user/updateCartItemQuantity`,{id, quantity},{
       headers: {
         "Content-Type": "application/json",
@@ -313,10 +316,12 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
+      setLoad(false);
       getCartItems();
       return [response, false];
     })
     .catch(function (error) {
+      setLoad(false);
       return [error, true];
     }
     )
