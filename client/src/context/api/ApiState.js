@@ -34,9 +34,9 @@ const ApiState = (props) => {
     }
   },[cartitems])
 
-  const removeCityListing = async (city, id) => {
+  const removeCityListing = async (id,city) => {
     return axios
-      .delete(
+      .post(
         `${host}/api/admin/removeCityListing`,
         { city: city, id: id },
         {
