@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -45,7 +45,7 @@ const Navbar = () => {
   const handleCloseWallet = () => {
     setWalletOpen(false);
   };
-  const handleCashChange = (e) =>{
+  const handleCashChange = (e) => {
     setaddCash(e.target.value);
   }
   const handleAddCash = () =>{
@@ -63,7 +63,7 @@ const Navbar = () => {
     getProfile(false);
     setaddCash(0);
     toast.success("Cash added successfully");
-  }
+  };
 
   useEffect(() => {
     getProfile();
@@ -135,27 +135,34 @@ const Navbar = () => {
                 aria-describedby="wallet-modal-description"
               >
                 <Box className="box">
-                  <h2 className="wallet-title" >Wallet</h2>
-                  <hr/>
+                  <h2 className="wallet-title">Wallet</h2>
+                  <hr />
                   <div className="wallet-body">
-                    <div className="wallet-cash" >
-                      <h3>
-                      Current cash
-                      </h3>
-                      <div>
-                        {currentCash}
-                      </div>
+                    <div className="wallet-cash">
+                      <h3>Current cash</h3>
+                      <div>{currentCash}</div>
                     </div>
                     <div>
-                    <TextField id="outlined-basic" label="Enter Cash" variant="outlined" name='addCash' value={addCash} onChange={(e)=>handleCashChange(e)} />
-                    <div className="addcash-btn">
-                      <Button variant="contained" color="success" onClick={handleAddCash} >
-                        Add Cash
-                      </Button>
-                    </div>
+                      <TextField
+                        id="outlined-basic"
+                        label="Enter Cash"
+                        variant="outlined"
+                        name="addCash"
+                        value={addCash}
+                        onChange={(e) => handleCashChange(e)}
+                      />
+                      <div className="addcash-btn">
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={handleAddCash}
+                        >
+                          Add Cash
+                        </Button>
                       </div>
+                    </div>
                   </div>
-                  </Box>
+                </Box>
               </Modal>
             </div>
 
@@ -186,23 +193,42 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/products"
-                  className={({ isActive }) =>
-                    "navlinks" + (isActive ? "-active" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Products
-                </NavLink>
-              </li>
+              {profile && profile.role && profile.role === "admin" ? (
+                <></>
+              ) : (
+                <li>
+                  <NavLink
+                    to="/products"
+                    className={({ isActive }) =>
+                      "navlinks" + (isActive ? "-active" : "")
+                    }
+                    onClick={closeMobileMenu}
+                  >
+                    Products
+                  </NavLink>
+                </li>
+              )}
+
               {loginStatus ? (
                 <div className="nav_logos">
-                  <Link to="/cart">
-                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </Link>
-                  <i className="fa fa-wallet wallet" aria-hidden="true" onClick={handleWalletClick}></i>
+                  {profile && profile.role && profile.role === "admin" ? (
+                    <></>
+                  ) : (
+                    <>
+                      <Link to="/cart">
+                        <i
+                          className="fa fa-shopping-cart"
+                          aria-hidden="true"
+                        ></i>
+                      </Link>
+                      <i
+                        className="fa fa-wallet wallet"
+                        aria-hidden="true"
+                        onClick={handleWalletClick}
+                      ></i>
+                    </>
+                  )}
+
                   <Button
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
@@ -210,7 +236,11 @@ const Navbar = () => {
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleMenuClick}
                   >
-                    <i className="fa fa-user" aria-hidden="true" style={{ fontSize: '24px' }}></i>
+                    <i
+                      className="fa fa-user"
+                      aria-hidden="true"
+                      style={{ fontSize: "24px" }}
+                    ></i>
                   </Button>
                   <Menu
                     id="basic-menu"
@@ -221,15 +251,20 @@ const Navbar = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem disabled={true}> Hello {profile?profile.email:"user"}!</MenuItem>
-                    <MenuItem onClick={
-                      () => {
+                    <MenuItem disabled={true}>
+                      {" "}
+                      Hello {profile ? profile.email : "user"}!
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
                         logout();
                         handleMenuClose();
                         toast("Logged out successfully");
                         navigate("/");
-                      }
-                    }>Logout</MenuItem>
+                      }}
+                    >
+                      Logout
+                    </MenuItem>
                   </Menu>
                 </div>
               ) : (
