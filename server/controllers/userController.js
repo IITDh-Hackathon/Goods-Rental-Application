@@ -81,12 +81,14 @@ export const getAllCategories = async (req, res) => {
 //all apis for cart handling
 export const addToCart = async (req, res) => {
   try {
-    const { item, city } = req.body;
-    const quantity = (req.body.quantity)?req.body.quantity:1;
-    const numberOfMonths = (req.body.months)?req.body.months:1;
+    const { item, city,quantity } = req.body;
+    const numberOfMonths = req.body.months;
     console.log(item, city);
     const email = req.user.email;
     const user = await User.findOne({ email });
+    const cartItem = await Cart.findById(item);
+    user.cartTotal += cartItem.price * quantity * numberOfMonths;
+    await user.save();
     const cart = await Cart.create({
       user: user._id,
       item,
@@ -100,7 +102,6 @@ export const addToCart = async (req, res) => {
   }
 };
 
-
 export const getAllCartItems = async (req, res) => {
   try {
     const email = req.user.email;
@@ -111,6 +112,8 @@ export const getAllCartItems = async (req, res) => {
 
     for (let i = 0; i < cartItems.length; i++) {
       let obj = {};
+      obj.id = cartItems[i]._id;
+      obj.cartTotal = user.cartTotal;
       obj.quantity = cartItems[i].quantity;
       obj.months = cartItems[i].numberOfMonths;
       //find item
@@ -137,13 +140,26 @@ export const deleteCartItem = async (req, res) => {
   }
 };
 
+export const deleteCart = async (req, res) => {
+  try{
+    const user = await User.findOne({email:req.user.email});
+    await Cart.deleteMany({user:user._id});
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+};
+
 export const updateCartItemQuantity = async (req, res) => {
   try {
     const { id, quantity } = req.body;
     const cart = await Cart.findById(id);
+    const user = await User.findOne({ email: req.user.email });
+    user.cartTotal -=  cart.quantity * cart.item.price;
+    user.cartTotal += quantity * cart.item.price;
     cart.quantity = quantity;
+    await user.save();
     await cart.save();
-    res.status(200).json({ message: "Item quantity updated successfully!" });
+    res.status(200).json({ message: "Item quantity updated successfully!", cartTotal: user.cartTotal });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });
@@ -154,9 +170,13 @@ export const updateCartItemMonths = async (req, res) => {
   try {
     const { id, months } = req.body;
     const cart = await Cart.findById(id);
+    const user = await User.findOne({ email: req.user.email });
+    user.cartTotal -=  cart.numberOfMonths * cart.item.price;
+    user.cartTotal += months * cart.item.price;
     cart.numberOfMonths = months;
+    await user.save();
     await cart.save();
-    res.status(200).json({ message: "Item months updated successfully!" });
+    res.status(200).json({ message: "Item months updated successfully!", cartTotal: user.cartTotal });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });

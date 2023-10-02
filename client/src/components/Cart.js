@@ -1,9 +1,9 @@
-import React from 'react'
-import { useState, useContext, useEffect } from 'react'
-import ApiContext from '../context/api/ApiContext'
-import CartCard from './CartCard'
-import '../css/CartCss.css'
-import { toast } from 'react-toastify';
+import React from "react";
+import { useState, useContext, useEffect } from "react";
+import ApiContext from "../context/api/ApiContext";
+import CartCard from "./CartCard";
+import "../css/CartCss.css";
+import { toast } from "react-toastify";
 
 const Cart = () => {
 	// const [totalprice, setTotalprice] = useState(0)

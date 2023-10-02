@@ -60,7 +60,7 @@ const GoodsCard = (props) => {
           description={props.description}
           unitPrice={props.price}
           images={props.images}
-          
+          id={props.id}
         />
       </Modal>
       <div className="GoodsCard" onClick={handleOpen}>
