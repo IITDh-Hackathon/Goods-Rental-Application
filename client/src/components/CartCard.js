@@ -1,9 +1,12 @@
-import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import '../css/CartCardCss.css'
+import ApiContext from "../context/api/ApiContext.js";
+
 
 const CartCard = (props) => {
-    const { title, price, image, handlePriceChange } = props;
+    const context = useContext(ApiContext);
+    const { getCartItems, updateCartItemQuantity, updateCartItemMonths } = context;
+    const { title, price, image, handlePriceChange, id } = props;
     const [quantity, setQuantity] = useState(1);
     const [pricestate, setPricestate] = useState(price)
     const [Months, setMonths] = useState(1);
@@ -13,12 +16,14 @@ const CartCard = (props) => {
         if (increase) {
             setMonths(Months + 1);
             setPricestate(pricestate + price);
-            handlePriceChange(true,price);
+            updateCartItemMonths(id,Months + 1);
+            getCartItems();
         } else {
             if (quantity > 1) {
                 setMonths(Months - 1);
                 setPricestate(pricestate - price);
-                handlePriceChange(false,price);
+                updateCartItemMonths(id,Months - 1);
+                getCartItems();
             }
         }
     }
@@ -27,12 +32,14 @@ const CartCard = (props) => {
         if (increase) {
             setQuantity(quantity + 1);
             setPricestate(pricestate + price);
-            handlePriceChange(true,price);
+            updateCartItemMonths(id, quantity + 1);
+            getCartItems();
         } else {
             if (quantity > 1) {
                 setQuantity(quantity - 1);
                 setPricestate(pricestate - price);
-                handlePriceChange(false,price);
+                updateCartItemMonths(id, quantity - 1);
+                getCartItems();
             }
         }
     }

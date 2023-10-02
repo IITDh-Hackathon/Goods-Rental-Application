@@ -155,8 +155,6 @@ export const updateCartItemQuantity = async (req, res) => {
     const { id, quantity } = req.body;
     const cart = await Cart.findById(id);
     const user = await User.findOne({ email: req.user.email });
-    user.cartTotal -=  cart.quantity * cart.item.price;
-    user.cartTotal += quantity * cart.item.price;
     cart.quantity = quantity;
     await user.save();
     await cart.save();
@@ -172,8 +170,7 @@ export const updateCartItemMonths = async (req, res) => {
     const { id, months } = req.body;
     const cart = await Cart.findById(id);
     const user = await User.findOne({ email: req.user.email });
-    user.cartTotal -=  cart.numberOfMonths * cart.item.price;
-    user.cartTotal += months * cart.item.price;
+
     cart.numberOfMonths = months;
     await user.save();
     await cart.save();
