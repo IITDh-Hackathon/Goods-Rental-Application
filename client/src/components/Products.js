@@ -14,7 +14,7 @@ const Products = (props) => {
     const {city, cartitems} = context;
     const [params, setParams] = useState({
         page: 1,
-        limit: 4,
+        limit: 6,
         category: selectedCategory,
         city: city,
         sortBy: "price",
