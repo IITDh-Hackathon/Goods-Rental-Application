@@ -9,12 +9,13 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import ApiContext from "./../../context/api/ApiContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const steps = ["Delivery Address", "Confirmation "];
 const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
   const navigate = useNavigate();
   const context = React.useContext(ApiContext);
-  const { totalprice } = context;
+  const { totalprice, getCartItems } = context;
   console.log(totalprice);
 
   const handleSubmit = (e) => {
@@ -26,7 +27,7 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
   };
 
   const handleConfirm = async () => {
-    const url = process.env.REACT_APP_SERVER_URL + "/api/user/deleteCart";
+    const url = process.env.REACT_APP_SERVER_URL + "/api/user/checkout";
     console.log("Form submitted with values:", deliveryInfo);
 
     return axios
@@ -43,11 +44,15 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
       )
       .then(function (response) {
         console.log(response);
-        return [response, false];
+        getCartItems().then((res) => {
+          toast.success("Order Placed Successfully");
         navigate("/");
+        });
+        return [response, false];
       })
       .catch(function (error) {
         console.log(error);
+        toast.error("Order Placed Failed");
         return [error, true];
       });
   };
