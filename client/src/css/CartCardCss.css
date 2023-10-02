@@ -34,3 +34,7 @@
 .cart-btn{
     margin: 0px 10px;
 }
+.cart-title-1{
+    display: flex;
+    justify-content: space-between;
+}

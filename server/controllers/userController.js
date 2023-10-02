@@ -117,6 +117,7 @@ export const getAllCartItems = async (req, res) => {
       obj.cartTotal = user.cartTotal;
       obj.quantity = cartItems[i].quantity;
       obj.months = cartItems[i].numberOfMonths;
+      obj.city = cartItems[i].city;
       //find item
       let item = await Item.findById(cartItems[i].item);
       // console.log("item", item);
@@ -197,12 +198,8 @@ export const addMoneyToWallet = async (req, res) => {
 
 export const checkout = async (req, res) => {
   try{
-    const {amount} = req.body;
     const user = await User.findOne({email:req.user.email});
-    if(user.walletCash < amount){
-      return res.status(400).json({message:"Not enough money in wallet!"});
-    }
-    user.walletCash -= amount;
+    user.walletCash -= user.cartTotal;
     user.cartTotal = 0;
     await Cart.deleteMany({user:user._id});
     await user.save();
