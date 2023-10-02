@@ -70,8 +70,8 @@ const GoodsCard = (props) => {
           <p>
             <h2 className="goods-name">{name}</h2>
             <h3 className="goods-price">₹ {price}</h3>
-            {description.length > 25
-              ? description.substring(0, 25) + "..."
+            {description.length > 50
+              ? description.substring(0, 60) + "..."
               : description}
           </p>
           <span
