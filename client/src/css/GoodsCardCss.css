@@ -73,16 +73,19 @@
   position: absolute;
   bottom: 0;
   transform: translateX(50%);
-  right: 50%;
+  right: 48%;
   margin: 8px;
-  border-radius: 4px;
-  background-color: var(--main-color);
+  border-radius: 25px;
+  background-color: var(--button-color);
   line-height: 40px;
   padding: 0 15px;
   color: #ffffff;
   font-weight: 800;
   font-size: 0.9em;
   text-transform: uppercase;
+}
+.GoodsCard span:hover {
+  background-color: black;
 }
 
 .GoodsCard:hover img,

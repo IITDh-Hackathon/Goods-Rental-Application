@@ -87,6 +87,7 @@ const Products = (props) => {
                 {[
                   "Baskets",
                   "Furniture",
+                  'Automobile',
                   "Cleaning Accessories",
                   "Books",
                   "Sports",

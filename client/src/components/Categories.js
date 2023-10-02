@@ -19,8 +19,8 @@ const Categories = () => {
       "https://www.ikea.com/ext/ingkadam/m/4d08014585d33c9/original/PH191589.jpg?f=xs",
     ],
     [
-      "Vases and Bowls",
-      "https://www.ikea.com/images/81/cd/81cdbdd2d048322d8948f51c210786c0.png?f=xs",
+      "Sports",
+      "https://m.media-amazon.com/images/I/61YJmiawE+L._AC_UF1000,1000_QL80_.jpg",
     ],
   ]);
   return (
