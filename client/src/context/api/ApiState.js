@@ -367,7 +367,8 @@ const ApiState = (props) => {
         cartitems,
         totalprice,
         updateCartItemQuantity,
-        updateCartItemMonths
+        updateCartItemMonths,
+        removeCartItem
       }}
     >
       {props.children}

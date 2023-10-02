@@ -101,13 +101,7 @@ const GoodsCard = (props) => {
             className="message"
             style={{backgroundColor: message === "RemoveItem" ? "red": "green"}}
             onClick={() => {
-              if (message === "addItem") {
-                handleOnSubmit(city, id);
-              } else if (message === "Add to cart") {
-                handleOnSubmit(city, id);
-              } else if (message === "RemoveItem"){
-                handleOnSubmit(city, id);
-              }
+              handleOnSubmit(city, id);
             }}
           >
             {message}
