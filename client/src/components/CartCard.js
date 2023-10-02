@@ -7,6 +7,7 @@ const CartCard = (props) => {
     const [quantity, setQuantity] = useState(1);
     const [pricestate, setPricestate] = useState(price)
     const [Months, setMonths] = useState(1);
+    const imageurl = process.env.REACT_APP_SERVER_URL + '/static/' + image;
 
     const handleMonthChange = (increase) => {
         if (increase) {
@@ -38,10 +39,10 @@ const CartCard = (props) => {
 
     return (
         <div className="cart-box">
-            <img src="https://www.ikea.com/images/93/7f/937f022b5ff3ff7c0a669711922e0a4f.png?f=xxs" />
+            <img src= {imageurl}/>
             <div className="cart-content">
                 <h3>{title}</h3>
-                <h4>Price: ${pricestate}</h4>
+                <h4>Price: ₹{pricestate}</h4>
                 <p className="cart-unit">
                     Quantity:
                     <i className='fa fa-minus cart-btn'  onClick={()=>handleOnChange(false)}></i>

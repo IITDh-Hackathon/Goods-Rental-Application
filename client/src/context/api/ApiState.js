@@ -19,10 +19,21 @@ const ApiState = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getProfile();
+      getCartItems();
     } else {
       setLoginStatus(false);
     }
   }, []);
+
+  useEffect(()=> {
+    if(cartitems){
+      let total = 0;
+      cartitems.forEach((item) => {
+        total += item.item.price;
+      });
+      setTotalprice(total);
+    }
+  },[cartitems])
 
   const addToCart = async (id, city) => {
     console.log(id, city,"from api state");
@@ -219,7 +230,8 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      console.log(response);
+      console.log(response.data);
+      setCartitems(response.data);
       return [response, false];
     })
     .catch(function (error) {
