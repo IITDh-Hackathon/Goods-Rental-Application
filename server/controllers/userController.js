@@ -39,7 +39,7 @@ export const getItems = async (req, res) => {
   if (req.query.notCity) {
     filter._id = { $nin: items };
   }
-  console.log(filter);
+  // console.log(filter);
   const options = pick(req.query, [
     "sortBy",
     "limit",
@@ -83,11 +83,11 @@ export const addToCart = async (req, res) => {
   try {
     const { item, city,quantity } = req.body;
     const numberOfMonths = req.body.months;
-    console.log(item, city);
+    // console.log(item, city);
     const email = req.user.email;
     const user = await User.findOne({ email });
     const cartItem = await Item.findById(item);
-    console.log(cartItem,"cartItem");
+    // console.log(cartItem,"cartItem");
     user.cartTotal += cartItem.price * quantity * numberOfMonths;
     await user.save();
     const cart = await Cart.create({
@@ -119,7 +119,7 @@ export const getAllCartItems = async (req, res) => {
       obj.months = cartItems[i].numberOfMonths;
       //find item
       let item = await Item.findById(cartItems[i].item);
-      console.log("item", item);
+      // console.log("item", item);
       obj.item = item;
       items.push(obj);
     }

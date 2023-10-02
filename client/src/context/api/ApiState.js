@@ -36,7 +36,7 @@ const ApiState = (props) => {
 
   const removeCityListing = async (city, id) => {
     return axios
-      .post(
+      .delete(
         `${host}/api/admin/removeCityListing`,
         { city: city, id: id },
         {

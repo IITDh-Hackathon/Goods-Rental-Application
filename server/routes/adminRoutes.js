@@ -15,7 +15,7 @@ router.post("/addCity", authenticateUser, authorizeUser(["admin"]), addCity);
 router.post("/addCityListing", authenticateUser, authorizeUser(["admin"]), addCityListing);
 
 //api to remove a city listing
-router.post("/removeCityListing", authenticateUser, authorizeUser(["admin"]), removeCityListing);
+router.delete("/removeCityListing", authenticateUser, authorizeUser(["admin"]), removeCityListing);
 
 //api to get all cities
 router.get("/getCities", authenticateUser, authorizeUser(["admin"]), getCities);
