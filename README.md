@@ -43,3 +43,10 @@ npm install
 npm start
 ```
 This will start the client on http://localhost:3000
+
+## Default Admin Credentials
+```
+email:admin@gmail.com
+password:admin
+```
+normal users can be signed up using the client application.
