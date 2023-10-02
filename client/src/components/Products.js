@@ -81,7 +81,7 @@ const Products = (props) => {
               </div>
             </div>
             <div className="filter-category">
-              <div className="filter-title">Category</div>
+              <div className="filter-title">Categories</div>
               <div className="filter-category-body">
                 {[
                   "Baskets",
