@@ -62,7 +62,7 @@ function App() {
           </div>
         </BrowserRouter>
       </ApiState>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </>
   );
 }
