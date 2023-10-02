@@ -40,7 +40,11 @@
 
 /* Style for selected category */
 .selected-category {
-    background-color: #1ee00b;
+    background-color: gray;
+    color: #fff;
+}
+.selected-category:hover {
+    background-color: black;
     color: #fff;
 }
 
