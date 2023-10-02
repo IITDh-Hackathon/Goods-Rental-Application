@@ -56,7 +56,7 @@
 	border-radius: 5px;
 }
 .cart-btn-area:hover {
-	background-color: #76bfb6;
+	background-color:rgb(206 0 0);
 	color: #fff;
 	font-weight: 600;
 }
@@ -90,7 +90,7 @@
 	font-size: 20px;
 }
 .right-bar a {
-	background-color: black;
+	background-color: var(--success-color);
 	color: #fff;
 	text-decoration: none;
 	display: block;
@@ -98,12 +98,13 @@
 	height: 40px;
 	line-height: 40px;
 	font-weight: 900;
+	border-radius: 25px;
 }
 .right-bar i {
 	margin-right: 15px;
 }
 .right-bar a:hover {
-	background-color: blue;
+	background-color: green;
 }
 @media screen and (max-width: 700px) {
 	.cart-content h3 {
