@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -21,12 +22,14 @@ const Navbar = () => {
   const [walletOpen, setWalletOpen] = useState(false);
   const [currentCash, setCurrentCash] = useState(0);
   const [addCash, setaddCash] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showNav, setShowNav] = useState(['/','/about', '/login', '/products', '/cart','/admin',].includes(location.pathname));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  const navigate = useNavigate();
 
   const { city, setCity, loginStatus, profile, logout, addcash, getProfile } =
     React.useContext(ApiContext);
@@ -96,6 +99,7 @@ const Navbar = () => {
 
   return (
     <>
+    {showNav && (
       <nav>
         <div
           className={showMenu ? "navbar-container-mobile" : "navbar-container"}
@@ -286,6 +290,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+    )}
     </>
   );
 };
