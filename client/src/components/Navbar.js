@@ -175,10 +175,10 @@ const Navbar = () => {
                 {loginStatus ? (
                   <div className="nav_logos">
                     <Link to="/cart">
-                      <i style={{marginLeft:'10px'}}className="fa fa-shopping-cart" aria-hidden="true"></i>
+                      <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                     </Link>
-                    <i style={{marginLeft:'10px'}}className="fa fa-user" aria-hidden="true"></i>
-                    <i  style={{marginLeft:'10px'}}className={click ? "fas fa-times" : "fas fa-bars"} />
+                    <i className="fa fa-user" aria-hidden="true"></i>
+                    <i  className={click ? "fas fa-times" : "fas fa-bars"} />
                   </div>
                 ) : (
                   <i  style={{marginLeft:'10px'}}className={click ? "fas fa-times" : "fas fa-bars"} />
@@ -228,9 +228,10 @@ const Navbar = () => {
                             ></i>
                           </Badge>
                         </Link>
-
+                        
                         <i
                           className="fa fa-wallet wallet"
+                          style={{marginLeft:'10px'}}
                           aria-hidden="true"
                           onClick={handleWalletClick}
                         ></i>
@@ -247,7 +248,7 @@ const Navbar = () => {
                       <i
                         className="fa fa-user"
                         aria-hidden="true"
-                        style={{ fontSize: "24px" }}
+                        style={{ fontSize: "24px", marginLeft:'10px' }}
                       ></i>
                     </a>
                     <Menu
