@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { toast } from "react-toastify";
 import Carousel from "react-bootstrap/Carousel";
 import Box from "@mui/material/Box";
 import "./../css/individualCard.css";
 import ApiContext from "../context/api/ApiContext";
-import toast from "react-hot-toast";
-import { useContext } from "react";
 
 const IndividualCard = ({ id, title, description, unitPrice, images }) => {
   const [index, setIndex] = useState(0);

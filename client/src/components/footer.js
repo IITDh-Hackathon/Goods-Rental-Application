@@ -30,14 +30,14 @@ export default function Footer() {
 
             <div>
               <i className="fa fa-phone"></i>
-              <p>+91 6305692484</p>
+              <p>+91 9676218429</p>
             </div>
 
             <div>
               <i className="fa fa-envelope"></i>
 
               <p>
-                <a href="mailto: support@company.com">support@borrowbox.com</a>
+                <a href="mailto: 200010024@iitdh.ac.in">support@borrowbox.com</a>
               </p>
             </div>
           </div>
@@ -53,21 +53,23 @@ export default function Footer() {
             </p>
 
             <div className="footer-icons">
+            <a href="https://github.com/karthik-k-18">
+                <i className="fa fa-github"></i>
+              </a>
+              <a href="https://twitter.com/mv_karthik14">
+                <i className="fa fa-twitter"></i>
+              </a>
               <a href="#">
                 <i className="fa fa-facebook"></i>
               </a>
 
-              <a href="#">
-                <i className="fa fa-twitter"></i>
-              </a>
+              
 
               <a href="#">
                 <i className="fa fa-linkedin"></i>
               </a>
 
-              <a href="#">
-                <i className="fa fa-github"></i>
-              </a>
+              
             </div>
           </div>
         </div>
