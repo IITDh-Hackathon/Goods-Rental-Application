@@ -178,10 +178,10 @@ const Navbar = () => {
                       <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                     </Link>
                     <i className="fa fa-user" aria-hidden="true"></i>
-                    <i className={click ? "fas fa-times" : "fas fa-bars"} />
+                    <i style={{marginLeft:'10px'}} className={click ? "fas fa-times" : "fas fa-bars"} />
                   </div>
                 ) : (
-                  <i className={click ? "fas fa-times" : "fas fa-bars"} />
+                  <i style={{marginLeft:'10px'}} className={click ? "fas fa-times" : "fas fa-bars"} />
                 )}
               </div>
             </div>
