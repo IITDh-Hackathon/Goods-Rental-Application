@@ -3,19 +3,47 @@ import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import axios from "axios";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
+import ApiContext from "./../../context/api/ApiContext";
 
 const steps = ["Delivery Address", "Confirmation "];
 const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
+  const context = React.useContext(ApiContext);
+  const { totalprice } = context;
+  console.log(totalprice);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   const backButtonStyle = {
-    marginRight: "16px", // Adjust margin as needed
+    marginRight: "16px",
+  };
+
+  const handleConfirm = async () => {
+    const url = process.env.REACT_APP_SERVER_URL + "/api/user/deleteCart";
+    console.log("Form submitted with values:", deliveryInfo);
+    console.log(url);
+
+    return axios
+      .post(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
   };
 
   return (
@@ -57,6 +85,13 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
             {deliveryInfo.shippingMethod}
           </Typography>
 
+          <Typography variant="h5" gutterBottom>
+            Total Price
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            ₹ {totalprice}
+          </Typography>
+
           <Box mt={3}>
             <Button
               variant="contained"
@@ -70,7 +105,12 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
             >
               Back
             </Button>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleConfirm}
+            >
               Confirm
             </Button>
           </Box>
