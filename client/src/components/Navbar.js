@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
 import { useLocation } from "react-router-dom";
+import Badge from '@mui/material/Badge';
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -31,7 +32,7 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const { city, setCity, loginStatus, profile, logout, addcash, getProfile } =
+  const { city, setCity, loginStatus, profile, logout, addcash, getProfile, cartitems } =
     React.useContext(ApiContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -220,11 +221,14 @@ const Navbar = () => {
                   ) : (
                     <>
                       <Link to="/cart">
+                      <Badge badgeContent={cartitems.length} color="error">
                         <i
                           className="fa fa-shopping-cart"
                           aria-hidden="true"
                         ></i>
+                        </Badge>
                       </Link>
+
                       <i
                         className="fa fa-wallet wallet"
                         aria-hidden="true"
@@ -233,7 +237,7 @@ const Navbar = () => {
                     </>
                   )}
 
-                  <Button
+                  <a
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
@@ -245,7 +249,7 @@ const Navbar = () => {
                       aria-hidden="true"
                       style={{ fontSize: "24px" }}
                     ></i>
-                  </Button>
+                  </a>
                   <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

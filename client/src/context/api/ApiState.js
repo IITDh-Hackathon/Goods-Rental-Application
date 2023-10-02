@@ -97,6 +97,7 @@ const ApiState = (props) => {
       )
       .then(function (response) {
         console.log(response);
+        getCartItems();
         return [response, false];
       })
       .catch(function (error) {
