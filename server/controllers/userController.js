@@ -195,3 +195,20 @@ export const addMoneyToWallet = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+export const checkout = async (req, res) => {
+  try{
+    const {amount} = req.body;
+    const user = await User.findOne({email:req.user.email});
+    if(user.walletCash < amount){
+      return res.status(400).json({message:"Not enough money in wallet!"});
+    }
+    user.walletCash -= amount;
+    user.cartTotal = 0;
+    await Cart.deleteMany({user:user._id});
+    await user.save();
+    res.status(201).json({ message: "Checkout successful!" });
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+};
