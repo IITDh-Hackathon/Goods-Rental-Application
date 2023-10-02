@@ -78,21 +78,12 @@
   border-radius: 4px;
   background-color: var(--main-color);
   line-height: 40px;
-  padding: 0 10px;
+  padding: 0 15px;
   color: #ffffff;
   font-weight: 800;
   font-size: 0.9em;
   text-transform: uppercase;
 }
-/* .GoodsCard span:before {
-  position: absolute;
-  right: 100%;
-  border-style: solid;
-  border-width: 0 0 40px 12px;
-  border-color: transparent transparent var(--secondary-color);
-  content: '';
-  top: 0;
-} */
 
 .GoodsCard:hover img,
 .GoodsCard.hover img {

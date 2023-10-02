@@ -101,6 +101,7 @@ const AddListingToCity = () => {
                     quantity={item.quantity}
                     category={item.category}
                     images={item.images}
+                    message="RemoveItem"
                     key={item.id}
                     city={city}
                     id={item.id}
