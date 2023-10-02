@@ -30,7 +30,7 @@ This will start the server on http://localhost:8000
 ## Client
 - Env variables (create a .env file in the client directory)
 ```
-REACT_APP_SERVER_URL=http://10.196.10.102:8000
+REACT_APP_SERVER_URL=http://localhost:8000
 ```
 - Install npm dependencies
 ```
