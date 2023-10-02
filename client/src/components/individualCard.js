@@ -9,7 +9,7 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
   const [index, setIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
-  const { addToCart, city, profile } = useContext(ApiContext);
+  const { addToCart, city, profile, cartitems } = useContext(ApiContext);
 
   const handleAddtoCart = async () => {
     console.log(id);
@@ -57,6 +57,8 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
           <></>
         ) : (
           <>
+          {(cartitems && cartitems.some((item) => item.id === id)) ? (
+          <>
             <div>
               <span>Quantity: </span>
               <button
@@ -93,6 +95,11 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
             <button className="add_to_cart" onClick={handleAddtoCart}>
               Add to Cart
             </button>
+          </>) : (
+            <button  disabled>
+              ✓Added to Cart
+            </button>
+          )}
           </>
         )}
       </div>
