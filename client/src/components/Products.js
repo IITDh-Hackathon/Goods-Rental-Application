@@ -18,15 +18,18 @@ const Products = (props) => {
         limit: 4,
         category: selectedCategory,
         city: city,
+        sortBy: "price",
     })
     const { getItems } = context;
+    const [Sort, setSort] = useState(true);
 
   useEffect(() => {
     setParams({
       ...params,
       city: city,
+      sortBy: Sort ? "price" : "-price",
     });
-  }, [city]);
+  }, [city, Sort]);
 
   useEffect(() => {
     getItems(params).then((res) => {
@@ -34,7 +37,6 @@ const Products = (props) => {
     });
   }, [params, getItems]);
 
-  const [Sort, setSort] = useState(true);
 
   // Function to handle category selection
   const handleCategoryClick = (clickedCategory) => {

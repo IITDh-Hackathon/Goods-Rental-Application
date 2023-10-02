@@ -62,10 +62,12 @@ export const addCityListing = async (req, res) => {
 export const removeCityListing = async (req, res) => {
     const cityName = req.body.city;
     const itemId = req.body.id;
-    console.log("cityname",cityName, itemId);
+    console.log("cityname",cityName);
+    console.log("itemId",itemId);
     try{
         const city = await City.findOne({name:cityName});
         //remove item._id from city.listings
+        console.log(city);
         const index = city.listings.indexOf(itemId);
         if(index > -1){
             city.listings.splice(index, 1);

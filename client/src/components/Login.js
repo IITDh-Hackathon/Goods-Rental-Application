@@ -93,6 +93,10 @@ const Login = () => {
   if (profile && profile.role === "admin") {
     return <Navigate to="/admin" />;
   }
+  if (profile && profile.role === "user") {
+    return <Navigate to="/" />;
+  }
+  
 
   return (
     <>

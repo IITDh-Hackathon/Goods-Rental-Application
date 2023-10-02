@@ -113,6 +113,7 @@ const AddListingToCity = () => {
                     key={item.id}
                     city={city}
                     id={item.id}
+                    handleCount={handleCount}
                   />
                 ))}
             </div>

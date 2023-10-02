@@ -24,9 +24,19 @@ const ApiState = (props) => {
     }
   }, []);
 
-  const removeCityListing = async (city, id) => {
+  useEffect(()=> {
+    if(cartitems){
+      let total = 0;
+      cartitems.forEach((item) => {
+        total += item.item.price;
+      });
+      setTotalprice(total);
+    }
+  },[cartitems])
+
+  const removeCityListing = async (id,city) => {
     return axios
-      .delete(
+      .post(
         `${host}/api/admin/removeCityListing`,
         { city: city, id: id },
         {
@@ -335,7 +345,9 @@ const ApiState = (props) => {
       return [error, true];
     }
     )
-  }
+  };
+
+
 
   return (
     <ApiContext.Provider

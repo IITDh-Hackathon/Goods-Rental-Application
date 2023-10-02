@@ -71,6 +71,7 @@ const GoodsCard = (props) => {
         toast.error(response.message);
       } else {
         toast.success("Item Removed from Cart Successfully");
+        handleCount();
       }
     }
   };
