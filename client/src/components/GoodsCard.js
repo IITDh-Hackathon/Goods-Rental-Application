@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import ApiContext from "./../context/api/ApiContext";
 import Modal from "@mui/material/Modal";
 import IndividualCard from "./individualCard";
+import { useNavigate } from "react-router-dom";
 
 const GoodsCard = (props) => {
+  const navigate = useNavigate();
   const handleOpen = () => {
     setOpen(true);
     console.log("hello");
@@ -16,8 +18,17 @@ const GoodsCard = (props) => {
   const [open, setOpen] = React.useState(false);
   const { addCityListing, addToCart, city } = useContext(ApiContext);
   const imageStore = process.env.REACT_APP_SERVER_URL + "/static/";
-  let { name, description, price, quantity, images, category, message, id } =
-    props;
+  let {
+    name,
+    description,
+    price,
+    quantity,
+    images,
+    category,
+    message,
+    id,
+    handleCount,
+  } = props;
   let image;
   if (!images) {
     image =
@@ -37,6 +48,7 @@ const GoodsCard = (props) => {
         toast.error(response.message);
       } else {
         toast.success("Item Added to City Listing Successfully");
+        handleCount();
       }
     } else if (message === "Add to cart") {
       console.log(id);

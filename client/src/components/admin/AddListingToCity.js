@@ -10,6 +10,7 @@ import CityLogos from "../cityLogos.js";
 const AddListingToCity = () => {
   const { city, setCity, getItems } = useContext(ApiContext);
   const [listed, setListed] = useState([]);
+  const [count, setCount] = useState(0);
   const [listedPage, setListedPage] = useState(1);
   const [notListed, setNotListed] = useState([]);
   const [notListedPage, setNotListedPage] = useState(1);
@@ -29,6 +30,7 @@ const AddListingToCity = () => {
   };
 
   useEffect(() => {
+    console.log("fetching");
     getItems({
       city: city,
       page: listedPage,
@@ -41,7 +43,12 @@ const AddListingToCity = () => {
     }).then((res) => {
       setNotListed(res[0]);
     });
-  }, [city, getItems, listedPage, notListedPage]);
+  }, [city, getItems, listedPage, notListedPage,count]);
+
+  const handleCount = () => {
+    console.log("count", count);
+    setCount(count+1);
+  };
 
   const handleChangeListedPage = (event, newPage) => {
     setListedPage(newPage);
@@ -60,7 +67,7 @@ const AddListingToCity = () => {
       {city ? (
         <>
           <div className="not-added">
-            <h2 className="not-added-title">
+            <h2 className="not-added-title" style={{textAlign:"center"}}>
               Items That are not listed in {city}{" "}
             </h2>
             <div className="wrapper">
@@ -78,6 +85,7 @@ const AddListingToCity = () => {
                     key={item.id}
                     city={city}
                     id={item.id}
+                    handleCount={handleCount}
                   />
                 ))}
             </div>
@@ -89,7 +97,7 @@ const AddListingToCity = () => {
             />
           </div>
           <div className="added">
-            <h2 className="added-title">Items That are listed in {city}</h2>
+            <h2 className="added-title" style={{textAlign:"center"}}>Items That are listed in {city}</h2>
             <div className="wrapper">
               {listed.data &&
                 listed.data.results &&
