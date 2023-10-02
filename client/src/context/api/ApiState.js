@@ -347,29 +347,7 @@ const ApiState = (props) => {
     )
   };
 
-  const removeCityListing = async (id,city) => {
-    console.log(localStorage.getItem("token"));
-    return axios
-      .post(
-        `${host}/api/admin/removeCityListing`,
-        { city: city, id: id },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then(function (response) {
-        console.log(response);
-        return [response, false];
-      })
-      .catch(function (error) {
-        console.log(error);
-        return [error, true];
-      });
-  };
+
 
   return (
     <ApiContext.Provider
