@@ -123,13 +123,13 @@ const Products = (props) => {
               </>
             ))}
         </div>
+      </div>
         <Pagination
-          className="paninate"
+          className="paginate"
           count={items.data && items.data.totalPages}
           page={params.page}
           onChange={handleChangePage}
         />
-      </div>
     </div>
   );
 };
