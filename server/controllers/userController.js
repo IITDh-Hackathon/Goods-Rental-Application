@@ -117,6 +117,7 @@ export const getAllCartItems = async (req, res) => {
       obj.cartTotal = user.cartTotal;
       obj.quantity = cartItems[i].quantity;
       obj.months = cartItems[i].numberOfMonths;
+      obj.city = cartItems[i].city;
       //find item
       let item = await Item.findById(cartItems[i].item);
       // console.log("item", item);
