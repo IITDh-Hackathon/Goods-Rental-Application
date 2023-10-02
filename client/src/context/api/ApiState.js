@@ -24,16 +24,6 @@ const ApiState = (props) => {
     }
   }, []);
 
-  useEffect(()=> {
-    if(cartitems){
-      let total = 0;
-      cartitems.forEach((item) => {
-        total += item.item.price;
-      });
-      setTotalprice(total);
-    }
-  },[cartitems])
-
   const addcash = async (amount) => {
     return axios
       .post(
@@ -294,6 +284,7 @@ const ApiState = (props) => {
     })
     .then(function (response) {
       console.log(response.data);
+      getCartItems();
       return [response, false];
     })
     .catch(function (error) {
@@ -313,6 +304,7 @@ const ApiState = (props) => {
     })
     .then(function (response) {
       console.log(response.data);
+      getCartItems();
       return [response, false];
     })
     .catch(function (error) {
@@ -343,7 +335,8 @@ const ApiState = (props) => {
         cartitems,
         totalprice,
         updateCartItemQuantity,
-        updateCartItemMonths
+        updateCartItemMonths,
+        removeCartItem
       }}
     >
       {props.children}
