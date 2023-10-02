@@ -26,7 +26,7 @@ function ControlledCarousel() {
       <Carousel.Item>
         <div className='carousel-img-div'>
 
-        <img className="carousel-img" src={ExampleCarouselImage2} alt="Second slide" />
+        <img className="carousel-img" src={ExampleCarouselImage1} alt="Second slide" />
         </div>
         {/* <Carousel.Caption>
           <h3>Second slide label</h3>

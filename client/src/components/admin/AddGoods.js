@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const AddGoods = () => {
     const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: 'Baskets' })
     const [images, setImages] = useState([]);
-    const [categories, setCategories] = useState(['Baskets','Furniture','Cleaning Accessories','Books','Sports','Others'])
+    const [categories, setCategories] = useState(['Baskets','Furniture','Automobile','Cleaning Accessories','Books','Sports','Others'])
     const [currentImage, setCurrentImage] = useState(null);
     const [invalidfields, setInvalidfields] = useState(false);
     const { addItem } = useContext(ApiContext);
@@ -87,6 +87,7 @@ const AddGoods = () => {
                   "Cleaning Accessories",
                   "Books",
                   "Sports",
+                  'Automobile',
                   "Others",
                 ].map((cat) => (
                   <div

@@ -24,7 +24,7 @@ const Navbar = () => {
   const [addCash, setaddCash] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const [showNav, setShowNav] = useState(['/','/about', '/login', '/products', '/cart','/admin',].includes(location.pathname));
+  const [showNav, setShowNav] = useState(['/','/about', '/login', '/products', '/cart','/admin','/admin/addlisting','/admin/addgoods'].includes(location.pathname));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

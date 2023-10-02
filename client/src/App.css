@@ -12,7 +12,9 @@ input {
 /* create a variable for global color */
 :root {
   --main-color: #007bff;
-  --secondary-color: #ff5733;
+  --secondary-color: #E00751;
+  --button-color: gray;
+  --light-color: #f4f4f4;
 }
 
 .App-logo {
