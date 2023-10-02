@@ -1,27 +1,31 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import "../css/ProductsCss.css";
-import GoodsCard from "./GoodsCard";
-import ApiContext from "../context/api/ApiContext";
-import Pagination from "@mui/material/Pagination";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useState } from 'react';
+import '../css/ProductsCss.css'
+import GoodsCard from './GoodsCard';
+import ApiContext from '../context/api/ApiContext';
+import Pagination from '@mui/material/Pagination';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useParams } from 'react-router-dom';
 
 const Products = (props) => {
-  const { category } = useParams();
-  const [selectedCategory, setSelectedCategory] = useState(category);
-  const context = React.useContext(ApiContext);
-  const [items, setItems] = useState([]);
-  const { city, cartitems } = context;
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 6,
-    category: selectedCategory,
-    city: city,
-    sortBy: "price",
-  });
-  const { getItems } = context;
-  const [Sort, setSort] = useState(true);
-  const noItemImg = process.env.REACT_APP_SERVER_URL + "/static/noItem.png";
+    const { category } = useParams();
+    const [selectedCategory, setSelectedCategory] = useState(category);
+    const [open, setOpen] = React.useState(false);
+    const context = React.useContext(ApiContext);
+    const [items, setItems] = useState([]);
+    const {city, cartitems} = context;
+    const [params, setParams] = useState({
+        page: 1,
+        limit: 6,
+        category: selectedCategory,
+        city: city,
+        sortBy: "price",
+    })
+    const { getItems } = context;
+    const [Sort, setSort] = useState(true);
+    const noItems = process.env.REACT_APP_SERVER_URL + "/static/noItem.png";
+
   useEffect(() => {
     setParams({
       ...params,
@@ -31,8 +35,10 @@ const Products = (props) => {
   }, [city, Sort]);
 
   useEffect(() => {
+    setOpen(true);
     getItems(params).then((res) => {
       setItems(res[0]);
+      setOpen(false);
     });
   }, [params, getItems]);
 
@@ -80,7 +86,7 @@ const Products = (props) => {
               </div>
             </div>
             <div className="filter-category">
-              <div className="filter-title">Category</div>
+              <div className="filter-title">Categories</div>
               <div className="filter-category-body">
                 {[
                   "Baskets",
@@ -110,7 +116,7 @@ const Products = (props) => {
             <>
               {/* <div className="no-items">No Items Found</div> */}
               <div className="no-items">
-                <img src={noItemImg} alt="" />
+                <img src={noItems} alt="No Items Found" />
                 {/* <h2>No Items Found</h2> */}
               </div>
             </>
@@ -148,12 +154,19 @@ const Products = (props) => {
             ))}
         </div>
       </div>
-      <Pagination
-        className="paginate"
-        count={items.data && items.data.totalPages}
-        page={params.page}
-        onChange={handleChangePage}
-      />
+        <Pagination
+          className="paginate"
+          count={items.data && items.data.totalPages}
+          page={params.page}
+          onChange={handleChangePage}
+        />
+     <Backdrop
+     className='backdrop'
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

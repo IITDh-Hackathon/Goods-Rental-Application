@@ -3,38 +3,48 @@ import '../css/CartCardCss.css'
 import ApiContext from "../context/api/ApiContext.js";
 
 
+
 const CartCard = (props) => {
     const context = useContext(ApiContext);
     const { getCartItems, updateCartItemQuantity, updateCartItemMonths, removeCartItem } = context;
-    console.log(props);
-    const { title, price, image, handlePriceChange, id, months, quantity, city } = props
+    const { title, price, image, handlePriceChange, id, months, quantity, city, open, setOpen } = props
 
     let pricestate = price * months * quantity;
 
     const imageurl = process.env.REACT_APP_SERVER_URL + '/static/' + image;
 
     const handleMonthChange = (increase) => {
+        setOpen(true);
         if (increase) {
-            updateCartItemMonths(id, months + 1);
+            updateCartItemMonths(id, months + 1,setOpen);
         } else {
             if (months > 1) {
-                updateCartItemMonths(id, months - 1);
+                updateCartItemMonths(id, months - 1, setOpen);
+            }else{
+                setOpen(false);
             }
         }
     }
 
     const handleOnChange = (increase) => {
+        setOpen(true);
         if (increase) {
-            updateCartItemQuantity(id, quantity + 1);
+            updateCartItemQuantity(id, quantity + 1, setOpen);
         } else {
             if (quantity > 1) {
-                updateCartItemQuantity(id, quantity - 1);
+                updateCartItemQuantity(id, quantity - 1, setOpen);
+            }else{
+                setOpen(false);
             }
         }
     }
 
     const handleOnDelete = () => {
-        removeCartItem(id);
+        setOpen(true);
+        removeCartItem(id).then((res) => {
+            setOpen(false);
+        }
+        );
         getCartItems();
     }
 

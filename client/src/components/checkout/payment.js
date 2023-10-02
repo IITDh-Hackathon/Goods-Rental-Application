@@ -197,7 +197,6 @@ const Payment = () => {
                     color="secondary"
                     sx={{ flex: 1, marginRight: 1 }}
                     startIcon={<ArrowBackIcon />}
-                    onClick={() => console.log("Previous button clicked")}
                   >
                     Previous
                   </Button>

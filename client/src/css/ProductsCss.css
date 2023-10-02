@@ -18,6 +18,10 @@
     text-align: center;
 }
 
+.filter-body{
+    width: 100%;
+}
+
 .products-filter{
     width:100%;
     display: flex;
@@ -36,7 +40,11 @@
 
 /* Style for selected category */
 .selected-category {
-    background-color: #1ee00b;
+    background-color: gray;
+    color: #fff;
+}
+.selected-category:hover {
+    background-color: black;
     color: #fff;
 }
 
@@ -49,16 +57,30 @@
 }
 
 .filter-category {
-    margin-top: 1rem;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .filter-category-body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
+    flex: 1;
+}
+.filters-sort{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter-body{
+    padding-left: 12%;
 }
 
+.backdrop{
+    color: var(--secondary-color);
+}
 
 /* Add media query for responsiveness */
 @media (max-width: 768px) {

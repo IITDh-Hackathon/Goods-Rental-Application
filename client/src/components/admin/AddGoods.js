@@ -44,7 +44,6 @@ const AddGoods = () => {
             return;
         } else {
             setInvalidfields(false);
-            console.log(images);
         }
         if (error) {
             toast.error(response.message);

@@ -12,8 +12,6 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
   const { addToCart, city, profile, cartitems } = useContext(ApiContext);
 
   const handleAddtoCart = async () => {
-    console.log(id);
-    console.log(city);
     if (city === null) return toast.error("Please Select City");
     const res = await addToCart(id, city, quantity, duration);
     const [response, error] = res || [null, true];

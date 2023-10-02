@@ -37,7 +37,6 @@ const Login = () => {
   const handleOnSubmit = async (e, islogin) => {
     e.preventDefault();
     if (islogin) {
-      console.log(creds);
       const res = await login(admin, creds);
       const [response, error] = res || [null, true];
       //todo: handle error

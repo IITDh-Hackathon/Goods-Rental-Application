@@ -39,7 +39,6 @@ export const getItems = async (req, res) => {
   if (req.query.notCity) {
     filter._id = { $nin: items };
   }
-  // console.log(filter);
   const options = pick(req.query, [
     "sortBy",
     "limit",
@@ -83,11 +82,9 @@ export const addToCart = async (req, res) => {
   try {
     const { item, city,quantity } = req.body;
     const numberOfMonths = req.body.months;
-    // console.log(item, city);
     const email = req.user.email;
     const user = await User.findOne({ email });
     const cartItem = await Item.findById(item);
-    // console.log(cartItem,"cartItem");
     user.cartTotal += cartItem.price * quantity * numberOfMonths;
     await user.save();
     const cart = await Cart.create({
@@ -120,13 +117,12 @@ export const getAllCartItems = async (req, res) => {
       obj.city = cartItems[i].city;
       //find item
       let item = await Item.findById(cartItems[i].item);
-      // console.log("item", item);
       obj.item = item;
       items.push(obj);
     }
     res.status(200).json(items);
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json({ message: err.message });
   }
 };
@@ -137,7 +133,7 @@ export const deleteCartItem = async (req, res) => {
     await Cart.findByIdAndDelete(id);
     res.status(200).json({ message: "Item deleted from cart successfully!" });
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json({ message: err.message });
   }
 };
@@ -161,7 +157,7 @@ export const updateCartItemQuantity = async (req, res) => {
     await cart.save();
     res.status(200).json({ message: "Item quantity updated successfully!", cartTotal: user.cartTotal });
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json({ message: err.message });
   }
 };
@@ -177,7 +173,7 @@ export const updateCartItemMonths = async (req, res) => {
     await cart.save();
     res.status(200).json({ message: "Item months updated successfully!", cartTotal: user.cartTotal });
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json({ message: err.message });
   }
 };

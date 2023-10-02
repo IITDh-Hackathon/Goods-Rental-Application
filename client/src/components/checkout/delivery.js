@@ -35,7 +35,6 @@ const Checkout = ({ deliveryInfo, setDeliveryInfo }) => {
     }),
     onSubmit: (values) => {
       setDeliveryInfo(values);
-      console.log("Form submitted with values:", values);
       navigate("/confirmation");
     },
   });

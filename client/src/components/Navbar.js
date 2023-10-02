@@ -107,7 +107,9 @@ const Navbar = () => {
           >
             <div className="top-bar">
               <div className="location_conatiner">
-                <i className="fa fa-map-marker" aria-hidden="true"></i>
+              <h3 style={{marginRight:'10px'}} >
+              Borrow<span className="box-title" >Box</span>
+            </h3>
                 <p className="city-select" on onClick={handleOpen}>
                   {!city ? "Select a City" : city}
                 </p>
