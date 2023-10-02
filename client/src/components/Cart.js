@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const Cart = () => {
 	// const [totalprice, setTotalprice] = useState(0)
 	// const [totalquantity, setTotalquantity] = useState(0)
-	const {cartitems, getCartItems, handlePriceChange, totalprice } = useContext(ApiContext);
+	const {cartitems, getCartItems, totalprice } = useContext(ApiContext);
 
 	useEffect(() => {
 		getCartItems();
@@ -22,7 +22,7 @@ const Cart = () => {
 			<div className="cart-project">
 				<div className="cart-shop">
 				{cartitems.map((cartItem) => (
-					<CartCard key={cartItem.id} title={cartItem.item.name} price={cartItem.item.price} image={cartItem.item.images[0]} handlePriceChange={handlePriceChange} />
+					<CartCard key={cartItem.id} title={cartItem.item.name} price={cartItem.item.price} image={cartItem.item.images[0]} id={cartItem.id} />
 				))
 				}
 				</div>

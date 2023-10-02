@@ -265,17 +265,62 @@ const ApiState = (props) => {
     });
   }
 
-  const handlePriceChange = (increase, price) => {
-    if (increase) {
-      setTotalquantity(totalquantity + 1);
-      setTotalprice(totalprice + price);
-    } else {
-      if (totalquantity > 1) {
-        setTotalquantity(totalquantity - 1);
-        setTotalprice(totalprice - price);
-      }
+  const removeCartItem = async (id) => {
+    return axios.post(`${host}/api/user/deleteCartItem`,{id},{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response.data);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
     }
+    )
   };
+
+  const updateCartItemMonths = async (id,months) => {
+    return axios.post(`${host}/api/user/updateCartItemMonths`,{id,months},{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response.data);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    }
+    )
+  };
+
+  const updateCartItemQuantity = async (id,quantity) => {
+    return axios.post(`${host}/api/user/updateCartItemQuantity`,{id, quantity},{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response.data);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    }
+    )
+  }
 
   return (
     <ApiContext.Provider
@@ -296,8 +341,9 @@ const ApiState = (props) => {
         addCityListing,
         getCartItems,
         cartitems,
-        handlePriceChange,
         totalprice,
+        updateCartItemQuantity,
+        updateCartItemMonths
       }}
     >
       {props.children}
