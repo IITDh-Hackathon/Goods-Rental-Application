@@ -3,8 +3,10 @@ import Carousel from "react-bootstrap/Carousel";
 import Box from "@mui/material/Box";
 import "./../css/individualCard.css";
 import ApiContext from "../context/api/ApiContext";
+import toast from "react-hot-toast";
+import { useContext } from "react";
 
-const IndividualCard = ({ id,title, description, unitPrice, images }) => {
+const IndividualCard = ({ id, title, description, unitPrice, images }) => {
   const [index, setIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [duration, setDuration] = useState(1);
@@ -22,7 +24,6 @@ const IndividualCard = ({ id,title, description, unitPrice, images }) => {
       toast.success("Item Added to Cart Successfully");
     }
   };
-
 
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
@@ -85,7 +86,9 @@ const IndividualCard = ({ id,title, description, unitPrice, images }) => {
             +
           </button>
         </div>
-        <button className="add_to_cart" onClick={handleAddtoCart} >Add to Cart</button>
+        <button className="add_to_cart" onClick={handleAddtoCart}>
+          Add to Cart
+        </button>
       </div>
     </Box>
   );
