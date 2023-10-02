@@ -175,13 +175,13 @@ const Navbar = () => {
                 {loginStatus ? (
                   <div className="nav_logos">
                     <Link to="/cart">
-                      <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                      <i style={{marginLeft:'10px'}}className="fa fa-shopping-cart" aria-hidden="true"></i>
                     </Link>
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                    <i style={{marginLeft:'10px'}} className={click ? "fas fa-times" : "fas fa-bars"} />
+                    <i style={{marginLeft:'10px'}}className="fa fa-user" aria-hidden="true"></i>
+                    <i  style={{marginLeft:'10px'}}className={click ? "fas fa-times" : "fas fa-bars"} />
                   </div>
                 ) : (
-                  <i style={{marginLeft:'10px'}} className={click ? "fas fa-times" : "fas fa-bars"} />
+                  <i  style={{marginLeft:'10px'}}className={click ? "fas fa-times" : "fas fa-bars"} />
                 )}
               </div>
             </div>
