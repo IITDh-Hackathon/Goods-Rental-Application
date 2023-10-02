@@ -4,11 +4,14 @@ import '../css/ProductsCss.css'
 import GoodsCard from './GoodsCard';
 import ApiContext from '../context/api/ApiContext';
 import Pagination from '@mui/material/Pagination';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useParams } from 'react-router-dom';
 
 const Products = (props) => {
     const { category } = useParams();
     const [selectedCategory, setSelectedCategory] = useState(category);
+    const [open, setOpen] = React.useState(false);
     const context = React.useContext(ApiContext);
     const [items, setItems] = useState([]);
     const {city, cartitems} = context;
@@ -31,8 +34,10 @@ const Products = (props) => {
   }, [city, Sort]);
 
   useEffect(() => {
+    setOpen(true);
     getItems(params).then((res) => {
       setItems(res[0]);
+      setOpen(false);
     });
   }, [params, getItems]);
 
@@ -147,6 +152,13 @@ const Products = (props) => {
           page={params.page}
           onChange={handleChangePage}
         />
+     <Backdrop
+     className='backdrop'
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
