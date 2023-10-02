@@ -15,6 +15,7 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Checkout from "./components/checkout/delivery";
 import ConfirmationPage from "./components/checkout/confirmation";
+import NotFound from "./components/404.js";
 
 function App() {
   const [deliveryInfo, setDeliveryInfo] = useState({
@@ -51,13 +52,14 @@ function App() {
               />
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login />} exact />
               <Route path="/products/:category" element={<Products />} />
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/admin" element={<AdminHome />} />
               <Route path="/admin/addgoods" element={<AddGoods />} />
               <Route path="/admin/addlisting" element={<AddListingToCity />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </BrowserRouter>
