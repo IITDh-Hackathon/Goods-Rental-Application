@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import '../css/ProductsCss.css'
-import GoodsCard from './GoodsCard';
-import ApiContext from '../context/api/ApiContext';
-import Pagination from '@mui/material/Pagination';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import "../css/ProductsCss.css";
+import GoodsCard from "./GoodsCard";
+import ApiContext from "../context/api/ApiContext";
+import Pagination from "@mui/material/Pagination";
+import { useParams } from "react-router-dom";
 
 const Products = (props) => {
-    const { category } = useParams();
-    const [selectedCategory, setSelectedCategory] = useState(category);
-    const context = React.useContext(ApiContext);
-    const [items, setItems] = useState([]);
-    const {city, cartitems} = context;
-    const [params, setParams] = useState({
-        page: 1,
-        limit: 6,
-        category: selectedCategory,
-        city: city,
-        sortBy: "price",
-    })
-    const { getItems } = context;
-    const [Sort, setSort] = useState(true);
-
+  const { category } = useParams();
+  const [selectedCategory, setSelectedCategory] = useState(category);
+  const context = React.useContext(ApiContext);
+  const [items, setItems] = useState([]);
+  const { city, cartitems } = context;
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 6,
+    category: selectedCategory,
+    city: city,
+    sortBy: "price",
+  });
+  const { getItems } = context;
+  const [Sort, setSort] = useState(true);
+  const noItemImg = process.env.REACT_APP_SERVER_URL + "/static/noItem.png";
   useEffect(() => {
     setParams({
       ...params,
@@ -35,7 +35,6 @@ const Products = (props) => {
       setItems(res[0]);
     });
   }, [params, getItems]);
-
 
   // Function to handle category selection
   const handleCategoryClick = (clickedCategory) => {
@@ -86,7 +85,7 @@ const Products = (props) => {
                 {[
                   "Baskets",
                   "Furniture",
-                  'Automobile',
+                  "Automobile",
                   "Cleaning Accessories",
                   "Books",
                   "Sports",
@@ -107,46 +106,54 @@ const Products = (props) => {
           </div>
         </div>
         <div className="products">
+          {items.data && items.data.results && items.data.results.length === 0 && (
+            <>
+              {/* <div className="no-items">No Items Found</div> */}
+              <div className="no-items">
+                <img src={noItemImg} alt="" />
+                {/* <h2>No Items Found</h2> */}
+              </div>
+            </>
+          )}
           {items.data &&
             items.data.results &&
             items.data.results.map((item) => (
               <>
-              {cartitems.some(cartitem => cartitem.item.id === item.id) ? (
-                <GoodsCard
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                  quantity={item.quantity}
-                  category={item.category}
-                  images={item.images}
-                  key={item.id}
-                  id={item.id}
-                  message="✓ Added"
-                />
-              ) : (
-                <GoodsCard
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                  quantity={item.quantity}
-                  category={item.category}
-                  images={item.images}
-                  key={item.id}
-                  id={item.id}
-                  message="Add to cart"
-                />
-              )}
-              
+                {cartitems.some((cartitem) => cartitem.item.id === item.id) ? (
+                  <GoodsCard
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                    quantity={item.quantity}
+                    category={item.category}
+                    images={item.images}
+                    key={item.id}
+                    id={item.id}
+                    message="✓ Added"
+                  />
+                ) : (
+                  <GoodsCard
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                    quantity={item.quantity}
+                    category={item.category}
+                    images={item.images}
+                    key={item.id}
+                    id={item.id}
+                    message="Add to cart"
+                  />
+                )}
               </>
             ))}
         </div>
       </div>
-        <Pagination
-          className="paginate"
-          count={items.data && items.data.totalPages}
-          page={params.page}
-          onChange={handleChangePage}
-        />
+      <Pagination
+        className="paginate"
+        count={items.data && items.data.totalPages}
+        page={params.page}
+        onChange={handleChangePage}
+      />
     </div>
   );
 };

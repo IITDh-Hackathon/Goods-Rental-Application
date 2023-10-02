@@ -9,7 +9,7 @@ const Categories = () => {
       "Baskets",
       "https://www.ikea.com/images/93/7f/937f022b5ff3ff7c0a669711922e0a4f.png?f=xxs",
     ],
-    ["Automobile", "https://borrowbox.onrender.com/static/auto.jpg"],
+    ["Automobile", `${process.env.REACT_APP_SERVER_URL}/static/auto.jpg`],
     [
       "Cleaning Accessories",
       "https://www.ikea.com/images/96/8e/968e22928aa8e4698a45d8b502117b89.jpg?f=xs",
