@@ -111,3 +111,14 @@ form {
     overflow-x: auto; /* Enable horizontal scroll if needed */
     margin-top: 10px; /* Adjust spacing as needed */
   }
+
+  .filter-category-body{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 30px;
+    width: 500px;
+  }
+  .filter-categories-title{
+    text-align: center;
+  }
