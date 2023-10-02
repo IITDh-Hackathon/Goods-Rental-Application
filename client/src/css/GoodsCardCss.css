@@ -1,4 +1,3 @@
-
 .GoodsCard {
   position: relative;
   overflow: hidden;
@@ -9,13 +8,13 @@
   color: #333;
   text-align: left;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  border-radius: 10px ;
+  border-radius: 10px;
 }
 .GoodsCard * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
-  transition: all 0.30s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
 .GoodsCard img {
   height: 230px;
@@ -23,24 +22,24 @@
   max-width: 100%;
   vertical-align: top;
 }
-.GoodsBody  {
+.GoodsBody {
   background-color: #ffffff;
   padding: 20px 25px 50px;
 }
-.goods-price{
+.goods-price {
   font-size: 1.5em;
   font-weight: 600;
   text-align: left;
   margin-bottom: 5px;
 }
-.goods-name{
+.goods-name {
   font-size: 2em;
   font-weight: 600;
   text-align: left;
   margin-bottom: 5px;
   color: var(--secondary-color);
 }
-.message{
+.message {
   cursor: pointer;
 }
 .GoodsCard p {
@@ -60,21 +59,24 @@
   line-height: 40px;
   font-weight: 800;
 }
- .category:before {
+.category:before {
   position: absolute;
   right: 100%;
   border-style: solid;
   border-width: 0 12px 40px 0;
   border-color: transparent var(--secondary-color) transparent;
-  content: '';
+  content: "";
   top: 0;
 }
 .GoodsCard span {
   text-decoration: none;
   position: absolute;
   bottom: 0;
-  right: 0;
-  background-color: var(--secondary-color);
+  transform: translateX(50%);
+  right: 50%;
+  margin: 8px;
+  border-radius: 4px;
+  background-color: var(--main-color);
   line-height: 40px;
   padding: 0 10px;
   color: #ffffff;
@@ -82,7 +84,7 @@
   font-size: 0.9em;
   text-transform: uppercase;
 }
-.GoodsCard span:before {
+/* .GoodsCard span:before {
   position: absolute;
   right: 100%;
   border-style: solid;
@@ -90,7 +92,7 @@
   border-color: transparent transparent var(--secondary-color);
   content: '';
   top: 0;
-}
+} */
 
 .GoodsCard:hover img,
 .GoodsCard.hover img {

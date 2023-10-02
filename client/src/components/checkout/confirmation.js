@@ -8,9 +8,11 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import ApiContext from "./../../context/api/ApiContext";
+import { useNavigate } from "react-router-dom";
 
 const steps = ["Delivery Address", "Confirmation "];
 const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
+  const navigate = useNavigate();
   const context = React.useContext(ApiContext);
   const { totalprice } = context;
   console.log(totalprice);
@@ -42,6 +44,7 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
       .then(function (response) {
         console.log(response);
         return [response, false];
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);
