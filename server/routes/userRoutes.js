@@ -1,5 +1,5 @@
 import express from "express";
-import { getCityListings, getItems, getUser,getAllCartItems ,addToCart,deleteCartItem,deleteCart,addMoneyToWallet, updateCartItemMonths, updateCartItemQuantity} from "../controllers/userController.js";
+import { getCityListings, getItems, getUser,getAllCartItems ,addToCart,deleteCartItem,checkout,addMoneyToWallet, updateCartItemMonths, updateCartItemQuantity} from "../controllers/userController.js";
 import { authenticateUser } from "../middlewares/Authenticate.js";
 import { authorizeUser } from "../middlewares/Authorize.js";
 
@@ -13,7 +13,7 @@ router.post('/addToCart', authenticateUser, authorizeUser(['user', 'admin']), ad
 router.post('/updateCartItemQuantity', authenticateUser, authorizeUser(['user', 'admin']), updateCartItemQuantity);
 router.post('/updateCartItemMonths', authenticateUser, authorizeUser(['user', 'admin']), updateCartItemMonths);
 router.post('/deleteCartItem', authenticateUser, authorizeUser(['user', 'admin']), deleteCartItem);
-router.post('/deleteCart', authenticateUser, authorizeUser(['user', 'admin']), deleteCart);
+router.post('/checkout', authenticateUser, authorizeUser(['user', 'admin']), checkout);
 router.post('/addMoneyToWallet', authenticateUser, authorizeUser(['user', 'admin']), addMoneyToWallet);
 
 export default router;
