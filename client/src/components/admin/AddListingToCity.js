@@ -34,12 +34,14 @@ const AddListingToCity = () => {
     getItems({
       city: city,
       page: listedPage,
+      limit: 4,
     }).then((res) => {
       setListed(res[0]);
     });
     getItems({
       notCity: city,
       page: notListedPage,
+      limit: 4,
     }).then((res) => {
       setNotListed(res[0]);
     });
