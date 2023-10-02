@@ -61,7 +61,7 @@ const GoodsCard = (props) => {
       } else {
         toast.success("Item Added to Cart Successfully");
       }
-    } else if (message === "RemoveItem"){
+    } else if (message === "RemoveItem") {
       console.log(id);
       console.log(city);
       if (city === null) return toast.error("Please Select City");
@@ -86,27 +86,29 @@ const GoodsCard = (props) => {
           id={props.id}
         />
       </Modal>
-      <div className="GoodsCard" onClick={handleOpen}>
-        <img src={image} alt="" />
-        <div className="category">{category}</div>
-        <div className="GoodsBody">
-          <p>
-            <h2 className="goods-name">{name}</h2>
-            <h3 className="goods-price">₹ {price}</h3>
-            {description.length > 50
-              ? description.substring(0, 60) + "..."
-              : description}
-          </p>
-          <span
-            className="message"
-            style={{backgroundColor: message === "RemoveItem" ? "red": "green"}}
-            onClick={() => {
-              handleOnSubmit(city, id);
-            }}
-          >
-            {message}
-          </span>
+      <div className="GoodsCard" >
+        <div onClick={handleOpen} className="GoodsCard-top">
+          <img src={image} alt="" />
+          <div className="category">{category}</div>
+          <div className="GoodsBody">
+            <p>
+              <h2 className="goods-name">{name}</h2>
+              <h3 className="goods-price">₹ {price}</h3>
+              {description.length > 50
+                ? description.substring(0, 60) + "..."
+                : description}
+            </p>
+          </div>
         </div>
+        <span
+          className="message"
+          style={{ backgroundColor: message === "RemoveItem" ? "red" : "green" }}
+          onClick={() => {
+            handleOnSubmit(city, id);
+          }}
+        >
+          {message}
+        </span>
       </div>
     </>
   );
