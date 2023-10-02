@@ -24,6 +24,29 @@ const ApiState = (props) => {
     }
   }, []);
 
+  const removeCityListing = async (city, id) => {
+    return axios
+      .delete(
+        `${host}/api/admin/removeCityListing`,
+        { city: city, id: id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        return [response, false];
+      })
+      .catch(function (error) {
+        console.log(error);
+        return [error, true];
+      });
+  };
+
   const addcash = async (amount) => {
     return axios
       .post(
@@ -317,6 +340,7 @@ const ApiState = (props) => {
   return (
     <ApiContext.Provider
       value={{
+        removeCityListing,
         addcash,
         addToCart,
         login,

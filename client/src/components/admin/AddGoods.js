@@ -6,8 +6,9 @@ import ApiContext from '../../context/api/ApiContext'
 import { useNavigate } from 'react-router-dom';
 
 const AddGoods = () => {
-    const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: '' })
+    const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: 'Baskets' })
     const [images, setImages] = useState([]);
+    const [categories, setCategories] = useState(['Baskets','Furniture','Cleaning Accessories','Books','Sports','Others'])
     const [currentImage, setCurrentImage] = useState(null);
     const [invalidfields, setInvalidfields] = useState(false);
     const { addItem } = useContext(ApiContext);
@@ -73,9 +74,32 @@ const AddGoods = () => {
                         <i className="fas fa-cubes"></i>
                         <input type="text" name='quantity' value={item.quantity || ''} onChange={handleOnChange} placeholder="Quantity" required />
                     </div>
-                    <div className="input-field">
+                    {/* <div className="input-field">
                         <i className="fas fa-tags"></i>
                         <input type="text" name='category' value={item.category} onChange={handleOnChange} placeholder="Category" required />
+                    </div> */}
+                    <div>
+                        <h4 className='filter-categories-title' >Categories</h4>
+                        <div className="filter-category-body">
+                {[
+                  "Baskets",
+                  "Furniture",
+                  "Cleaning Accessories",
+                  "Books",
+                  "Sports",
+                  "Others",
+                ].map((cat) => (
+                  <div
+                    key={cat}
+                    className={`filter-category-item ${
+                         item['category'] === cat ? "selected-category" : ""
+                      }`}
+                    onClick={() => setitem({ ...item, category: cat })}
+                  >
+                    {cat}
+                  </div>
+                ))}
+              </div>
                     </div>
                         <label htmlFor="imageUpload" className="image-upload-label">
                             {currentImage ? (

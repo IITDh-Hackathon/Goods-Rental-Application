@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import ApiContext from "./../context/api/ApiContext";
 import Modal from "@mui/material/Modal";
 import IndividualCard from "./individualCard";
+import { useNavigate } from "react-router-dom";
 
 const GoodsCard = (props) => {
+  const navigate = useNavigate();
   const handleOpen = () => {
     setOpen(true);
     console.log("hello");
@@ -14,10 +16,19 @@ const GoodsCard = (props) => {
   };
   const handleClose = () => setOpen(false);
   const [open, setOpen] = React.useState(false);
-  const { addCityListing, addToCart, city } = useContext(ApiContext);
+  const { addCityListing, addToCart, city, removeCityListing } = useContext(ApiContext);
   const imageStore = process.env.REACT_APP_SERVER_URL + "/static/";
-  let { name, description, price, quantity, images, category, message, id } =
-    props;
+  let {
+    name,
+    description,
+    price,
+    quantity,
+    images,
+    category,
+    message,
+    id,
+    handleCount,
+  } = props;
   let image;
   if (!images) {
     image =
@@ -37,6 +48,7 @@ const GoodsCard = (props) => {
         toast.error(response.message);
       } else {
         toast.success("Item Added to City Listing Successfully");
+        handleCount();
       }
     } else if (message === "Add to cart") {
       console.log(id);
@@ -48,6 +60,17 @@ const GoodsCard = (props) => {
         toast.error(response.message);
       } else {
         toast.success("Item Added to Cart Successfully");
+      }
+    } else if (message === "RemoveItem") {
+      console.log(id);
+      console.log(city);
+      if (city === null) return toast.error("Please Select City");
+      const res = await removeCityListing(id, city);
+      const [response, error] = res || [null, true];
+      if (error) {
+        toast.error(response.message);
+      } else {
+        toast.success("Item Removed from Cart Successfully");
       }
     }
   };
@@ -63,30 +86,29 @@ const GoodsCard = (props) => {
           id={props.id}
         />
       </Modal>
-      <div className="GoodsCard" onClick={handleOpen}>
-        <img src={image} alt="" />
-        <div className="category">{category}</div>
-        <div className="GoodsBody">
-          <p>
-            <h2 className="goods-name">{name}</h2>
-            <h3 className="goods-price">₹ {price}</h3>
-            {description.length > 25
-              ? description.substring(0, 25) + "..."
-              : description}
-          </p>
-          <span
-            className="message"
-            onClick={() => {
-              if (message === "addItem") {
-                handleOnSubmit(city, id);
-              } else if (message === "Add to cart") {
-                handleOnSubmit(city, id);
-              }
-            }}
-          >
-            {message}
-          </span>
+      <div className="GoodsCard" >
+        <div onClick={handleOpen} className="GoodsCard-top">
+          <img src={image} alt="" />
+          <div className="category">{category}</div>
+          <div className="GoodsBody">
+            <p>
+              <h2 className="goods-name">{name}</h2>
+              <h3 className="goods-price">₹ {price}</h3>
+              {description.length > 50
+                ? description.substring(0, 60) + "..."
+                : description}
+            </p>
+          </div>
         </div>
+        <span
+          className="message"
+          style={{ backgroundColor: message === "RemoveItem" ? "red" : "green" }}
+          onClick={() => {
+            handleOnSubmit(city, id);
+          }}
+        >
+          {message}
+        </span>
       </div>
     </>
   );

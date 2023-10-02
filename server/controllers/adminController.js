@@ -19,7 +19,7 @@ export const addItemHandler = async (req, res) => {
                 let fileName = file.path.split(path.sep).pop();
                 return fileName;
             });
-            console.log(images);
+            // console.log(images);
             try {
                 const item = await Item.create({ name, description, price, quantity, category, images });
                 res.status(201).json({ message: "Item added successfully!", item });
@@ -43,19 +43,37 @@ export const addCity = async (req, res) => {
 export const addCityListing = async (req, res) => {
     const cityName = req.body.city;
     const itemId = req.body.id;
-    console.log("cityname",cityName, itemId);
+    // console.log("cityname",cityName, itemId);
     try{
         //add item._id to city.listings
         const city = await City.findOne({name:cityName});
         if(!city){
             //create city
-            console.log("city not found");
+            // console.log("city not found");
             await City.create({name:cityName, listings: [itemId]});
-            
         }
         await City.updateOne({name:cityName}, {$push: {listings: itemId}});
         return res.status(201).json({ message: "City listing added successfully!", city});
     }catch(err){
+        return res.status(500).json({ message: err.message });
+    }
+};
+
+export const removeCityListing = async (req, res) => {
+    const cityName = req.body.city;
+    const itemId = req.body.id;
+    console.log("cityname",cityName, itemId);
+    try{
+        const city = await City.findOne({name:cityName});
+        //remove item._id from city.listings
+        const index = city.listings.indexOf(itemId);
+        if(index > -1){
+            city.listings.splice(index, 1);
+        }
+        await city.save();
+        return res.status(201).json({ message: "City listing removed successfully!", city});
+    }catch(err){
+        console.log(err);
         return res.status(500).json({ message: err.message });
     }
 };
