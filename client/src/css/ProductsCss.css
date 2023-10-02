@@ -74,6 +74,9 @@
     padding-left: 12%;
 }
 
+.backdrop{
+    color: var(--secondary-color);
+}
 
 /* Add media query for responsiveness */
 @media (max-width: 768px) {
