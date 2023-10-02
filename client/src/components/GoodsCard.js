@@ -11,8 +11,6 @@ const GoodsCard = (props) => {
   const navigate = useNavigate();
   const handleOpen = () => {
     setOpen(true);
-    console.log("hello");
-    console.log(props.images);
   };
   const handleClose = () => setOpen(false);
   const [open, setOpen] = React.useState(false);
@@ -39,8 +37,6 @@ const GoodsCard = (props) => {
 
   const handleOnSubmit = async (city, id) => {
     if (message === "addItem") {
-      console.log(id);
-      console.log(city);
       if (city === null) return toast.error("Please Select City");
       const res = await addCityListing(city, id);
       const [response, error] = res || [null, true];
@@ -51,8 +47,6 @@ const GoodsCard = (props) => {
         handleCount();
       }
     } else if (message === "Add to cart") {
-      console.log(id);
-      console.log(city);
       if (city === null) return toast.error("Please Select City");
       const res = await addToCart(id, city);
       const [response, error] = res || [null, true];
@@ -62,8 +56,6 @@ const GoodsCard = (props) => {
         toast.success("Item Added to Cart Successfully");
       }
     } else if (message === "RemoveItem") {
-      console.log(id);
-      console.log(city);
       if (city === null) return toast.error("Please Select City");
       const res = await removeCityListing(id, city);
       const [response, error] = res || [null, true];

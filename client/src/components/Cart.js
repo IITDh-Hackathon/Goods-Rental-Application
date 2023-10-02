@@ -12,7 +12,6 @@ const Cart = () => {
 	const navigate = useNavigate();
 	const { cartitems, getCartItems, profile } = useContext(ApiContext);
 	const handleCheckout = async () => {
-		console.log(profile);
 		if (profile.walletCash - totalprice < 0) {
 			toast.error("Insufficient Balance")
 			return;

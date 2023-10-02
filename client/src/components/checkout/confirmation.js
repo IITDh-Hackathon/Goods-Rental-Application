@@ -16,7 +16,6 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
   const navigate = useNavigate();
   const context = React.useContext(ApiContext);
   const { totalprice, getCartItems } = context;
-  console.log(totalprice);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,8 +27,6 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
 
   const handleConfirm = async () => {
     const url = process.env.REACT_APP_SERVER_URL + "/api/user/checkout";
-    console.log("Form submitted with values:", deliveryInfo);
-
     return axios
       .post(
         url,
@@ -43,7 +40,6 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
         }
       )
       .then(function (response) {
-        console.log(response);
         getCartItems().then((res) => {
           toast.success("Order Placed Successfully");
         navigate("/");
@@ -51,7 +47,6 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         toast.error("Order Placed Failed");
         return [error, true];
       });

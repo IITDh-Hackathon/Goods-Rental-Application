@@ -30,7 +30,6 @@ const AddListingToCity = () => {
   };
 
   useEffect(() => {
-    console.log("fetching");
     getItems({
       city: city,
       page: listedPage,
@@ -48,7 +47,6 @@ const AddListingToCity = () => {
   }, [city, getItems, listedPage, notListedPage,count]);
 
   const handleCount = () => {
-    console.log("count", count);
     setCount(count+1);
   };
 

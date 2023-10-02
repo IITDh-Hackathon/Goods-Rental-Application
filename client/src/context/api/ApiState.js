@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const ApiState = (props) => {
-  console.log(process.env.REACT_APP_SERVER_URL);
   const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8000";
 
   const [profile, setProfile] = useState(null);
@@ -48,11 +47,9 @@ const ApiState = (props) => {
         }
       )
       .then(function (response) {
-        console.log(response);
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -71,19 +68,16 @@ const ApiState = (props) => {
         }
       )
       .then(function (response) {
-        console.log(response);
         getProfile();
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
 
 
   const addToCart = async (id, city, quantity = 1, months = 1) => {
-    console.log(id, city, "from api state");
     return axios
       .post(
         `${host}/api/user/addtocart`,
@@ -97,12 +91,10 @@ const ApiState = (props) => {
         }
       )
       .then(function (response) {
-        console.log(response);
         getCartItems();
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -125,7 +117,6 @@ const ApiState = (props) => {
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -151,7 +142,6 @@ const ApiState = (props) => {
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -169,7 +159,6 @@ const ApiState = (props) => {
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -182,7 +171,6 @@ const ApiState = (props) => {
   };
 
   const addItem = async (item) => {
-    console.log(item);
     const formData = new FormData();
     formData.append("name", item.name);
     formData.append("description", item.description);
@@ -200,11 +188,9 @@ const ApiState = (props) => {
         },
       })
       .then(function (response) {
-        console.log(response);
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -222,7 +208,6 @@ const ApiState = (props) => {
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -238,11 +223,9 @@ const ApiState = (props) => {
         params: params,
       })
       .then(function (response) {
-        console.log(response.data.results);
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -261,11 +244,9 @@ const ApiState = (props) => {
         }
       )
       .then(function (response) {
-        console.log(response);
         return [response, false];
       })
       .catch(function (error) {
-        console.log(error);
         return [error, true];
       });
   };
@@ -280,12 +261,10 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      console.log(response.data);
       setCartitems(response.data);
       return [response, false];
     })
     .catch(function (error) {
-      console.log(error);
       return [error, true];
     });
   }
@@ -299,11 +278,9 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      console.log(response.data);
       return [response, false];
     })
     .catch(function (error) {
-      console.log(error);
       return [error, true];
     }
     )
@@ -318,12 +295,10 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      console.log(response.data);
       getCartItems();
       return [response, false];
     })
     .catch(function (error) {
-      console.log(error);
       return [error, true];
     }
     )
@@ -338,12 +313,10 @@ const ApiState = (props) => {
       },
     })
     .then(function (response) {
-      console.log(response.data);
       getCartItems();
       return [response, false];
     })
     .catch(function (error) {
-      console.log(error);
       return [error, true];
     }
     )

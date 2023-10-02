@@ -6,7 +6,6 @@ import ApiContext from "../context/api/ApiContext.js";
 const CartCard = (props) => {
     const context = useContext(ApiContext);
     const { getCartItems, updateCartItemQuantity, updateCartItemMonths, removeCartItem } = context;
-    console.log(props);
     const { title, price, image, handlePriceChange, id, months, quantity, city } = props
 
     let pricestate = price * months * quantity;
