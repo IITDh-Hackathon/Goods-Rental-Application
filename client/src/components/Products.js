@@ -11,8 +11,7 @@ const Products = (props) => {
     const [selectedCategory, setSelectedCategory] = useState(category);
     const context = React.useContext(ApiContext);
     const [items, setItems] = useState([]);
-    const {city} = context;
-    console.log(city);
+    const {city, cartitems} = context;
     const [params, setParams] = useState({
         page: 1,
         limit: 4,
@@ -112,6 +111,19 @@ const Products = (props) => {
             items.data.results &&
             items.data.results.map((item) => (
               <>
+              {cartitems.some(cartitem => cartitem.item.id === item.id) ? (
+                <GoodsCard
+                  name={item.name}
+                  description={item.description}
+                  price={item.price}
+                  quantity={item.quantity}
+                  category={item.category}
+                  images={item.images}
+                  key={item.id}
+                  id={item.id}
+                  message="✓ Added"
+                />
+              ) : (
                 <GoodsCard
                   name={item.name}
                   description={item.description}
@@ -123,6 +135,8 @@ const Products = (props) => {
                   id={item.id}
                   message="Add to cart"
                 />
+              )}
+              
               </>
             ))}
         </div>

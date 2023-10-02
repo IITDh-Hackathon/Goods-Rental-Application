@@ -57,6 +57,15 @@ const Login = () => {
         toast.error("Password and Confirm Password should be same");
         return;
       }
+      if (signupCreds.password.length < 8) {
+        toast.error("Password should be atleast 8 characters long");
+        return;
+      }
+      if (signupCreds.name.length < 4) {
+        toast.error("Name should be atleast 4 characters long");
+        return;
+      }
+
       const res = await signup(signupCreds);
       //todo: handle error
       const [response, error] = res || [null, true];
@@ -201,8 +210,8 @@ const Login = () => {
               <h3>{admin ? "Admin" : "User"}</h3>
               <p>
                 {admin
-                  ? "Lorem ipsum dolor sit amet consectetur adipisicing elit. A necessitatibus similique mollitia obcaecati nesciunt non ipsam quis, voluptatum cupiditate porro optio dicta rem impedit ducimus labore ad numquam nam maxime"
-                  : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione"}
+                  ? "Welcome to the heart of BorrowBox! As an administrator, you play a vital role in ensuring the smooth operation of our platform. We appreciate your dedication and commitment to maintaining a safe and efficient environment for our users. Together, we'll make BorrowBox the best it can be, providing outstanding service and opportunities for our community."
+                  : "Welcome to BorrowBox! We're thrilled to have you here. Get ready to access a world of convenience and choice as you embark on your rental journey with us. Explore our extensive collection of goods and start renting today."}
               </p>
               {admin ? null : (
                 <button className="btn transparent" id="sign-up-btn">
@@ -216,8 +225,7 @@ const Login = () => {
             <div className="content user-content">
               <h3>One of us ?</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam ad deleniti.
+              Ready to embark on a journey of convenience and choice? Join us at BorrowBox today! Sign up now to gain access to our extensive collection of goods for rent. Whether you're planning an adventure, a special occasion, or simply looking for a sustainable and cost-effective solution, we've got you covered.
               </p>
               <button className="btn transparent" id="sign-in-btn">
                 Login

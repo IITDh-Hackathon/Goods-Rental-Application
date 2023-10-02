@@ -72,6 +72,7 @@ const ApiState = (props) => {
       )
       .then(function (response) {
         console.log(response);
+        getProfile();
         return [response, false];
       })
       .catch(function (error) {
