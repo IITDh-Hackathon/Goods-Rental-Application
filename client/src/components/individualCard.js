@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { toast } from "react-toastify";
 import Carousel from "react-bootstrap/Carousel";
 import Box from "@mui/material/Box";
 import "./../css/individualCard.css";
