@@ -3,7 +3,7 @@ import { useState,useContext } from 'react'
 import { toast } from 'react-toastify';
 import '../../css/AddGoodsCss.css'
 import ApiContext from '../../context/api/ApiContext'
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 const AddGoods = () => {
     const [item, setitem] = useState({ name: '', description: '', price: 0, quantity: 0, category: 'Baskets' })
@@ -51,6 +51,7 @@ const AddGoods = () => {
         }
         else {
             toast.success('Item Added Successfully');
+            redirect("/admin");
         }
     }
     return (
