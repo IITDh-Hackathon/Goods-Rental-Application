@@ -51,10 +51,27 @@ export const addCityListing = async (req, res) => {
             //create city
             console.log("city not found");
             await City.create({name:cityName, listings: [itemId]});
-            
         }
         await City.updateOne({name:cityName}, {$push: {listings: itemId}});
         return res.status(201).json({ message: "City listing added successfully!", city});
+    }catch(err){
+        return res.status(500).json({ message: err.message });
+    }
+};
+
+export const removeCityListing = async (req, res) => {
+    const cityName = req.body.city;
+    const itemId = req.body.id;
+    console.log("cityname",cityName, itemId);
+    try{
+        const city = await City.findOne({name:cityName});
+        //remove item._id from city.listings
+        const index = city.listings.indexOf(itemId);
+        if(index > -1){
+            city.listings.splice(index, 1);
+        }
+        await city.save();
+        return res.status(201).json({ message: "City listing removed successfully!", city});
     }catch(err){
         return res.status(500).json({ message: err.message });
     }
