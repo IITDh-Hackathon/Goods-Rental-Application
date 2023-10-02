@@ -23,7 +23,7 @@ const ApiState = (props) => {
     }
   }, []);
 
-  const addCash = async (amount) => {
+  const addcash = async (amount) => {
     return axios
       .post(
         `${host}/api/user/addMoneyToWallet`,
@@ -38,7 +38,6 @@ const ApiState = (props) => {
       )
       .then(function (response) {
         console.log(response);
-        getProfile();
         return [response, false];
       })
       .catch(function (error) {
@@ -72,7 +71,7 @@ const ApiState = (props) => {
       });
   };
 
-  const getProfile = async () => {
+  const getProfile = async (show=true) => {
     return axios
       .get(`${host}/api/user/profile`, {
         headers: {
@@ -83,8 +82,10 @@ const ApiState = (props) => {
       })
       .then(function (response) {
         setProfile(response.data);
-        toast.dismiss();
-        toast(`you are logged in as ${response.data.email}`);
+        if (show){
+          toast.dismiss();
+          toast(`you are logged in as ${response.data.email}`);
+        }
         return [response, false];
       })
       .catch(function (error) {
@@ -267,7 +268,7 @@ const ApiState = (props) => {
   return (
     <ApiContext.Provider
       value={{
-        addCash,
+        addcash,
         addToCart,
         login,
         signup,

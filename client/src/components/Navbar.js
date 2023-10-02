@@ -28,7 +28,7 @@ const Navbar = () => {
   const closeMobileMenu = () => setClick(false);
   const navigate = useNavigate();
 
-  const { city, setCity, loginStatus, profile, logout } =
+  const { city, setCity, loginStatus, profile, logout, addcash, getProfile } =
     React.useContext(ApiContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,11 +40,6 @@ const Navbar = () => {
     setAnchorEl(null);
   };
   const handleWalletClick = () => {
-    // Fetch the user's current cash value from your API or wherever it's stored
-    // For now, I'm just setting it to a static value of 1000 as an example
-    const userCash = 1000;
-
-    setCurrentCash(userCash);
     setWalletOpen(true);
   };
   const handleCloseWallet = () => {
@@ -54,41 +49,27 @@ const Navbar = () => {
     setaddCash(e.target.value);
   }
   const handleAddCash = () =>{
-    if(isNaN(addCash)){
+    if(isNaN(addCash) || addCash<0 ){
       toast.error("Please enter a valid number");
       return;
     }
+    if(currentCash+parseInt(addCash)>10000){
+      toast.error("You can't have more than 10000");
+      return;
+    }
+
     setCurrentCash(currentCash+parseInt(addCash));
+    addcash(parseInt(addCash));
+    getProfile(false);
     setaddCash(0);
     toast.success("Cash added successfully");
   }
 
-  const [cityList, setCityList] = useState([
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Phoenix",
-    "Philadelphia",
-    "San Antonio",
-    "San Diego",
-    "Dallas",
-    "San Jose",
-    "Austin",
-    "Jacksonville",
-    "San Francisco",
-    "Columbus",
-    "Charlotte",
-    "Indianapolis",
-    "Seattle",
-    "Denver",
-    "Washington, D.C.",
-    "Boston",
-    "Nashville",
-    "Baltimore",
-    "Oklahoma City",
-    "Louisville",
-  ]);
+  useEffect(() => {
+    getProfile();
+    setCurrentCash(profile?profile.walletCash:0);
+  }, []);
+
   const [showCity, setShowCity] = useState(false);
   const show = () => {
     if (window.innerWidth <= 760) {
