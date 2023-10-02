@@ -29,13 +29,17 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
     console.log(url);
 
     return axios
-      .post(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+      .post(
+        url,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then(function (response) {
         console.log(response);
         return [response, false];
