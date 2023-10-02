@@ -86,7 +86,8 @@ export const addToCart = async (req, res) => {
     console.log(item, city);
     const email = req.user.email;
     const user = await User.findOne({ email });
-    const cartItem = await Cart.findById(item);
+    const cartItem = await Item.findById(item);
+    console.log(cartItem,"cartItem");
     user.cartTotal += cartItem.price * quantity * numberOfMonths;
     await user.save();
     const cart = await Cart.create({
