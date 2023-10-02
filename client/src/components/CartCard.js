@@ -5,43 +5,37 @@ import ApiContext from "../context/api/ApiContext.js";
 
 const CartCard = (props) => {
     const context = useContext(ApiContext);
-    const { getCartItems, updateCartItemQuantity, updateCartItemMonths } = context;
-    const { title, price, image, handlePriceChange, id } = props;
-    const [quantity, setQuantity] = useState(1);
-    const [pricestate, setPricestate] = useState(price)
-    const [Months, setMonths] = useState(1);
+    const { getCartItems, updateCartItemQuantity, updateCartItemMonths, removeCartItem } = context;
+    console.log(props);
+    const { title, price, image, handlePriceChange, id,  months, quantity} = props
+
+    let pricestate = price * months * quantity;
+    
     const imageurl = process.env.REACT_APP_SERVER_URL + '/static/' + image;
 
     const handleMonthChange = (increase) => {
         if (increase) {
-            setMonths(Months + 1);
-            setPricestate(pricestate + price);
-            updateCartItemMonths(id,Months + 1);
-            getCartItems();
+            updateCartItemMonths(id,months + 1);
         } else {
-            if (quantity > 1) {
-                setMonths(Months - 1);
-                setPricestate(pricestate - price);
-                updateCartItemMonths(id,Months - 1);
-                getCartItems();
+            if (months > 1) {
+                updateCartItemMonths(id,months - 1);
             }
         }
     }
     
     const handleOnChange = (increase) => {
         if (increase) {
-            setQuantity(quantity + 1);
-            setPricestate(pricestate + price);
-            updateCartItemMonths(id, quantity + 1);
-            getCartItems();
+            updateCartItemQuantity(id, quantity + 1);
         } else {
             if (quantity > 1) {
-                setQuantity(quantity - 1);
-                setPricestate(pricestate - price);
-                updateCartItemMonths(id, quantity - 1);
-                getCartItems();
+                updateCartItemQuantity(id, quantity - 1);
             }
         }
+    }
+
+    const handleOnDelete = () => {
+        removeCartItem(id);
+        getCartItems();
     }
 
     return (
@@ -59,11 +53,11 @@ const CartCard = (props) => {
                 <p>
                     Months:
                     <i className='fa fa-minus cart-btn'  onClick={()=>handleMonthChange(false)}></i>
-                    <span>{Months}</span>
+                    <span>{months}</span>
                     <i className='fa fa-plus cart-btn'  onClick={()=>handleMonthChange(true)}></i>
                     
                 </p>
-                <p className="cart-btn-area"><i aria-hidden="true" className="fa fa-trash"></i> <span className="btn2">Remove</span></p>
+                <p className="cart-btn-area" onClick={handleOnDelete}><i aria-hidden="true" className="fa fa-trash"></i> <span className="btn2">Remove</span></p>
             </div>
         </div>
     )
