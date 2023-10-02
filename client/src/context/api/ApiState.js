@@ -18,10 +18,21 @@ const ApiState = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getProfile();
+      getCartItems();
     } else {
       setLoginStatus(false);
     }
   }, []);
+
+  useEffect(()=> {
+    if(cartitems){
+      let total = 0;
+      cartitems.forEach((item) => {
+        total += item.item.price;
+      });
+      setTotalprice(total);
+    }
+  },[cartitems])
 
   const addcash = async (amount) => {
     return axios
@@ -236,22 +247,23 @@ const ApiState = (props) => {
 
   const getCartItems = async () => {
     return axios
-      .get(`${host}/api/user/getcartItems`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then(function (response) {
-        console.log(response);
-        return [response, false];
-      })
-      .catch(function (error) {
-        console.log(error);
-        return [error, true];
-      });
-  };
+    .get(`${host}/api/user/getcartItems`,{
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(function (response) {
+      console.log(response.data);
+      setCartitems(response.data);
+      return [response, false];
+    })
+    .catch(function (error) {
+      console.log(error);
+      return [error, true];
+    });
+  }
 
   const handlePriceChange = (increase, price) => {
     if (increase) {

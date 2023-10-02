@@ -26,7 +26,6 @@ const ConfirmationPage = ({ deliveryInfo, setDeliveryInfo }) => {
   const handleConfirm = async () => {
     const url = process.env.REACT_APP_SERVER_URL + "/api/user/deleteCart";
     console.log("Form submitted with values:", deliveryInfo);
-    console.log(url);
 
     return axios
       .post(

@@ -59,7 +59,7 @@ const Products = (props) => {
         <div className="products-filter">
           <div className="filter-body">
             <div className="filters-sort">
-              <div className="filter-title">Sort</div>
+              <div className="filter-title">Sort By Price</div>
               <div className="filter-category-body">
                 <div
                   className={`filter-category-item ${
@@ -67,7 +67,7 @@ const Products = (props) => {
                   }`}
                   onClick={() => setSort(true)}
                 >
-                  Ascending
+                  Low to High Price
                 </div>
                 <div
                   className={`filter-category-item ${
@@ -75,7 +75,7 @@ const Products = (props) => {
                   }`}
                   onClick={() => setSort(false)}
                 >
-                  Descending
+                  High to Low Price
                 </div>
               </div>
             </div>
@@ -123,13 +123,13 @@ const Products = (props) => {
               </>
             ))}
         </div>
+      </div>
         <Pagination
-          className="paninate"
+          className="paginate"
           count={items.data && items.data.totalPages}
           page={params.page}
           onChange={handleChangePage}
         />
-      </div>
     </div>
   );
 };

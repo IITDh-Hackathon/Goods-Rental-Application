@@ -11,11 +11,11 @@ export default function Footer() {
               Borrow<span>Box</span>
             </h3>
             <p className="footer-links">
-              <a href="#" className="link-1">
+              <a href="/" className="link-1">
                 Home
               </a>
               <a href="/products">Products</a>
-              <a href="#">Contact</a>
+              <a href="/">Contact</a>
             </p>
             <p className="footer-company-name">Borrow Box © 2023</p>
           </div>
@@ -59,13 +59,13 @@ export default function Footer() {
               <a href="https://twitter.com/mv_karthik14">
                 <i className="fa fa-twitter"></i>
               </a>
-              <a href="#">
+              <a href="/">
                 <i className="fa fa-facebook"></i>
               </a>
 
               
 
-              <a href="#">
+              <a href="https://www.linkedin.com/in/asish-gokarakonda-30798b1bb/">
                 <i className="fa fa-linkedin"></i>
               </a>
 
