@@ -138,3 +138,9 @@
 		max-width: 95%;
 	}
 }
+
+.cart-empty-img{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}

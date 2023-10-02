@@ -102,7 +102,7 @@ const GoodsCard = (props) => {
         </div>
         <span
           className="message"
-          style={{ backgroundColor: message === "RemoveItem" ? "red" : "green" }}
+          style={{ backgroundColor: message === "RemoveItem" ? "red" : ""}}
           onClick={() => {
             handleOnSubmit(city, id);
           }}
