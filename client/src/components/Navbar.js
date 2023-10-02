@@ -268,7 +268,7 @@ const Navbar = () => {
                           logout();
                           handleMenuClose();
                           toast("Logged out successfully");
-                          navigate("/");
+                          navigate("/login");
                         }}
                       >
                         Logout

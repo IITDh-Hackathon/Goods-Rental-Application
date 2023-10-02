@@ -57,6 +57,15 @@ const Login = () => {
         toast.error("Password and Confirm Password should be same");
         return;
       }
+      if (signupCreds.password.length < 8) {
+        toast.error("Password should be atleast 8 characters long");
+        return;
+      }
+      if (signupCreds.name.length < 4) {
+        toast.error("Name should be atleast 4 characters long");
+        return;
+      }
+
       const res = await signup(signupCreds);
       //todo: handle error
       const [response, error] = res || [null, true];

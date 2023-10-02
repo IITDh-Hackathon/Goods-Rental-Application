@@ -4,11 +4,12 @@
   object-fit: unset;
   object-position: center;
   border-radius: 40px;
-  margin: 15px 20px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+  margin-bottom: 10px;
+  margin-top: 10px;
   transition: all 0.3s ease-in-out;
 }
 
 .carousel-img-div{
   text-align: center;
+  margin: auto;
 }
