@@ -57,7 +57,7 @@ const IndividualCard = ({ id, title, description, unitPrice, images }) => {
           <></>
         ) : (
           <>
-          {(cartitems && cartitems.some((item) => item.id === id)) ? (
+          {(cartitems && cartitems.some((item) => item.id !== id)) ? (
           <>
             <div>
               <span>Quantity: </span>
